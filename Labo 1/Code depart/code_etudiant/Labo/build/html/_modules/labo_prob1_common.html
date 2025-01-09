@@ -1,0 +1,246 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>labo_prob1_common &mdash; Documentation Labo_GIF270 2.1</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4c2f8551"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Labo_GIF270
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenus:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../debug_handler_common.html">Module debug_handler_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../handle_unicode_common.html">Module handle_unicode_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob1.html">Module labo_prob1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob1_common.html">Module labo_prob1_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob2.html">Module labo_prob2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob2_common.html">Module labo_prob2_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob3.html">Module labo_prob3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob3_common.html">Module labo_prob3_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob4.html">Module labo_prob4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob4_common.html">Module labo_prob4_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../smart_formatter_common.html">Module smart_formatter_common</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Labo_GIF270</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Code du module</a></li>
+      <li class="breadcrumb-item active">labo_prob1_common</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de labo_prob1_common</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Code de base pour explorer le premier exercice du laboratoire - APP du cours GIF270</span>
+
+<span class="sd">    L&#39;exercice 1 touche le débogage et les éléments suivants :</span>
+<span class="sd">        - Utilisation de points d&#39;arrêt (breakpoints) pour l&#39;identification de problèmes d&#39;exécution et de logique</span>
+<span class="sd">        - Identification du code qui modifie une valeur</span>
+<span class="sd">        - Interruption d&#39;exécution sans fin</span>
+<span class="sd">        - Gestion de chaînes de caractères en format utf-8</span>
+<span class="sd">        - Détection et traitement des exceptions</span>
+
+<span class="sd">    Note :</span>
+<span class="sd">        - Le traitement des arguments a été inclus dans la classe ParsingClass1, qui est utilisée dans le code principal</span>
+<span class="sd">        - Tous les arguments requis sont présents et accessibles dans ParsingClass1.args</span>
+<span class="sd">        - Le traitement du mode verbose vous donne un exemple de l&#39;utilisation des arguments</span>
+<span class="sd">        - La classe SmartFormatter permet d&#39;imprimer correctement la chaîne de caractère &quot;help&quot; lorsqu&#39;elle</span>
+<span class="sd">          débute par &quot;R|&quot;</span>
+
+<span class="sd">    Copyright 2023-2025 Frédéric Mailhot et Université de Sherbrooke</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">from</span> <span class="nn">smart_formatter_common</span> <span class="kn">import</span> <span class="n">SmartFormatter</span>
+<span class="kn">from</span> <span class="nn">handle_unicode_common</span> <span class="kn">import</span> <span class="n">HandleUnicodeCommon</span>
+<span class="kn">from</span> <span class="nn">debug_handler_common</span> <span class="kn">import</span> <span class="n">DebugHandler</span>
+
+
+<div class="viewcode-block" id="ConfigData">
+<a class="viewcode-back" href="../labo_prob1_common.html#labo_prob1_common.ConfigData">[docs]</a>
+<span class="k">class</span> <span class="nc">ConfigData</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialisation d&#39;une nouvelle instance de ConfigData :</span>
+<span class="sd">            - Ajoute trois champs avec leurs valeurs par défaut</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;objet est initialisé</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="n">num</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">new</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span></div>
+
+
+
+<div class="viewcode-block" id="ParsingClass1">
+<a class="viewcode-back" href="../labo_prob1_common.html#labo_prob1_common.ParsingClass1">[docs]</a>
+<span class="k">class</span> <span class="nc">ParsingClass1</span><span class="p">(</span><span class="n">HandleUnicodeCommon</span><span class="p">,</span> <span class="n">DebugHandler</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Création d&#39;un parser prédéfini pour lire les paramètres de la ligne de commande pour le premier exercice</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ParsingClass1.setup_and_parse_cli">
+<a class="viewcode-back" href="../labo_prob1_common.html#labo_prob1_common.ParsingClass1.setup_and_parse_cli">[docs]</a>
+    <span class="k">def</span> <span class="nf">setup_and_parse_cli</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Utilise le module argparse pour :</span>
+<span class="sd">            - Enregistrer les commandes à reconnaître</span>
+<span class="sd">            - Lire la ligne de commande et créer le champ self.args qui récupère la structure produite</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, toutes les commandes reconnues sont comprises dans self.args</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;Labo1:Exercice1.py&#39;</span><span class="p">,</span> <span class="n">formatter_class</span><span class="o">=</span><span class="n">SmartFormatter</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s2">&quot;R|&quot;</span>
+                                 <span class="s2">&quot;Type de problème à débugger (par défaut, 1):</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                 <span class="s2">&quot;  1: factorielle,</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                 <span class="s2">&quot;  2: problème d</span><span class="se">\&#39;</span><span class="s2">exécution,</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                 <span class="s2">&quot;  3: long calcul,</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                 <span class="s2">&quot;  4: comparaison de chaînes de caractères Unicode,</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                 <span class="s2">&quot;  5: Exceptions</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                 <span class="s2">&quot;      Par défaut: exceptions non traitées</span><span class="se">\n</span><span class="s2">&quot;</span>
+                                 <span class="s2">&quot;      Utiliser -e pour utiliser le code de traitement existant (mais incomplet)&quot;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-e&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Indique l</span><span class="se">\&#39;</span><span class="s1">utilisation de code de traitement des exceptions, </span><span class="se">\\</span><span class="s1">&#39;</span>
+                                 <span class="s1">&#39;à utiliser avec l</span><span class="se">\&#39;</span><span class="s1">option &quot;-p 4&quot;&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-fact&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Valeur de factorielle à calculer (par défaut, 30)&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-fact_end&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Valeur de fin de récursion de la factorielle (par défaut, 0)&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-val&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Valeur à utiliser pour le long calcul (par défaut, 30)&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-val_end&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Valeur de fin du long calcul (par défaut, 0)&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-v&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Mode verbose&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">parser</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialisation d&#39;une nouvelle instance de ParsingClass1 :</span>
+<span class="sd">            - Ajoute toutes les valeurs par défaut des paramètres utilisés</span>
+<span class="sd">            - Modifie les valeurs redéfinies sur la ligne de commande</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;objet est initialisé</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">:</span> <span class="n">ConfigData</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">word1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">word2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_strings</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_and_parse_cli</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">:</span> <span class="n">ConfigData</span> <span class="o">=</span> <span class="n">ConfigData</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+        <span class="c1"># Si mode verbose, refléter les valeurs des paramètres passés sur la ligne de commande</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">v</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mode verbose:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type de problème à déboguer: &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">match</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">p</span><span class="p">:</span>
+                <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calcul de factorielle:&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Factorielle de &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">fact</span><span class="p">)</span>
+                <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exécution problématique d&#39;une méthode&quot;</span><span class="p">)</span>
+                <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Long calcul:&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Somme des entiers plus petits ou égaux à &quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+                <span class="k">case</span> <span class="mi">4</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;En Unicode (utf-8): chaînes de caractères différentes ou égales?&quot;</span><span class="p">)</span>
+                <span class="k">case</span> <span class="mi">5</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">e</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Utilisation du code de traitement des exceptions&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;N&#39;utilise pas le code de traitement des exceptions&quot;</span><span class="p">)</span>
+                <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type de problème à déboguer inconnu (doit être 1,2,3,4 ou 5)&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2018-2025, Frédéric Mailhot.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

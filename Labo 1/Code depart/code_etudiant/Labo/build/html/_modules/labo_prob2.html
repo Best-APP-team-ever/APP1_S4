@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>labo_prob2 &mdash; Documentation Labo_GIF270 2.1</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4c2f8551"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Labo_GIF270
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenus:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../debug_handler_common.html">Module debug_handler_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../handle_unicode_common.html">Module handle_unicode_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob1.html">Module labo_prob1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob1_common.html">Module labo_prob1_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob2.html">Module labo_prob2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob2_common.html">Module labo_prob2_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob3.html">Module labo_prob3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob3_common.html">Module labo_prob3_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob4.html">Module labo_prob4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob4_common.html">Module labo_prob4_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../smart_formatter_common.html">Module smart_formatter_common</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Labo_GIF270</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Code du module</a></li>
+      <li class="breadcrumb-item active">labo_prob2</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de labo_prob2</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Code pour explorer le deuxième exercice du laboratoire - APP du cours GIF270</span>
+
+<span class="sd">    L&#39;exercice 2 touche les tableaux de hachage et leur redéfinition en Python :</span>
+<span class="sd">        - Redéfinition de la méthode pour établir l&#39;égalité entre deux objets</span>
+<span class="sd">        - Redéfinition de la méthode de hachage pour obtenir un nombre à partir d&#39;un objet</span>
+<span class="sd">        - Redéfinition de la méthode d&#39;ajout d&#39;un bigramme dans un vecteur (dict qui contient un ensemble de bigrammes)</span>
+<span class="sd">        - Redéfinition de la méthode pour calculer la taille d&#39;un vecteur</span>
+<span class="sd">        - Redéfinition du produit scalaire entre deux vecteurs</span>
+<span class="sd">        - Redéfinition de la méthode de calcul du cosinus de l&#39;angle entre deux vecteurs</span>
+
+<span class="sd">    De plus, cet exercice touche aussi l&#39;utilisation de :</span>
+<span class="sd">        - listes (non-immuable)</span>
+<span class="sd">        - d&#39;autres structures apparentées aux listes, mais immuables (lesquelles ?)</span>
+
+<span class="sd">  Copyright 2018-2025, Frédéric Mailhot et Université de Sherbrooke</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">labo_prob2_common</span> <span class="kn">import</span> <span class="n">LaboProb2Common</span>
+<span class="kn">from</span> <span class="nn">labo_prob2_common</span> <span class="kn">import</span> <span class="n">BigramCommon</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+
+
+<span class="c1"># Pour ce problème, vous devez :</span>
+<span class="c1">#   - compléter les méthodes suivantes de la classe Bigram :</span>
+<span class="c1">#       - __eq__()</span>
+<span class="c1">#       - __hash__()</span>
+<span class="c1">#   - compléter les méthodes suivantes de la classe LaboProb2 :</span>
+<span class="c1">#       - add_bigram()</span>
+<span class="c1">#       - add_bigram_object()</span>
+<span class="c1">#       - add_bigram_other()</span>
+<span class="c1">#       - vector_size()</span>
+<span class="c1">#       - scalar_product()</span>
+<span class="c1">#       - cosine()</span>
+<span class="c1"># Lire les commentaires au début de chacune de ces méthodes pour savoir plus précisément ce qui doit être fait.</span>
+<span class="c1">#</span>
+<span class="c1"># Important: - Vous ne devez modifier aucun code dans le fichier labo_prob2_common.py</span>
+<span class="c1">#            - Vous n&#39;avez pas à modifier la méthode add_bigram_vector, mais sachez qu&#39;elle ne fonctionne pas...</span>
+<span class="c1">#</span>
+<span class="c1"># Note :</span>
+<span class="c1">#       1. Vous pouvez constater que la classe Bigram hérite de la classe BigramCommon.</span>
+<span class="c1">#       On doit y redéfinir les méthodes __eq__() et __hash__()</span>
+<span class="c1">#</span>
+<span class="c1">#       2. De même, la classe LaboProb2 hérite de la classe LaboProb2Common.</span>
+<span class="c1">#       Ici encore, on redéfinit un certain nombre de méthodes :</span>
+<span class="c1">#           add_bigram_object(), add_bigram_other(), vector_size(), scalar_product(), cosine().</span>
+
+
+<div class="viewcode-block" id="Bigram">
+<a class="viewcode-back" href="../labo_prob2.html#labo_prob2.Bigram">[docs]</a>
+<span class="k">class</span> <span class="nc">Bigram</span><span class="p">(</span><span class="n">BigramCommon</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Création de méthodes permettant de personnaliser un dictionnaire (tableau de hachage)</span>
+<span class="sd">    - Dans cette classe, on redéfinit comment faire le hash et comparer deux objets de type Bigram</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Redéfinition de l&#39;égalité entre deux bigrammes :</span>
+<span class="sd">            - L&#39;un des bigrammes est self (celui avec lequel __eq__ est appelé)</span>
+<span class="sd">            - Le deuxième bigramme est other, fourni en paramètre</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            other (Bigram) : Le bigramme avec lequel il faut se comparer</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (bool) : Retourne True ou False, selon l&#39;égalité entre les bigrammes</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Vous devez coder ici comment déterminer que deux bigrammes (paires de mots) sont les mêmes.</span>
+        <span class="c1"># Le paramètre &quot;other&quot; est un autre bigramme (instance de la classe Bigram).</span>
+        <span class="c1"># Pour le moment, la comparaison ne fait que vérifier que les objets sont des instances de la même classe.</span>
+        <span class="c1"># Vous devrez ajouter d&#39;autres conditions qui déterminent que deux bigrammes sont égaux (ou non).</span>
+        <span class="c1"># Note: Il n&#39;est pas nécessaire d&#39;utiliser la méthode &quot;isinstance&quot;.</span>
+        <span class="c1">#       Elle est utilisée ici simplement pour démontrer qu&#39;elle existe,</span>
+        <span class="c1">#       et qu&#39;on peut facilement vérifier si les classes de deux objets correspondent</span>
+        <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Redéfinition de la méthode de hachage d&#39;un bigramme :</span>
+<span class="sd">            - Doit utiliser les deux mots du bigramme</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : Toute l&#39;information nécessaire (a et b) se trouve dans le bigramme</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (int) : Retourne la valeur de hachage</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Faire en sorte que la fonction de hachage utilise les deux mots du bigramme.</span>
+        <span class="c1"># Pour le moment, on n&#39;utilise que le premier mot.</span>
+        <span class="c1"># Vous devez changer ce qui est utilisé comme entrée dans la fonction de hachage.</span>
+        <span class="c1"># Vous pourriez utiliser une combinaison des deux mots, avec un séparateur qui n&#39;est pas une lettre.</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">word1</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="LaboProb2">
+<a class="viewcode-back" href="../labo_prob2.html#labo_prob2.LaboProb2">[docs]</a>
+<span class="k">class</span> <span class="nc">LaboProb2</span><span class="p">(</span><span class="n">LaboProb2Common</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Classe de test pour valider la personalisation d&#39;un dictionnaire (tableau de hachage)</span>
+<span class="sd">        - Classe hérite de ParsingClass2, qui lit les paramètres de la ligne de commande</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LaboProb2.add_bigram">
+<a class="viewcode-back" href="../labo_prob2.html#labo_prob2.LaboProb2.add_bigram">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">add_bigram</span><span class="p">(</span><span class="n">bigram</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">bigram_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode appelée pour ajouter un bigramme au dictionnaire fourni :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            bigram (Any) : object (arbitraire) qui représente un bigramme et qui est utilisé comme clé</span>
+<span class="sd">            bigram_dict (dict) : tableau de hachage de bigrammes.  Utilisé pour emmagasiner et compter les bigrammes</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Le nouveau bigramme est ajouté au dictionnaire de bigrammes fourni</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Ici, remplacez les prints par votre code.</span>
+        <span class="c1"># Le tableau de hachage bigram_dict devrait accumuler et compter les bigrammes à mesure qu&#39;on les ajoute.</span>
+        <span class="c1"># On suppose qu&#39;au départ, le tableau de hachage est vide</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">bigram</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">bigram_dict</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb2.add_bigram_vector">
+<a class="viewcode-back" href="../labo_prob2.html#labo_prob2.LaboProb2.add_bigram_vector">[docs]</a>
+    <span class="nd">@staticmethod</span>  <span class="c1"># Cette méthode est statique, parce qu&#39;elle n&#39;utilise aucune valeur de l&#39;objet.</span>
+    <span class="k">def</span> <span class="nf">add_bigram_vector</span><span class="p">(</span><span class="n">word1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">bigram_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode appelée pour créer un vecteur de deux mots et pour l&#39;ajouter au dictionnaire fourni :</span>
+<span class="sd">            - Est-ce que cette méthode fonctionne ?  Pourquoi ?</span>
+<span class="sd">            - Si elle ne fonctionne pas, utilisez plutôt les méthodes add_bigram_object et add_bigram_tuple</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            word1 (str) : premier mot</span>
+<span class="sd">            word2 (str) : deuxième mot</span>
+<span class="sd">            bigram_dict (dict) : tableau de hachage de bigrammes.  Utilisé pour emmagasiner et compter les bigrammes</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Le nouveau bigramme est ajouté au dictionnaire de bigrammes fourni</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Code invalide.  Utiliser pour découvrir quel est le problème, mais il n&#39;est pas nécessaire de le corriger :</span>
+        <span class="c1">#   Regarder quel est le type de l&#39;erreur (TypeError) associée à la ligne 109 de add_bigram()</span>
+        <span class="c1"># Plutôt que de modifier le code, inclure le paramètre &quot;-p 2&quot; ou &quot;-p 3&quot; sur la ligne de commande</span>
+        <span class="c1">#    pour utiliser les méthodes add_bigram_object() et add_bigram_other()</span>
+        <span class="n">bigram</span> <span class="o">=</span> <span class="p">[</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">]</span>
+        <span class="n">LaboProb2</span><span class="o">.</span><span class="n">add_bigram</span><span class="p">(</span><span class="n">bigram</span><span class="p">,</span> <span class="n">bigram_dict</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb2.add_bigram_object">
+<a class="viewcode-back" href="../labo_prob2.html#labo_prob2.LaboProb2.add_bigram_object">[docs]</a>
+    <span class="nd">@staticmethod</span>  <span class="c1"># Cette méthode est statique, parce qu&#39;elle n&#39;utilise aucune valeur de l&#39;objet.</span>
+    <span class="k">def</span> <span class="nf">add_bigram_object</span><span class="p">(</span><span class="n">word1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">bigram_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode appelée pour créer un bigramme (à l&#39;aide des deux mots fournis)</span>
+<span class="sd">            et pour l&#39;ajouter au dictionnaire fourni :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            word1 (str) : premier mot</span>
+<span class="sd">            word2 (str) : deuxième mot</span>
+<span class="sd">            bigram_dict (dict) : tableau de hachage de bigrammes.  Utilisé pour emmagasiner et compter les bigrammes</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Le nouveau bigramme est ajouté au dictionnaire de bigrammes fourni</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Ici, remplacez les prints par votre code.</span>
+        <span class="c1"># L&#39;utilisation de la classe Bigram est probablement justifiée...</span>
+        <span class="c1"># Modifier l&#39;appel à la méthode add_bigram pour ajouter le bigramme complet au tableau de bigrammes</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">word1</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">word2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">bigram_dict</span><span class="p">)</span>
+        <span class="n">LaboProb2</span><span class="o">.</span><span class="n">add_bigram</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">bigram_dict</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb2.add_bigram_other">
+<a class="viewcode-back" href="../labo_prob2.html#labo_prob2.LaboProb2.add_bigram_other">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">add_bigram_other</span><span class="p">(</span><span class="n">word1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word2</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">bigram_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode appelée pour créer un bigramme (à l&#39;aide des deux mots fournis)</span>
+<span class="sd">            et pour l&#39;ajouter au dictionnaire fourni, la clé étant un vecteur :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            word1 (str) : premier mot</span>
+<span class="sd">            word2 (str) : deuxième mot</span>
+<span class="sd">            bigram_dict (dict) : tableau de hachage de bigrammes.  Utilisé pour emmagasiner et compter les bigrammes</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Le nouveau bigramme est ajouté au dictionnaire de bigrammes fourni</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Ici, remplacez les prints par votre code.</span>
+        <span class="c1"># Que pouvez-vous utiliser pour remplacer un vecteur, mais qui est immuable ?</span>
+        <span class="n">bigram</span> <span class="o">=</span> <span class="p">[</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">]</span>
+        <span class="n">LaboProb2</span><span class="o">.</span><span class="n">add_bigram</span><span class="p">(</span><span class="n">bigram</span><span class="p">,</span> <span class="n">bigram_dict</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb2.vector_size">
+<a class="viewcode-back" href="../labo_prob2.html#labo_prob2.LaboProb2.vector_size">[docs]</a>
+    <span class="nd">@staticmethod</span>  <span class="c1"># Cette méthode est statique, parce qu&#39;elle n&#39;utilise aucune valeur de l&#39;objet.</span>
+    <span class="k">def</span> <span class="nf">vector_size</span><span class="p">(</span><span class="n">vector</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode appelée pour calculer la taille d&#39;un vecteur (tableau de hachage, dict) :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            vector (dict) : tableau de hachage contenant tous les bigrammes</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            size (int) : La taille du vecteur</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Ici, vous devez calculer la taille totale du vecteur (le tableau de hachage vector, de type dict).</span>
+        <span class="c1"># Comme pour tout vecteur, la taille est obtenue en calculant la racine carrée de</span>
+        <span class="c1"># la somme des carrés des projections dans chacune des dimensions.</span>
+        <span class="c1"># Cette somme de carrés représente le produit scalaire du vecteur avec lui-même</span>
+        <span class="c1"># Ici, chaque bigramme distinct est une dimension</span>
+        <span class="c1"># Remplacez les lignes suivantes par le code approprié.</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">size</span> <span class="o">+=</span> <span class="n">LaboProb2</span><span class="o">.</span><span class="n">scalar_product</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="n">vector</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">size</span></div>
+
+
+<div class="viewcode-block" id="LaboProb2.scalar_product">
+<a class="viewcode-back" href="../labo_prob2.html#labo_prob2.LaboProb2.scalar_product">[docs]</a>
+    <span class="nd">@staticmethod</span>  <span class="c1"># Cette méthode est statique, parce qu&#39;elle n&#39;utilise aucune valeur de l&#39;objet.</span>
+    <span class="k">def</span> <span class="nf">scalar_product</span><span class="p">(</span><span class="n">vector1</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">vector2</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode calculant le produit scalaire entre 2 vecteurs :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            vector1 (dict) : tableau de hachage contenant tous les bigrammes du premier fichier</span>
+<span class="sd">            vector2 (dict) : tableau de hachage contenant tous les bigrammes du deuxième fichier</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            prod_scal (int) : Produit scalaire entre les deux vecteurs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Ici, vous devez calculer le produit scalaire entre les deux vecteurs.</span>
+        <span class="c1"># Pour ce faire, vous devez multiplier les valeurs des projections dans chacune des dimensions.</span>
+        <span class="c1"># De nouveau, les dimensions correspondent aux bigrammes.</span>
+        <span class="c1"># Si un bigramme existe dans un seul des vecteurs, alors la projection est nulle dans l&#39;autre,</span>
+        <span class="c1">#   et en conséquence le produit pour cette dimension est nul.</span>
+        <span class="c1"># Remplacez le print et les lignes suivantes par le code approprié.</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">vector1</span><span class="p">,</span> <span class="n">vector2</span><span class="p">)</span>
+        <span class="n">scal_prod</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">scal_prod</span></div>
+
+
+<div class="viewcode-block" id="LaboProb2.cosine">
+<a class="viewcode-back" href="../labo_prob2.html#labo_prob2.LaboProb2.cosine">[docs]</a>
+    <span class="nd">@staticmethod</span>  <span class="c1"># Cette méthode est statique, parce qu&#39;elle n&#39;utilise aucune valeur de l&#39;objet.</span>
+    <span class="k">def</span> <span class="nf">cosine</span><span class="p">(</span><span class="n">vector1</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">vector2</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode calculant le cosinus de l&#39;angle entre 2 vecteurs (produit scalaire normalisé) :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            vector1 (dict) : tableau de hachage contenant tous les bigrammes du premier fichier</span>
+<span class="sd">            vector2 (dict) : tableau de hachage contenant tous les bigrammes du deuxième fichier</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            angle_cos (float) : Cosinus de l&#39;angle entre les deux vecteurs (produit scalaire normalisé)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Ici, vous devez calculer le cosinus de l&#39;angle entre les deux vecteurs, soit le produit scalaire normalisé.</span>
+        <span class="c1"># Pour normaliser un vecteur, il faut diviser chacune des projections par la longueur totale du vecteur.</span>
+        <span class="c1"># Vous devez donc :</span>
+        <span class="c1">#   - Effectuer le produit scalaire entre les deux vecteurs,</span>
+        <span class="c1">#     puis diviser le résultat par leurs longueurs respectives.</span>
+        <span class="c1"># Remplacer le print et les lignes qui suivent par le code approprié.</span>
+        <span class="c1"># Note: Assurez-vous que le résultat ne dépasse pas 1.0, sinon math.acos() causera une exception.</span>
+        <span class="c1"># Remplacer les lignes qui suivent par le code approprié.</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">vector1</span><span class="p">,</span> <span class="n">vector2</span><span class="p">,</span> <span class="n">LaboProb2</span><span class="o">.</span><span class="n">vector_size</span><span class="p">(</span><span class="n">vector1</span><span class="p">),</span> <span class="n">LaboProb2</span><span class="o">.</span><span class="n">vector_size</span><span class="p">(</span><span class="n">vector2</span><span class="p">))</span>
+        <span class="n">angle_cos</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">return</span> <span class="n">angle_cos</span></div>
+</div>
+
+
+
+<span class="c1"># Main : lecture des paramètres et appel des méthodes appropriées</span>
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../labo_prob2.html#labo_prob2.main">[docs]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Démarrage de l&#39;exercice 2 du labo :</span>
+<span class="sd">        - Crée une instance de la classe LaboProb2, utilisée pour tester les mots de deux fichiers</span>
+<span class="sd">        - Trois méthodes sont explorées pour utiliser des bigrammes comme clé d&#39;un tableau de hachage :</span>
+<span class="sd">            - Vecteur []</span>
+<span class="sd">            - Instance de la classe Bigramme (qui doit être ajustée adéquatement)</span>
+<span class="sd">            - Alternative au vecteur, qui est immuable</span>
+<span class="sd">        - Dans la classe Bigramme de LaboProb2, il faut redéfinir les opérations d&#39;égalité et de hachage</span>
+
+<span class="sd">    Returns :</span>
+<span class="sd">        (void) : Au retour, l&#39;exécution est terminée</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Vous n&#39;avez rien à modifier dans la méthode main()</span>
+    <span class="n">p2</span> <span class="o">=</span> <span class="n">LaboProb2</span><span class="p">()</span>
+    <span class="k">match</span> <span class="n">p2</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">p</span><span class="p">:</span> <span class="c1"># La méthode d&#39;ajout de bigrammes est modifiée selon le choix effectué sur la ligne de commande</span>
+        <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">p2</span><span class="o">.</span><span class="n">define_add_bigram_func</span><span class="p">(</span><span class="n">LaboProb2</span><span class="o">.</span><span class="n">add_bigram_vector</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">p2</span><span class="o">.</span><span class="n">define_add_bigram_func</span><span class="p">(</span><span class="n">LaboProb2</span><span class="o">.</span><span class="n">add_bigram_object</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">p2</span><span class="o">.</span><span class="n">define_add_bigram_func</span><span class="p">(</span><span class="n">LaboProb2</span><span class="o">.</span><span class="n">add_bigram_other</span><span class="p">)</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 2, type inconnu de traitement d&#39;objets dans un tableau de hachage (doit être 1,2 ou 3)&quot;</span><span class="p">)</span>
+    <span class="n">p2</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">p2</span><span class="o">.</span><span class="n">do_something</span><span class="p">()</span>
+    <span class="k">return</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2018-2025, Frédéric Mailhot.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

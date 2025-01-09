@@ -1,0 +1,446 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module labo_prob2_common &mdash; Documentation Labo_GIF270 2.1</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4c2f8551"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=e6b791cb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Module labo_prob3" href="labo_prob3.html" />
+    <link rel="prev" title="Module labo_prob2" href="labo_prob2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Labo_GIF270
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenus:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="debug_handler_common.html">Module debug_handler_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handle_unicode_common.html">Module handle_unicode_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob1.html">Module labo_prob1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob1_common.html">Module labo_prob1_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob2.html">Module labo_prob2</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Module labo_prob2_common</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#diagramme-de-classe">Diagramme de classe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-labo_prob2_common">Code du module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#labo_prob2_common.BigramCommon"><code class="docutils literal notranslate"><span class="pre">BigramCommon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.add_bigram"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.add_bigram()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.add_bigram_object"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.add_bigram_object()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.add_bigram_other"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.add_bigram_other()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.add_bigram_vector"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.add_bigram_vector()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.cosine"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.cosine()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.define_add_bigram_func"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.define_add_bigram_func()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.do_something"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.do_something()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.get_common_bigrams"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.get_common_bigrams()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.print_common_bigrams"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.print_common_bigrams()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.print_dict_bigram"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.print_dict_bigram()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.read"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.read()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.read_one_file"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.read_one_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.scalar_product"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.scalar_product()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.LaboProb2Common.vector_size"><code class="docutils literal notranslate"><span class="pre">LaboProb2Common.vector_size()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#labo_prob2_common.ParsingClass2"><code class="docutils literal notranslate"><span class="pre">ParsingClass2</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.ParsingClass2.read_file_lines"><code class="docutils literal notranslate"><span class="pre">ParsingClass2.read_file_lines()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob2_common.ParsingClass2.setup_and_parse_cli"><code class="docutils literal notranslate"><span class="pre">ParsingClass2.setup_and_parse_cli()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob3.html">Module labo_prob3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob3_common.html">Module labo_prob3_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob4.html">Module labo_prob4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob4_common.html">Module labo_prob4_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart_formatter_common.html">Module smart_formatter_common</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Labo_GIF270</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module labo_prob2_common</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/labo_prob2_common.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <a class="reference internal image-reference" href="_images/UdeS_logo_h_pms347-crop.jpg"><img alt="_images/UdeS_logo_h_pms347-crop.jpg" src="_images/UdeS_logo_h_pms347-crop.jpg" style="width: 200px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="module-labo-prob2-common">
+<h1>Module labo_prob2_common<a class="headerlink" href="#module-labo-prob2-common" title="Lien vers cette rubrique"></a></h1>
+<section id="diagramme-de-classe">
+<h2>Diagramme de classe<a class="headerlink" href="#diagramme-de-classe" title="Lien vers cette rubrique"></a></h2>
+<a class="reference internal image-reference" href="_images/classes_labo_prob2_common.png"><img alt="_images/classes_labo_prob2_common.png" src="_images/classes_labo_prob2_common.png" style="width: 1000.0px; height: 547.2404115996259px;" />
+</a>
+</section>
+<section id="module-labo_prob2_common">
+<span id="code-du-module"></span><h2>Code du module<a class="headerlink" href="#module-labo_prob2_common" title="Lien vers cette rubrique"></a></h2>
+<blockquote>
+<div><p>Code pour explorer le deuxième exercice du laboratoire - APP du cours GIF270</p>
+<dl class="simple">
+<dt>L’exercice 2 touche les tableaux de hachage et leur redéfinition en Python :</dt><dd><ul class="simple">
+<li><p>Redéfinition de la méthode pour établir l’égalité entre deux objets</p></li>
+<li><p>Redéfinition de la méthode de hachage pour obtenir un nombre à partir d’un objet</p></li>
+<li><p>Redéfinition de la méthode d’ajout d’un bigramme dans un vecteur (dict qui contient un ensemble de bigrammes)</p></li>
+<li><p>Redéfinition de la méthode pour calculer la taille d’un vecteur</p></li>
+<li><p>Redéfinition de la méthode de calcul du produit scalaire entre deux vecteurs</p></li>
+<li><p>Redéfinition de la méthode de calcul du cosinus de l’angle entre deux vecteurs</p></li>
+</ul>
+</dd>
+<dt>Note :</dt><dd><ul class="simple">
+<li><p>Le traitement des arguments a été inclus dans la classe ParsingClass2, qui est utilisée dans le code principal</p></li>
+<li><p>Tous les arguments requis sont présents et accessibles dans ParsingClass2.args</p></li>
+<li><p>Le traitement du mode verbose vous donne un exemple de l’utilisation des arguments</p></li>
+<li><p>La classe SmartFormatter permet d’imprimer correctement la chaîne de caractère « help » lorsqu’elle débute par « R| »</p></li>
+</ul>
+</dd>
+</dl>
+</div></blockquote>
+<p>Copyright 2018-2025, Frédéric Mailhot et Université de Sherbrooke</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="labo_prob2_common.BigramCommon">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">labo_prob2_common.</span></span><span class="sig-name descname"><span class="pre">BigramCommon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">premier_mot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deuxieme_mot</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/labo_prob2_common.html#BigramCommon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.BigramCommon" title="Lien vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Création de méthodes permettant de personnaliser un dictionnaire (tableau de hachage)
+- Dans cette classe, on redéfinit comment faire le hash et comparer deux objets de type Bigramme</p>
+<p>Initialisation d’une nouvelle instance de Bigramme :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>premier_mot (str) : Premier mot du bigramme
+deuxieme_mot (str) : Deuxième mot du bigramme</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, l’objet est initialisé</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">labo_prob2_common.</span></span><span class="sig-name descname"><span class="pre">LaboProb2Common</span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common" title="Lien vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#labo_prob2_common.ParsingClass2" title="labo_prob2_common.ParsingClass2"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParsingClass2</span></code></a></p>
+<p>Classe de test pour valider la personalisation d’un dictionnaire (tableau de hachage)
+- Classe hérite de ParsingClass2, qui lit les paramètres de la ligne de commande</p>
+<p>Initialisation d’une nouvelle instance de LaboProb2 :</p>
+<dl class="simple">
+<dt>Returns :</dt><dd><p>(void) : Au retour, l’objet est initialisé</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.add_bigram">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_bigram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bigram</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bigram_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.add_bigram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.add_bigram" title="Lien vers cette définition"></a></dt>
+<dd><p>Méthode appelée pour ajouter un bigramme au dictionnaire fourni :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>bigram (Any) : object (arbitraire) qui représente un bigramme et qui est utilisé comme clé
+bigram_dict (dict) : tableau de hachage de bigrammes.  Utilisé pour emmagasiner et compter les bigrammes</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Le nouveau bigramme est ajouté au dictionnaire de bigrammes fourni</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.add_bigram_object">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_bigram_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bigram_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.add_bigram_object"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.add_bigram_object" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Méthode appelée pour créer un bigramme (à l’aide des deux mots fournis)</dt><dd><p>et pour l’ajouter au dictionnaire fourni :</p>
+</dd>
+<dt>Args :</dt><dd><p>word1 (str) : premier mot
+word2 (str) : deuxième mot
+bigram_dict (dict) : tableau de hachage de bigrammes.  Utilisé pour emmagasiner et compter les bigrammes</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Le nouveau bigramme est ajouté au dictionnaire de bigrammes fourni</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.add_bigram_other">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_bigram_other</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bigram_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.add_bigram_other"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.add_bigram_other" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Méthode appelée pour créer un bigramme (à l’aide des deux mots fournis)</dt><dd><p>et pour l’ajouter au dictionnaire fourni, la clé étant un vecteur :</p>
+</dd>
+<dt>Args :</dt><dd><p>word1 (str) : premier mot
+word2 (str) : deuxième mot
+bigram_dict (dict) : tableau de hachage de bigrammes.  Utilisé pour emmagasiner et compter les bigrammes</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Le nouveau bigramme est ajouté au dictionnaire de bigrammes fourni</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.add_bigram_vector">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_bigram_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bigram_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.add_bigram_vector"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.add_bigram_vector" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Méthode appelée pour créer un vecteur de deux mots et pour l’ajouter au dictionnaire fourni :</dt><dd><ul class="simple">
+<li><p>Est-ce que cette méthode fonctionne ?  Pourquoi ?</p></li>
+<li><p>Si elle ne fonctionne pas, utilisez plutôt les méthodes add_bigram_object et add_bigram_tuple</p></li>
+</ul>
+</dd>
+<dt>Args :</dt><dd><p>word1 (str) : premier mot
+word2 (str) : deuxième mot
+bigram_dict (dict) : tableau de hachage de bigrammes.  Utilisé pour emmagasiner et compter les bigrammes</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Le nouveau bigramme est ajouté au dictionnaire de bigrammes fourni</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.cosine">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cosine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.cosine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.cosine" title="Lien vers cette définition"></a></dt>
+<dd><p>Méthode calculant le cosinus de l’angle entre 2 vecteurs (produit scalaire normalisé) :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>vector1 (dict) : tableau de hachage contenant tous les bigrammes du premier fichier
+vector2 (dict) : tableau de hachage contenant tous les bigrammes du deuxième fichier</p>
+</dd>
+<dt>Returns :</dt><dd><p>angle_cos (float) : Cosinus de l’angle entre les deux vecteurs (produit scalaire normalisé)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.define_add_bigram_func">
+<span class="sig-name descname"><span class="pre">define_add_bigram_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">add_bigram_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.define_add_bigram_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.define_add_bigram_func" title="Lien vers cette définition"></a></dt>
+<dd><p>Méthode utilisée pour redéfinir la fonction d’ajout de bigrammes :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>add_bigram_func (Callable) : Méthode à utiliser par l’objet pour ajouter un bigramme à un tableau</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, la méthode d’ajout de bigrammes a été redéfinie</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.do_something">
+<span class="sig-name descname"><span class="pre">do_something</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.do_something"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.do_something" title="Lien vers cette définition"></a></dt>
+<dd><p>Méthode appelée pour donner les statistiques voulues :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : Tout se trouve dans l’objet</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, tout a déjà été imprimé à l’écran</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.get_common_bigrams">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_common_bigrams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.get_common_bigrams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.get_common_bigrams" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Méthode utilisée pour produire un tableau de hachage avec tous les bigrammes communs</dt><dd><p>à input_dict et test_dict</p>
+</dd>
+<dt>Args :</dt><dd><p>input_dict (dict) : tableau de hachage contenant les bigrammes issus du premier tableau
+test_dict (dict) : tableau de hachage contenant les bigrammes issus du deuxième tableau</p>
+</dd>
+<dt>Returns :</dt><dd><p>common_dict (dict) : tableau de hachage contenant les bigrammes communs aux deux tableaux</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.print_common_bigrams">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_common_bigrams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.print_common_bigrams"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.print_common_bigrams" title="Lien vers cette définition"></a></dt>
+<dd><p>Méthode utilisée pour imprimer tous les bigrammes communs à deux tableaux de hachage :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>input_dict (dict) : tableau de hachage contenant les bigrammes issus du premier fichier
+test_dict (dict) : tableau de hachage contenant les bigrammes issus du deuxième fichier</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Rien n’est retourné</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.print_dict_bigram">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_dict_bigram</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bigram_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.print_dict_bigram"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.print_dict_bigram" title="Lien vers cette définition"></a></dt>
+<dd><p>Méthode utilisée pour imprimer tous les bigrammes contenus dans un tableau de hachage :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>bigram_dict (dict) : tableau de hachage contenant des bigrammes</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Rien n’est retourné</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.read"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.read" title="Lien vers cette définition"></a></dt>
+<dd><p>Lecture des deux fichiers nécessaires à l’exercice :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : Tout se trouve déjà dans l’objet</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, les tableaux de hachage sont complets</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.read_one_file">
+<span class="sig-name descname"><span class="pre">read_one_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.read_one_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.read_one_file" title="Lien vers cette définition"></a></dt>
+<dd><p>Lecture d’un fichier de bigrammes et ajout dans le tableau de hachage fourni :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>filename (str) : Nom du fichier à traiter
+file_dict (dict) : Tableau de hachage à remplir</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, le tableau de hachage est complet</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.scalar_product">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">scalar_product</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.scalar_product"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.scalar_product" title="Lien vers cette définition"></a></dt>
+<dd><p>Méthode calculant le produit scalaire entre 2 vecteurs :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>vector1 (dict) : tableau de hachage contenant tous les bigrammes du premier fichier
+vector2 (dict) : tableau de hachage contenant tous les bigrammes du deuxième fichier</p>
+</dd>
+<dt>Returns :</dt><dd><p>prod_scal (int) : Produit scalaire entre les deux vecteurs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.LaboProb2Common.vector_size">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vector_size</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vector</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#LaboProb2Common.vector_size"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.LaboProb2Common.vector_size" title="Lien vers cette définition"></a></dt>
+<dd><p>Méthode appelée pour calculer la taille d’un vecteur (tableau de hachage, dict) :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>vector (dict) : tableau de hachage contenant tous les bigrammes</p>
+</dd>
+<dt>Returns :</dt><dd><p>size (int) : La taille du vecteur</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="labo_prob2_common.ParsingClass2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">labo_prob2_common.</span></span><span class="sig-name descname"><span class="pre">ParsingClass2</span></span><a class="reference internal" href="_modules/labo_prob2_common.html#ParsingClass2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.ParsingClass2" title="Lien vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Création d’un parser prédéfini pour lire les paramètres de la ligne de commande pour le deuxième exercice</p>
+<dl class="simple">
+<dt>Initialisation d’une nouvelle instance de ParsingClass2 :</dt><dd><ul class="simple">
+<li><p>Ajoute toutes les valeurs par défaut des paramètres utilisés</p></li>
+<li><p>Modifie les valeurs redéfinies sur la ligne de commande</p></li>
+</ul>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, l’objet est initialisé</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.ParsingClass2.read_file_lines">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_file_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#ParsingClass2.read_file_lines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.ParsingClass2.read_file_lines" title="Lien vers cette définition"></a></dt>
+<dd><p>Lecture d’un fichier” :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>filename (str) : Le nom du fichier à lire</p>
+</dd>
+<dt>Returns :</dt><dd><p>file_lines (array) : Tableau avec les lignes du fichier lu</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob2_common.ParsingClass2.setup_and_parse_cli">
+<span class="sig-name descname"><span class="pre">setup_and_parse_cli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob2_common.html#ParsingClass2.setup_and_parse_cli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob2_common.ParsingClass2.setup_and_parse_cli" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Utilise le module argparse pour :</dt><dd><ul class="simple">
+<li><p>Enregistrer les commandes à reconnaître</p></li>
+<li><p>Lire la ligne de commande et créer le champ self.args qui récupère la structure produite</p></li>
+</ul>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, toutes les commandes reconnues sont comprises dans self.args</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Documentation créée le 04 janv. 2025.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="labo_prob2.html" class="btn btn-neutral float-left" title="Module labo_prob2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="labo_prob3.html" class="btn btn-neutral float-right" title="Module labo_prob3" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2018-2025, Frédéric Mailhot.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module labo_prob4_common &mdash; Documentation Labo_GIF270 2.1</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4c2f8551"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=e6b791cb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Module smart_formatter_common" href="smart_formatter_common.html" />
+    <link rel="prev" title="Module labo_prob4" href="labo_prob4.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Labo_GIF270
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenus:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="debug_handler_common.html">Module debug_handler_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handle_unicode_common.html">Module handle_unicode_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob1.html">Module labo_prob1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob1_common.html">Module labo_prob1_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob2.html">Module labo_prob2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob2_common.html">Module labo_prob2_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob3.html">Module labo_prob3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob3_common.html">Module labo_prob3_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob4.html">Module labo_prob4</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Module labo_prob4_common</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#diagramme-de-classe">Diagramme de classe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-labo_prob4_common">Code du module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.SetMaxDistance"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.SetMaxDistance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.addEdgesBetweenAdjacentWords"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.addEdgesBetweenAdjacentWords()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.addWordToMask"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.addWordToMask()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.buildGraph"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.buildGraph()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.buildGraph1"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.buildGraph1()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.buildGraph2"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.buildGraph2()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.findWord"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.findWord()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.getWordMask"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.getWordMask()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.markPath"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.markPath()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.printFromWordDistance"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.printFromWordDistance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.printPath"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.printPath()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.printRecurWithPrev"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.printRecurWithPrev()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.storeWordDistances"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.storeWordDistances()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.LaboProb4Common.testProb4"><code class="docutils literal notranslate"><span class="pre">LaboProb4Common.testProb4()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#labo_prob4_common.ParsingClass4"><code class="docutils literal notranslate"><span class="pre">ParsingClass4</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob4_common.ParsingClass4.setup_and_parse_cli"><code class="docutils literal notranslate"><span class="pre">ParsingClass4.setup_and_parse_cli()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="smart_formatter_common.html">Module smart_formatter_common</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Labo_GIF270</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module labo_prob4_common</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/labo_prob4_common.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <a class="reference internal image-reference" href="_images/UdeS_logo_h_pms347-crop.jpg"><img alt="_images/UdeS_logo_h_pms347-crop.jpg" src="_images/UdeS_logo_h_pms347-crop.jpg" style="width: 200px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="module-labo-prob4-common">
+<h1>Module labo_prob4_common<a class="headerlink" href="#module-labo-prob4-common" title="Lien vers cette rubrique"></a></h1>
+<section id="diagramme-de-classe">
+<h2>Diagramme de classe<a class="headerlink" href="#diagramme-de-classe" title="Lien vers cette rubrique"></a></h2>
+<a class="reference internal image-reference" href="_images/classes_labo_prob4_common.png"><img alt="_images/classes_labo_prob4_common.png" src="_images/classes_labo_prob4_common.png" style="width: 811.0px; height: 1050.0px;" />
+</a>
+</section>
+<section id="module-labo_prob4_common">
+<span id="code-du-module"></span><h2>Code du module<a class="headerlink" href="#module-labo_prob4_common" title="Lien vers cette rubrique"></a></h2>
+<p>Code pour explorer le quatrième exercice du laboratoire - APP du cours GIF270</p>
+<dl class="simple">
+<dt>L’exercice 4 touche les graphes et les éléments suivants :</dt><dd><ul class="simple">
+<li><p>Redéfinition de la création du graphe de proximité</p></li>
+</ul>
+</dd>
+<dt>Note :</dt><dd><ul class="simple">
+<li><p>Le traitement des arguments a été inclus dans la classe ParsingClass4, qui est utilisée dans le code principal</p></li>
+<li><p>Tous les arguments requis sont présents et accessibles dans ParsingClass4.args</p></li>
+<li><p>Le traitement du mode verbose vous donne un exemple de l’utilisation des arguments</p></li>
+</ul>
+</dd>
+</dl>
+<p>Copyright 2018-2025, Frédéric Mailhot et Université de Sherbrooke</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">labo_prob4_common.</span></span><span class="sig-name descname"><span class="pre">LaboProb4Common</span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common" title="Lien vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#labo_prob4_common.ParsingClass4" title="labo_prob4_common.ParsingClass4"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParsingClass4</span></code></a></p>
+<p>Classe de test pour valider le code de l’échelle de mots
+- Classe hérite de ParsingClass4, qui lit les paramètres de la ligne de commande
+- Plusieurs des méthodes définies ici sont incomplètes et doivent être redéfinies dans la classe LaboProb4</p>
+<dl class="simple">
+<dt>Initialisation d’une nouvelle instance de LaboProb4 :</dt><dd><ul class="simple">
+<li><p>Utilise l’initialisation de la classe héritée par LaboProb4Common (ParsingClass4)</p></li>
+</ul>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, l’objet est initialisé</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.SetMaxDistance">
+<span class="sig-name descname"><span class="pre">SetMaxDistance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.SetMaxDistance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.SetMaxDistance" title="Lien vers cette définition"></a></dt>
+<dd><p>Annotation de tous les noeuds avec la distance maximale. Utile avant d’établir la distance avec le mot de départ</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : Le graphe contenant tous les mots est contenu dans self.g</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Tous les noeuds du graphe sont annotés avec la distance maximale, mais rien n’est retourné</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.addEdgesBetweenAdjacentWords">
+<span class="sig-name descname"><span class="pre">addEdgesBetweenAdjacentWords</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.addEdgesBetweenAdjacentWords"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.addEdgesBetweenAdjacentWords" title="Lien vers cette définition"></a></dt>
+<dd><p>Refactorisation du code tiré de la section 8.8, pour partager l’ajout d’arcs entre buildGraph et buildGraph2</p>
+<dl>
+<dt>Args :</dt><dd><p>(void) :  Les champs suivants sont utilisés, étant directement disponibles dans l’objet self</p>
+<p>g (Graph) : Graphe contenant les noeuds à traiter
+masks (dict) : Dictionnaire des clés utilisées (masques, par exemple : « _abc », « _bc », etc.)</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Les arcs sont ajoutés directement dans le graphe</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.addWordToMask">
+<span class="sig-name descname"><span class="pre">addWordToMask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.addWordToMask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.addWordToMask" title="Lien vers cette définition"></a></dt>
+<dd><p>Refactorisation du code tiré de la section 8.8, pour partager l’ajout de mots dans les masques</p>
+<p>Args :</p>
+<blockquote>
+<div><p>mask (str) : Masque auquel ajouter un mot qui a produit ce masque
+word (str) : Mot à l’origine du masque</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns :</dt><dd><p>(void) : Le mot est ajouté au masque, dans le dictionnaire</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.buildGraph">
+<span class="sig-name descname"><span class="pre">buildGraph</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.buildGraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.buildGraph" title="Lien vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.buildGraph1">
+<span class="sig-name descname"><span class="pre">buildGraph1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.buildGraph1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.buildGraph1" title="Lien vers cette définition"></a></dt>
+<dd><p>Création du graphe de connectivité entre les mots</p>
+<p>Code tiré de la section 8.8 du livre de référence
+Voir : &lt;<a class="reference external" href="https://runestone.academy/ns/books/published/GIF270/Graphs/BuildingtheWordLadderGraph.html">https://runestone.academy/ns/books/published/GIF270/Graphs/BuildingtheWordLadderGraph.html</a>&gt;</p>
+<dl class="simple">
+<dt>À adapter pour l’exercice :</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>ajouter un arc entre des mots qui ne sont pas de la même longueur,</dt><dd><p>mais qui ne diffèrent que par une lettre</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>optionnel<span class="classifier">permettre des arcs entre des mots qui diffèrent</span></dt><dd><p>par 2, 3, 4, etc. lettres (indiqué sur la ligne de commande)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p>Produit un graphe où les noeuds représentent des mots et les arcs lient des mots qui ne diffèrent entre eux
+que du nombre de caractères demandé</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>word_file (str) : Nom du fichier de mots à étudier</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : L’objet comprend le graphe qui contient tous les mots, avec des arcs entre les mots qui sont liés</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.buildGraph2">
+<span class="sig-name descname"><span class="pre">buildGraph2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word_file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">different_word_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.buildGraph2"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.buildGraph2" title="Lien vers cette définition"></a></dt>
+<dd><p>Création du graphe modifié de connectivité entre les mots</p>
+<dl class="simple">
+<dt>Modification du code de la fonction buildGraph1() :</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>ajouter un arc entre des mots qui ne sont pas de la même longueur,</dt><dd><p>mais qui ne diffèrent que par une lettre</p>
+</dd>
+</dl>
+</li>
+<li><p>ajouter un arc entre des mots qui diffèrent par 2, 3, … lettres</p></li>
+</ul>
+</dd>
+</dl>
+<p>Doit produire un graphe où les noeuds représentent des mots et les arcs lient des mots qui ne diffèrent entre eux
+que du nombre de caractères demandé</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>wordFile (str) : Nom du fichier de mots à étudier
+wordDistance (int) : Nombre maximum de caractères différents permis entre 2 mots adjacents dans l’échelle
+different_word_size (bool) : Indique qu’on permet (ou non) des mots de tailles différentes</p>
+</dd>
+<dt>Returns :</dt><dd><dl class="simple">
+<dt>(void)<span class="classifier">Au retour, l’objet contient le nouveau graphe tous les mots,</span></dt><dd><p>avec des arcs entre les mots qui sont liés</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.findWord">
+<span class="sig-name descname"><span class="pre">findWord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Vertex</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.findWord"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.findWord" title="Lien vers cette définition"></a></dt>
+<dd><p>Retourne le noeud (vertex) qui correspond au mot passé en paramètre</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>start_word (str) : Mot de départ</p>
+</dd>
+<dt>Returns :</dt><dd><p>(Vertex) : Retourne le noeud recherché</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.getWordMask">
+<span class="sig-name descname"><span class="pre">getWordMask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_point</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_word</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.getWordMask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.getWordMask" title="Lien vers cette définition"></a></dt>
+<dd><p>Énumération de masques (de type <em>abc, a*bc, ab*c, abc</em>, <em>bc, a*c, ab</em>)</p>
+<dl class="simple">
+<dt>Code adapté pour l’exercice :</dt><dd><ul class="simple">
+<li><p>ajout d’un arc entre des mots qui ne sont pas de la même longueur, mais qui ne diffèrent que par une lettre</p></li>
+<li><p>ajout d’arcs entre des mots qui diffèrent par 2, 3, … lettres (indiqué sur la ligne de commande)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Produit (de façon récursive) tous les masques appropriés</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>word (str) : mot à traiter
+distance (int) : nombre maximum de caractères différents permis entre deux mots adjacents
+start_point () :
+init_word (str) :</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : tous les masques nécessaires sont ajoutés aux structures passées en paramètres</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.markPath">
+<span class="sig-name descname"><span class="pre">markPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current_vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Vertex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.markPath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.markPath" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Annotation de tous les noeuds du graphe avec la distance la plus courte à partir du mot donné en paramètre :</dt><dd><ul class="simple">
+<li><p>Marquer le chemin (distance) à partir du noeud courant et de la distance courante</p></li>
+<li><p>Si un noeud voisin obtient une distance plus petite, le mettre à jour et le traiter</p></li>
+<li><p>Sinon (noeud voisin a déjà une distance assez petite), ne pas traiter ce noeud</p></li>
+<li><p>Considérer la distance maximale permise (currentDepth), pour limiter l’exploration du graphe</p></li>
+<li><p>Si la distance maximale permise est négative, cette méthode s’arrêtera lorsque tous les noeuds auront été traités</p></li>
+</ul>
+</dd>
+<dt>Args :</dt><dd><p>current_vertex (Vertex) : Noeud à traiter
+current_depth (int) : Distance maximale à étudier (cesser l’analyse lorsque ce nombre est à 0)
+current_distance (int) : Distance courante du noeud (mot) de départ</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Les noeuds du graphe sont annotés, mais rien n’est retourné</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.printFromWordDistance">
+<span class="sig-name descname"><span class="pre">printFromWordDistance</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.printFromWordDistance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.printFromWordDistance" title="Lien vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.printPath">
+<span class="sig-name descname"><span class="pre">printPath</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current_vertex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Vertex</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_distance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertex_list</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.printPath"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.printPath" title="Lien vers cette définition"></a></dt>
+<dd><p>Impression à l’écran de l’ensemble des chemins ayant la distance requise (à partir du mot de départ)</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>current_vertex (Vertex) : Noeud à traiter
+max_distance (int) : Distance maximale à imprimer (cesser lorsque ce nombre est à 0)
+vertex_list (Liste[Vertex]) : liste des noeuds dans le chemin parcouru jusqu’ici</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Tout le travail est fait par la fonction récursive _prinPath()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.printRecurWithPrev">
+<span class="sig-name descname"><span class="pre">printRecurWithPrev</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Vertex</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.printRecurWithPrev"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.printRecurWithPrev" title="Lien vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.storeWordDistances">
+<span class="sig-name descname"><span class="pre">storeWordDistances</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.storeWordDistances"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.storeWordDistances" title="Lien vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.LaboProb4Common.testProb4">
+<span class="sig-name descname"><span class="pre">testProb4</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#LaboProb4Common.testProb4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.LaboProb4Common.testProb4" title="Lien vers cette définition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="labo_prob4_common.ParsingClass4">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">labo_prob4_common.</span></span><span class="sig-name descname"><span class="pre">ParsingClass4</span></span><a class="reference internal" href="_modules/labo_prob4_common.html#ParsingClass4"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.ParsingClass4" title="Lien vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Création d’un parser prédéfini pour lire les paramètres de la ligne de commande pour le quatrième exercice</p>
+<dl class="simple">
+<dt>Initialisation d’une nouvelle instance de ParsingClass4 :</dt><dd><ul class="simple">
+<li><p>Ajoute toutes les valeurs par défaut des paramètres utilisés</p></li>
+<li><p>Modifie les valeurs redéfinies sur la ligne de commande</p></li>
+</ul>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, l’objet est initialisé</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob4_common.ParsingClass4.setup_and_parse_cli">
+<span class="sig-name descname"><span class="pre">setup_and_parse_cli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob4_common.html#ParsingClass4.setup_and_parse_cli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob4_common.ParsingClass4.setup_and_parse_cli" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Utilise le module argparse pour :</dt><dd><ul class="simple">
+<li><p>Enregistrer les commandes à reconnaître</p></li>
+<li><p>Lire la ligne de commande et créer le champ self.args qui récupère la structure produite</p></li>
+</ul>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, toutes les commandes reconnues sont comprises dans self.args</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Documentation créée le 04 janv. 2025.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="labo_prob4.html" class="btn btn-neutral float-left" title="Module labo_prob4" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="smart_formatter_common.html" class="btn btn-neutral float-right" title="Module smart_formatter_common" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2018-2025, Frédéric Mailhot.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

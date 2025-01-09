@@ -1,0 +1,858 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>labo_prob3_common &mdash; Documentation Labo_GIF270 2.1</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4c2f8551"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Labo_GIF270
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenus:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../debug_handler_common.html">Module debug_handler_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../handle_unicode_common.html">Module handle_unicode_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob1.html">Module labo_prob1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob1_common.html">Module labo_prob1_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob2.html">Module labo_prob2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob2_common.html">Module labo_prob2_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob3.html">Module labo_prob3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob3_common.html">Module labo_prob3_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob4.html">Module labo_prob4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob4_common.html">Module labo_prob4_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../smart_formatter_common.html">Module smart_formatter_common</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Labo_GIF270</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Code du module</a></li>
+      <li class="breadcrumb-item active">labo_prob3_common</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de labo_prob3_common</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Code pour explorer le troisième exercice du laboratoire - APP du cours GIF270</span>
+
+<span class="sd">    L&#39;exercice 3 touche les arbres AVL et l&#39;élément suivant :</span>
+<span class="sd">        - Redéfinition de la méthode rotate_right</span>
+
+<span class="sd">    Note :</span>
+<span class="sd">        - Le traitement des arguments a été inclus dans la classe ParsingClass3, qui est utilisée dans le code principal</span>
+<span class="sd">        - Tous les arguments requis sont présents et accessibles dans ParsingClass3.args</span>
+<span class="sd">        - Le traitement du mode verbose vous donne un exemple de l&#39;utilisation des arguments</span>
+
+<span class="sd">    Copyright 2018-2025, Frédéric Mailhot et Université de Sherbrooke</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterator</span>
+
+
+<div class="viewcode-block" id="TreeNode">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.TreeNode">[docs]</a>
+<span class="k">class</span> <span class="nc">TreeNode</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Création d&#39;un noeud pour un arbre</span>
+
+<span class="sd">    Code tiré des sections 6.13 à 6.17 du livre de référence</span>
+<span class="sd">    Voir : &lt;https://runestone.academy/ns/books/published/GIF270/Trees/SearchTreeImplementation.html&gt;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">left</span><span class="p">:</span> <span class="n">TreeNode</span> <span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">right</span><span class="p">:</span> <span class="n">TreeNode</span> <span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">TreeNode</span> <span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialisation d&#39;un nouveau noeud d&#39;un arbre</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            key (int) :</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;objet est initialisé</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="n">left</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="n">right</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="TreeNode.has_left_child">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.TreeNode.has_left_child">[docs]</a>
+    <span class="k">def</span> <span class="nf">has_left_child</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indique si un noeud a un enfant à gauche</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : On observe l&#39;instance elle-même</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (TreeNode) : Valeur de l&#39;enfant à gauche, ou valeur nulle</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span></div>
+
+
+<div class="viewcode-block" id="TreeNode.has_right_child">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.TreeNode.has_right_child">[docs]</a>
+    <span class="k">def</span> <span class="nf">has_right_child</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indique si un noeud a un enfant à droite</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : On observe l&#39;instance elle-même</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (TreeNode) : Valeur de l&#39;enfant à droite, ou valeur nulle</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span></div>
+
+
+<div class="viewcode-block" id="TreeNode.is_left_child">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.TreeNode.is_left_child">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_left_child</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indique si un noeud est l&#39;enfant à gauche de son parent</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : On observe l&#39;instance elle-même</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (bool) : Vrai si le noeud a un parent dont il est l&#39;enfant à gauche, Faux sinon</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">left_child</span> <span class="o">==</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="TreeNode.is_right_child">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.TreeNode.is_right_child">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_right_child</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indique si un noeud est l&#39;enfant à droite de son parent</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : On observe l&#39;instance elle-même</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (bool) : Vrai si le noeud a un parent dont il est l&#39;enfant à droite, Faux sinon</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">right_child</span> <span class="o">==</span> <span class="bp">self</span></div>
+
+
+<div class="viewcode-block" id="TreeNode.is_root">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.TreeNode.is_root">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_root</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indique si un noeud est la racine d&#39;un arbre (dans ce cas, il n&#39;a pas de parent)</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : On observe l&#39;instance elle-même</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (bool) : Faux si le noeud a un parent, Vrai sinon</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span></div>
+
+
+<div class="viewcode-block" id="TreeNode.is_leaf">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.TreeNode.is_leaf">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_leaf</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indique si un noeud est une feuille d&#39;un arbre</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : On observe l&#39;instance elle-même</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (bool) : Vrai si le noeud n&#39;a pas d&#39;enfant à gauche ni d&#39;enfant à droite, Faux sinon</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">right_child</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="TreeNode.has_any_children">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.TreeNode.has_any_children">[docs]</a>
+    <span class="k">def</span> <span class="nf">has_any_children</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indique si un noeud possède au moins un enfant</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : On observe l&#39;instance elle-même</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (bool) : Vrai si le noeud a un enfant à gauche, un enfant à droite, ou les deux, Faux sinon</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span></div>
+
+
+<div class="viewcode-block" id="TreeNode.has_both_children">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.TreeNode.has_both_children">[docs]</a>
+    <span class="k">def</span> <span class="nf">has_both_children</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Indique si un noeud a deux enfants</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : On observe l&#39;instance elle-même</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (bool) : Vrai si le noeud deux enfants, Faux sinon</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span></div>
+
+
+<div class="viewcode-block" id="TreeNode.replaceNodeData">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.TreeNode.replaceNodeData">[docs]</a>
+    <span class="k">def</span> <span class="nf">replaceNodeData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">lc</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">,</span> <span class="n">rc</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remplace toute l&#39;information contenue dans un noeud</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            key (int) : Clé associée au noeud</span>
+<span class="sd">            value (int) : Contenu associé à un noeud (peut être n&#39;importe quel objet)</span>
+<span class="sd">            lc (TreeNode) : Nouvel enfant à gauche</span>
+<span class="sd">            rc (TreeNode) : Nouvel enfant à droite</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Les champs du noeud sont mis à jour, et il devient le parent de ses nouveaux noeuds enfants</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payload</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="n">lc</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="n">rc</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_left_child</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">left_child</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">has_right_child</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">right_child</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="k">return</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="BinarySearchTree">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.BinarySearchTree">[docs]</a>
+<span class="k">class</span> <span class="nc">BinarySearchTree</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Création d&#39;un arbre binaire</span>
+
+<span class="sd">    Code tiré de la section 6.13 du livre de référence</span>
+<span class="sd">    Voir : &lt;https://runestone.academy/ns/books/published/GIF270/Trees/SearchTreeImplementation.html&gt;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialisation d&#39;une nouvelle instance d&#39;arbre  :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : Ne fait que créer l&#39;amorce d&#39;un arbre vide</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;objet est initialisé</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span> <span class="n">TreeNode</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="BinarySearchTree.length">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.BinarySearchTree.length">[docs]</a>
+    <span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retourne la taille (le nombre de noeuds) de l&#39;arbre :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : La taille de l&#39;arbre est contenue dans l&#39;objet de type BinarySearchTree</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (int) : Retourne le nombre de noeuds dans l&#39;arbre</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retourne la taille (le nombre de noeuds) de l&#39;arbre :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : La taille de l&#39;arbre est contenue dans l&#39;objet de type BinarySearchTree</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (int) : Retourne le nombre de noeuds dans l&#39;arbre</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retourne un itérateur sur le noeud :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : On utilise le noeud racine de l&#39;objet de type BinarySearchTree</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (Iterator) : Retourne l&#39;itérateur par défaut du noeud racine de l&#39;arbre binaire</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="fm">__iter__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="BinarySearchTree.put">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.BinarySearchTree.put">[docs]</a>
+    <span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Ajout d&#39;une nouvelle valeur dans l&#39;arbre binaire :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            key (int) : La clé associée à la valeur à ajouter</span>
+<span class="sd">            val (int) : La valeur à ajouter dans l&#39;arbre</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, un nouveau noeud a été ajouté à l&#39;arbre avec la valeur passée en paramètre</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">return</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">current_node</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Traverse l&#39;arbre existant et ajoute le noeud au bon endroit :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            key (int) : La clé associée à la valeur à ajouter</span>
+<span class="sd">            val (int) : La valeur à ajouter dans l&#39;arbre</span>
+<span class="sd">            current_node (TreeNode) : le noeud courant, lors de la traversée de l&#39;arbre</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, un nouveau noeud a été ajouté à l&#39;arbre, au bon endroit</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">current_node</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">current_node</span><span class="o">.</span><span class="n">hasLeftChild</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">current_node</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">current_node</span><span class="o">.</span><span class="n">leftChild</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">current_node</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">current_node</span><span class="o">.</span><span class="n">hasRightChild</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">current_node</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">current_node</span><span class="o">.</span><span class="n">rightChild</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">current_node</span><span class="p">)</span>
+        <span class="k">return</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Wrapper pour utiliser la méthode put d&#39;ajout d&#39;une nouvelle valeur dans l&#39;arbre binaire :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            k (int) : La clé associée à la valeur à ajouter</span>
+<span class="sd">            v (int) : La valeur à ajouter dans l&#39;arbre</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, un nouveau noeud a été ajouté à l&#39;arbre avec la valeur passée en paramètre</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="BinarySearchTree.get">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.BinarySearchTree.get">[docs]</a>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TreeNode</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retour du noeud associé à la clée dans l&#39;arbre binaire :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            key (int) : La clé associée à la valeur à trouver</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (TreeNode) : Le noeud associé à la clé (si elle existe dans l&#39;arbre)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">res</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">payload</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">current_node</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TreeNode</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Traverse l&#39;arbre existant et retourne le noeud approprié :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            key (int) : La clé associée à la valeur à ajouter</span>
+<span class="sd">            current_node (TreeNode) : Le noeud courant (au départ, il s&#39;agit de la racine de l&#39;arbre)</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (TreeNode) : Le noeud associé à la clé (peut être l&#39;objet None si la clé est absente de l&#39;arbre)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">current_node</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="n">current_node</span><span class="o">.</span><span class="n">key</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">current_node</span>
+        <span class="k">elif</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">current_node</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">current_node</span><span class="o">.</span><span class="n">leftChild</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">current_node</span><span class="o">.</span><span class="n">rightChild</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TreeNode</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Wrapper pour utiliser la méthode get de recherche d&#39;un noeud avec une certaine valeur dans l&#39;arbre binaire :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            key (int) : La clé associée au noeud à trouver</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (TreeNode) : Au retour, le noeud avec la valeur recherchée (ou None s&#39;il n&#39;existe pas)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Test logique (vrai ou faux) pour déterminer si une clé est présente dans l&#39;arbre (ou non)</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            key (int) : La clé associée au noeud à trouver</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (bool) : Indique si la valeur se trouve dans l&#39;orbre ou non</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+
+
+<div class="viewcode-block" id="AVLTreeCommon">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.AVLTreeCommon">[docs]</a>
+<span class="k">class</span> <span class="nc">AVLTreeCommon</span><span class="p">(</span><span class="n">BinarySearchTree</span><span class="p">)</span> <span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">current_node</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Redéfinition de la méthode _put de la classe BinarySearchTree pour inclure au besoin le rebalancement :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            key (int) : La clé associée à la valeur à ajouter</span>
+<span class="sd">            value (int) : La valeur à ajouter dans l&#39;arbre</span>
+<span class="sd">            current_node (TreeNoce) : Le noeud courant (au départ, c&#39;est le noeud racine de l&#39;arbre)</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, un nouveau noeud a été ajouté à l&#39;arbre, au bon endroit</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">current_node</span><span class="o">.</span><span class="n">key</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">current_node</span><span class="o">.</span><span class="n">left_child</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">current_node</span><span class="o">.</span><span class="n">left_child</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">current_node</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span>
+                    <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">current_node</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update_balance</span><span class="p">(</span><span class="n">current_node</span><span class="o">.</span><span class="n">left_child</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">current_node</span><span class="o">.</span><span class="n">right_child</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">current_node</span><span class="o">.</span><span class="n">right_child</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">current_node</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="n">TreeNode</span><span class="p">(</span>
+                    <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">current_node</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update_balance</span><span class="p">(</span><span class="n">current_node</span><span class="o">.</span><span class="n">right_child</span><span class="p">)</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="AVLTreeCommon.update_balance">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.AVLTreeCommon.update_balance">[docs]</a>
+    <span class="k">def</span> <span class="nf">update_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;À partir d&#39;un certain noeud, rebalancer ses enfants immédiats et son parent, si nécessaire :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            node (TreeNoce) : Le noeud courant</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, le noeud a été rebalancé, ainsi que ses parents (si nécessaire)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_rebal</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">node</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rebalance</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+                <span class="k">return</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">is_left_child</span><span class="p">():</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">is_right_child</span><span class="p">():</span>
+                <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">-=</span> <span class="mi">1</span>
+
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update_balance</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="AVLTreeCommon.rebalance">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.AVLTreeCommon.rebalance">[docs]</a>
+    <span class="k">def</span> <span class="nf">rebalance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rebalancer un noeud en utilisant des rotations sur ses enfants :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            node (TreeNoce) : Le noeud courant</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, le noeud a été rebalancé</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">right_child</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rotate_right</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right_child</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rotate_left</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rotate_left</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">node</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">node</span><span class="o">.</span><span class="n">left_child</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rotate_left</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left_child</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rotate_right</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">rotate_right</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="AVLTreeCommon.rotate_left">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.AVLTreeCommon.rotate_left">[docs]</a>
+    <span class="k">def</span> <span class="nf">rotate_left</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rotation_root</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rotation d&#39;un sous-arbre vers la droite :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            rotation_root (TreeNode) : Noeud sur lequel effectuer la rotation gauche</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, la rotation gauche a été effectuée et tous les noeuds ont été ajustés</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">new_root</span> <span class="o">=</span> <span class="n">rotation_root</span><span class="o">.</span><span class="n">right_child</span>
+        <span class="n">rotation_root</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="n">new_root</span><span class="o">.</span><span class="n">left_child</span>
+        <span class="k">if</span> <span class="n">new_root</span><span class="o">.</span><span class="n">left_child</span><span class="p">:</span>
+            <span class="n">new_root</span><span class="o">.</span><span class="n">left_child</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">rotation_root</span>
+        <span class="n">new_root</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">rotation_root</span><span class="o">.</span><span class="n">parent</span>
+        <span class="k">if</span> <span class="n">rotation_root</span><span class="o">.</span><span class="n">is_root</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">new_root</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">rotation_root</span><span class="o">.</span><span class="n">is_left_child</span><span class="p">():</span>
+                <span class="n">rotation_root</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="n">new_root</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">rotation_root</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">right_child</span> <span class="o">=</span> <span class="n">new_root</span>
+        <span class="n">new_root</span><span class="o">.</span><span class="n">left_child</span> <span class="o">=</span> <span class="n">rotation_root</span>
+        <span class="n">rotation_root</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">new_root</span>
+        <span class="n">rotation_root</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">rotation_root</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="n">new_root</span><span class="o">.</span><span class="n">balance_factor</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">new_root</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="n">new_root</span><span class="o">.</span><span class="n">balance_factor</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">rotation_root</span><span class="o">.</span><span class="n">balance_factor</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="AVLTreeCommon.rotate_right">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.AVLTreeCommon.rotate_right">[docs]</a>
+    <span class="k">def</span> <span class="nf">rotate_right</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rotation_root</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Rotation d&#39;un sous-arbre vers la droite :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            rotation_root (TreeNode) : Noeud sur lequel effectuer la rotation droite</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, la rotation droite a été effectuée et tous les noeuds ont été ajustés</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Code incomplet.  Doit être modifié dans la classe AVLTree, qui hérite de AVLTreeCommon.</span>
+        <span class="k">return</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">do_rebal</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialisation d&#39;un nouvel arbre AVL :</span>
+<span class="sd">            - Le paramètre do_rebal permet de créer (et observer) un abre balancé (AVL) ou non</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            do_rebal (bool) : L&#39;arbre doit être rebalancé dynamiquement (AVL) ou non (arbre binaire standard)</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;objet est initialisé</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">do_rebal</span> <span class="o">=</span> <span class="n">do_rebal</span>
+        <span class="k">return</span></div>
+
+
+
+<div class="viewcode-block" id="ParsingClass3">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.ParsingClass3">[docs]</a>
+<span class="k">class</span> <span class="nc">ParsingClass3</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Création d&#39;un parser prédéfini pour lire les paramètres de la ligne de commande pour le troisième exercice</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ParsingClass3.setup_and_parse_cli">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.ParsingClass3.setup_and_parse_cli">[docs]</a>
+    <span class="k">def</span> <span class="nf">setup_and_parse_cli</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Utilise le module argparse pour :</span>
+<span class="sd">            - Enregistrer les commandes à reconnaître</span>
+<span class="sd">            - Lire la ligne de commande et créer le champ self.args qui récupère la structure produite</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, toutes les commandes reconnues sont comprises dans self.args</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;Labo1:Exercice3.py&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Fichier contenant les nombres à ordonner&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-v&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Mode verbose&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-nrb&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Sans rebalancement&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">parser</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ParsingClass3.read_file_lines">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.ParsingClass3.read_file_lines">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">read_file_lines</span><span class="p">(</span><span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lecture d&#39;un fichier&#39; :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            filename (str) : Le nom du fichier à lire</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            file_lines (array) : Tableau avec les lignes du fichier lu</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+                <span class="n">file_lines</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">file_lines</span>
+        <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fichier &quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="s2">&quot; inexistant&quot;</span><span class="p">)</span>
+            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="ParsingClass3.read_one_file">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.ParsingClass3.read_one_file">[docs]</a>
+    <span class="k">def</span> <span class="nf">read_one_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">numbers</span><span class="p">:</span> <span class="p">[])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lecture d&#39;un fichier de nombres et ajout dans le tableau fourni :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            filename (str) : Nom du fichier à traiter</span>
+<span class="sd">            numbers (array) : Tableau de nombres (vide au départ)</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, le tableau de nombre est rempli</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read_file_lines</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">one_line</span> <span class="ow">in</span> <span class="n">file_lines</span><span class="p">:</span>
+            <span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">one_line</span><span class="p">)</span>
+            <span class="n">numbers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="ParsingClass3.read_numbers">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.ParsingClass3.read_numbers">[docs]</a>
+    <span class="k">def</span> <span class="nf">read_numbers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Lecture du fichier nécessaire à l&#39;exercice :</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : Tout se trouve déjà dans l&#39;objet</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, la liste de nombre est complète</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_one_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_numbers</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialisation d&#39;une nouvelle instance de ParsingClass3 :</span>
+<span class="sd">            - Ajoute toutes les valeurs par défaut des paramètres utilisés</span>
+<span class="sd">            - Modifie les valeurs redéfinies sur la ligne de commande</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;objet est initialisé, avec la liste de nombres dans le tableau input_numbers</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_numbers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_and_parse_cli</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">read_numbers</span><span class="p">()</span>
+
+        <span class="c1"># Si mode verbose, refléter les valeurs des paramètres passés sur la ligne de commande</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">v</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mode verbose:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Fichier de nombres: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">nrb</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Arbre non rebalancé&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">Arbre rebalancé&quot;</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+
+<div class="viewcode-block" id="LaboProb3Common">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.LaboProb3Common">[docs]</a>
+<span class="k">class</span> <span class="nc">LaboProb3Common</span><span class="p">(</span><span class="n">ParsingClass3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Création de méthodes permettant de créer des arbres AVL</span>
+<span class="sd">        - Classe hérite de ParsingClass3, qui lit les paramètres de la ligne de commande</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LaboProb3Common.build_AVL">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.LaboProb3Common.build_AVL">[docs]</a>
+    <span class="k">def</span> <span class="nf">build_AVL</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode qui crée l&#39;arbre AVL à partir des nombres inclus dans le tableau self.input_numbers</span>
+<span class="sd">            - Utilise la classe AVLTree définie dans l&#39;objet</span>
+<span class="sd">            - Cette classe peut être redéfinie lors de la création de l&#39;objet (paramètre facultatif)</span>
+<span class="sd">            - Si elle est redéfinie, cela permet d&#39;utiliser une version différente de AVLTree</span>
+<span class="sd">            - Par exemple, la version par défaut (AVLTreeCommon) ne contient pas le code pour la rotation droite</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : Tout se trouve dans l&#39;objet</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;arbre AVL est créé</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">AVLTreeClass</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">do_rebal</span><span class="p">)</span>     <span class="c1"># Création de l&#39;arbre AVL à l&#39;aide de la classe fournie</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_numbers</span><span class="p">)):</span>        <span class="c1"># Ajout des nombres de la liste dans l&#39;arbre</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">avl</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_numbers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb3Common.print_one_node">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.LaboProb3Common.print_one_node">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_one_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="n">TreeNode</span><span class="p">,</span> <span class="n">depth</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Imprime à l&#39;écran les valeurs de chacun des noeuds de l&#39;arbre AVL, dans l&#39;ordre :</span>
+<span class="sd">            - D&#39;abord les enfants gauches</span>
+<span class="sd">            - Ensuite la valeur dans le noeud lui-même</span>
+<span class="sd">            - Enfin les enfants droits</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            node (TreeNode) : le noeud à traiter dans l&#39;arbre AVL</span>
+<span class="sd">            depth (int) :    la profondeur du noeud courant</span>
+<span class="sd">            max_depth (int) : la plus grande profondeur observée jusqu&#39;à maintenant</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            max_depth (int) : la profondeur maximale observée (enfant gauche, noeud lui-même, enfant droit)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">node</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">depth</span> <span class="o">&gt;</span> <span class="n">max_depth</span><span class="p">:</span>
+                <span class="n">max_depth</span> <span class="o">=</span> <span class="n">depth</span>
+            <span class="n">max_depth_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_one_node</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">left_child</span><span class="p">,</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">max_depth_left</span> <span class="o">&gt;</span> <span class="n">max_depth</span><span class="p">:</span>
+                <span class="n">max_depth</span> <span class="o">=</span> <span class="n">max_depth_left</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">node</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">max_depth_right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_one_node</span><span class="p">(</span><span class="n">node</span><span class="o">.</span><span class="n">right_child</span><span class="p">,</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">max_depth_right</span> <span class="o">&gt;</span> <span class="n">max_depth</span><span class="p">:</span>
+                <span class="n">max_depth</span> <span class="o">=</span> <span class="n">max_depth_right</span>
+        <span class="k">return</span> <span class="n">max_depth</span></div>
+
+
+<div class="viewcode-block" id="LaboProb3Common.print_AVL">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.LaboProb3Common.print_AVL">[docs]</a>
+    <span class="k">def</span> <span class="nf">print_AVL</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Imprime à l&#39;écran les valeurs ordonnées dans l&#39;arbre AVL.</span>
+<span class="sd">            À la fin, indique la profondeur maximale de l&#39;arbre</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : Tout se trouve dans l&#39;objet</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;arbre AVL a été imprimé, ainsi que la profondeur maximale</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">max_depth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">print_one_node</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">avl</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_rebal</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&gt; </span><span class="se">\&quot;</span><span class="s2">Vrai</span><span class="se">\&quot;</span><span class="s2"> arbre AVL, avec rebalancement&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;---&gt; </span><span class="se">\&quot;</span><span class="s2">Faux</span><span class="se">\&quot;</span><span class="s2"> arbre AVL: sans rebalancement&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Profondeur maximale:&quot;</span><span class="p">,</span> <span class="n">max_depth</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb3Common.do_something">
+<a class="viewcode-back" href="../labo_prob3_common.html#labo_prob3_common.LaboProb3Common.do_something">[docs]</a>
+    <span class="k">def</span> <span class="nf">do_something</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode appelée pour créer l&#39;arbre AVL, imprimer la liste initiale de nombres, puis l&#39;arbre AVL (ordonné)</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : Tout se trouve dans l&#39;objet</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;arbre AVL est créé et a été imprimé</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">build_AVL</span><span class="p">()</span>
+
+        <span class="c1"># Le premier print imprime la liste de nombres originale à l&#39;écran (avec le rang dans la liste)</span>
+        <span class="c1"># Le deuxième print imprime la liste ordonnée (à l&#39;aide de l&#39;arbre AVL</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nombres en entrée: -----------------------------------------------&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_numbers</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input_numbers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Arbre AVL: -----------------------------------------------&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_AVL</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">avltree_class</span><span class="o">=</span><span class="n">AVLTreeCommon</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialisation d&#39;une nouvelle instance de LaboProb3 :</span>
+<span class="sd">            - Utilise l&#39;initialisation de la classe héritée par LaboProb3 (ParsingClass3)</span>
+<span class="sd">            - Par défaut, utilise la classe AVLTreeCommon pour la création future des arbres AVL</span>
+<span class="sd">            - Cependant, cette classe peut être redéfinie à la création de l&#39;objet</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;objet est initialisé</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">AVLTreeClass</span> <span class="o">=</span> <span class="n">avltree_class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">avl</span><span class="p">:</span> <span class="n">AVLTreeCommon</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">do_rebal</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">nrb</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">do_rebal</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">return</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2018-2025, Frédéric Mailhot.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

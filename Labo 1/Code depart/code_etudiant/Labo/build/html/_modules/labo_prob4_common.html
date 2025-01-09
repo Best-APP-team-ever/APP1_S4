@@ -1,0 +1,609 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>labo_prob4_common &mdash; Documentation Labo_GIF270 2.1</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4c2f8551"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Labo_GIF270
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenus:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../debug_handler_common.html">Module debug_handler_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../handle_unicode_common.html">Module handle_unicode_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob1.html">Module labo_prob1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob1_common.html">Module labo_prob1_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob2.html">Module labo_prob2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob2_common.html">Module labo_prob2_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob3.html">Module labo_prob3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob3_common.html">Module labo_prob3_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob4.html">Module labo_prob4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob4_common.html">Module labo_prob4_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../smart_formatter_common.html">Module smart_formatter_common</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Labo_GIF270</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Code du module</a></li>
+      <li class="breadcrumb-item active">labo_prob4_common</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de labo_prob4_common</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Code pour explorer le quatrième exercice du laboratoire - APP du cours GIF270</span>
+
+<span class="sd">    L&#39;exercice 4 touche les graphes et les éléments suivants :</span>
+<span class="sd">        - Redéfinition de la création du graphe de proximité</span>
+
+<span class="sd">    Note :</span>
+<span class="sd">        - Le traitement des arguments a été inclus dans la classe ParsingClass4, qui est utilisée dans le code principal</span>
+<span class="sd">        - Tous les arguments requis sont présents et accessibles dans ParsingClass4.args</span>
+<span class="sd">        - Le traitement du mode verbose vous donne un exemple de l&#39;utilisation des arguments</span>
+
+<span class="sd">    Copyright 2018-2025, Frédéric Mailhot et Université de Sherbrooke</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">from</span> <span class="nn">pythonds3</span> <span class="kn">import</span> <span class="n">Vertex</span>
+<span class="kn">from</span> <span class="nn">pythonds3</span> <span class="kn">import</span> <span class="n">Graph</span>
+
+
+<div class="viewcode-block" id="ParsingClass4">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.ParsingClass4">[docs]</a>
+<span class="k">class</span> <span class="nc">ParsingClass4</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Création d&#39;un parser prédéfini pour lire les paramètres de la ligne de commande pour le quatrième exercice</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ParsingClass4.setup_and_parse_cli">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.ParsingClass4.setup_and_parse_cli">[docs]</a>
+    <span class="k">def</span> <span class="nf">setup_and_parse_cli</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Utilise le module argparse pour :</span>
+<span class="sd">            - Enregistrer les commandes à reconnaître</span>
+<span class="sd">            - Lire la ligne de commande et créer le champ self.args qui récupère la structure produite</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, toutes les commandes reconnues sont comprises dans self.args</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">prog</span><span class="o">=</span><span class="s1">&#39;GIF270 Labo1:Exercice4.py&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-f&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Fichier contenant la liste de mots&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-m&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Mot de départ&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-d&#39;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Distance du mot de départ&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-v&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Mode verbose&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-wd&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Nombre maximal de caractères différents entre les mots&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-D&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Permet des mots de taille différente&#39;</span><span class="p">)</span>
+        <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-max&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Nombre maximal de listes à imprimer&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span> <span class="o">=</span> <span class="n">parser</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+
+        <span class="k">return</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialisation d&#39;une nouvelle instance de ParsingClass4 :</span>
+<span class="sd">            - Ajoute toutes les valeurs par défaut des paramètres utilisés</span>
+<span class="sd">            - Modifie les valeurs redéfinies sur la ligne de commande</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;objet est initialisé</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setup_and_parse_cli</span><span class="p">()</span>
+
+        <span class="c1"># Si mode verbose, refléter les valeurs des paramètres passés sur la ligne de commande</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">v</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mode verbose:&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fichier de mots utilisé: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">f</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mot de départ: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Distance du mot de départ: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">d</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nombre maximal de caractères différencts entre les mots: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">wd</span><span class="p">))</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">D</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Utilisation possible de mots de taille différente dans l&#39;échelle de mots&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tous les mots de l&#39;échelle de mots seront de même taille&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Nombre maximal de listes de mots: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">max</span><span class="p">))</span>
+        <span class="k">return</span></div>
+
+
+
+<div class="viewcode-block" id="LaboProb4Common">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common">[docs]</a>
+<span class="k">class</span> <span class="nc">LaboProb4Common</span><span class="p">(</span><span class="n">ParsingClass4</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Classe de test pour valider le code de l&#39;échelle de mots</span>
+<span class="sd">        - Classe hérite de ParsingClass4, qui lit les paramètres de la ligne de commande</span>
+<span class="sd">        - Plusieurs des méthodes définies ici sont incomplètes et doivent être redéfinies dans la classe LaboProb4</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LaboProb4Common.addEdgesBetweenAdjacentWords">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.addEdgesBetweenAdjacentWords">[docs]</a>
+    <span class="k">def</span> <span class="nf">addEdgesBetweenAdjacentWords</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Refactorisation du code tiré de la section 8.8, pour partager l&#39;ajout d&#39;arcs entre buildGraph et buildGraph2</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) :  Les champs suivants sont utilisés, étant directement disponibles dans l&#39;objet self</span>
+
+<span class="sd">            g (Graph) : Graphe contenant les noeuds à traiter</span>
+<span class="sd">            masks (dict) : Dictionnaire des clés utilisées (masques, par exemple : &quot;_abc&quot;, &quot;_bc&quot;, etc.)</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Les arcs sont ajoutés directement dans le graphe</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Ajouter un arc entre tous les mots qui se trouvent dans le même masque</span>
+        <span class="c1"># Pour chaque paire de mots différents dans un certain masque, ajouter un arc :</span>
+        <span class="c1">#       self.g.add_edge devrait être utile</span>
+        <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">masks</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="c1"># Traiter toutes les paires de mots différents se trouvant dans un certain masque</span>
+            <span class="c1"># Remplacer le print par le code approprié</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb4Common.addWordToMask">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.addWordToMask">[docs]</a>
+    <span class="k">def</span> <span class="nf">addWordToMask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Refactorisation du code tiré de la section 8.8, pour partager l&#39;ajout de mots dans les masques</span>
+
+<span class="sd">        Args :</span>
+
+<span class="sd">            mask (str) : Masque auquel ajouter un mot qui a produit ce masque</span>
+<span class="sd">            word (str) : Mot à l&#39;origine du masque</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Le mot est ajouté au masque, dans le dictionnaire</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Ajouter le mot au masque dérivé de ce mot</span>
+        <span class="c1"># Remplacer les prints par le code approprié</span>
+        <span class="k">if</span> <span class="n">mask</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">masks</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ajout d&#39;un mot à un masque existant&quot;</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ajout d&#39;un mot à un nouveau masque&quot;</span><span class="p">,</span> <span class="n">mask</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb4Common.buildGraph1">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.buildGraph1">[docs]</a>
+    <span class="k">def</span> <span class="nf">buildGraph1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Création du graphe de connectivité entre les mots</span>
+
+<span class="sd">        Code tiré de la section 8.8 du livre de référence</span>
+<span class="sd">        Voir : &lt;https://runestone.academy/ns/books/published/GIF270/Graphs/BuildingtheWordLadderGraph.html&gt;</span>
+
+<span class="sd">        À adapter pour l&#39;exercice :</span>
+<span class="sd">            - ajouter un arc entre des mots qui ne sont pas de la même longueur,</span>
+<span class="sd">                mais qui ne diffèrent que par une lettre</span>
+<span class="sd">            - optionnel : permettre des arcs entre des mots qui diffèrent</span>
+<span class="sd">                par 2, 3, 4, etc. lettres (indiqué sur la ligne de commande)</span>
+
+<span class="sd">        Produit un graphe où les noeuds représentent des mots et les arcs lient des mots qui ne diffèrent entre eux</span>
+<span class="sd">        que du nombre de caractères demandé</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            word_file (str) : Nom du fichier de mots à étudier</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : L&#39;objet comprend le graphe qui contient tous les mots, avec des arcs entre les mots qui sont liés</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">w_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">word_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="c1"># create buckets of words that differ by one letter</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">w_file</span><span class="p">:</span>
+            <span class="n">word</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)):</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="n">word</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">word</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">addWordToMask</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+        <span class="c1"># Ajouter les noeuds et les arcs pour les mots qui apparaissent dans le même masque</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addEdgesBetweenAdjacentWords</span><span class="p">()</span>
+
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb4Common.getWordMask">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.getWordMask">[docs]</a>
+    <span class="k">def</span> <span class="nf">getWordMask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">start_point</span><span class="p">,</span> <span class="n">init_word</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Énumération de masques (de type *abc, a*bc, ab*c, abc*, *bc, a*c, ab*)</span>
+
+<span class="sd">        Code adapté pour l&#39;exercice :</span>
+<span class="sd">            - ajout d&#39;un arc entre des mots qui ne sont pas de la même longueur, mais qui ne diffèrent que par une lettre</span>
+<span class="sd">            - ajout d&#39;arcs entre des mots qui diffèrent par 2, 3, ... lettres (indiqué sur la ligne de commande)</span>
+
+<span class="sd">        Produit (de façon récursive) tous les masques appropriés</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            word (str) : mot à traiter</span>
+<span class="sd">            distance (int) : nombre maximum de caractères différents permis entre deux mots adjacents</span>
+<span class="sd">            start_point () :</span>
+<span class="sd">            init_word (str) :</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : tous les masques nécessaires sont ajoutés aux structures passées en paramètres</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span>
+                <span class="n">word</span><span class="p">):</span>  <span class="c1"># Situation où la différence de caractères permise est plus grande que la taille du mot</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">distance</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start_point</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)):</span>
+            <span class="n">mask</span> <span class="o">=</span> <span class="n">word</span><span class="p">[:</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">word</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">getWordMask</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">distance</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">init_word</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">addWordToMask</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">word</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb4Common.buildGraph2">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.buildGraph2">[docs]</a>
+    <span class="k">def</span> <span class="nf">buildGraph2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word_file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">word_distance</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">different_word_size</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Création du graphe modifié de connectivité entre les mots</span>
+
+<span class="sd">        Modification du code de la fonction buildGraph1() :</span>
+<span class="sd">            - ajouter un arc entre des mots qui ne sont pas de la même longueur,</span>
+<span class="sd">                mais qui ne diffèrent que par une lettre</span>
+<span class="sd">            - ajouter un arc entre des mots qui diffèrent par 2, 3, ... lettres</span>
+
+<span class="sd">        Doit produire un graphe où les noeuds représentent des mots et les arcs lient des mots qui ne diffèrent entre eux</span>
+<span class="sd">        que du nombre de caractères demandé</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            wordFile (str) : Nom du fichier de mots à étudier</span>
+<span class="sd">            wordDistance (int) : Nombre maximum de caractères différents permis entre 2 mots adjacents dans l&#39;échelle</span>
+<span class="sd">            different_word_size (bool) : Indique qu&#39;on permet (ou non) des mots de tailles différentes</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;objet contient le nouveau graphe tous les mots,</span>
+<span class="sd">                    avec des arcs entre les mots qui sont liés</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">w_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">word_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="c1"># Pour cette méthode, vous pouvez vous inspirer du code de buildGraph() défini dans labo_prob4_common.py</span>
+        <span class="c1"># Le code de buildGraph est directement adapté du code de la section 8.8 du livre de référence</span>
+        <span class="c1">#</span>
+        <span class="c1"># Créer des masques pour que les mots puissent différer de 1 à wordDistance caractères</span>
+        <span class="c1"># Pour chacun des mots du fichier de mots à étudier :</span>
+        <span class="c1">#   - Utiliser getWordMask pour générer tous les masques utiles :</span>
+        <span class="c1">#       - mot d&#39;origine où chacune des lettres est remplacée à tour de rôle par &quot;_&quot; (pour créer un masque)</span>
+        <span class="c1">#       - mot étendu, où une &quot;pseudo-lettre&quot; est ajoutée au début (&quot;_&quot; ajouté avant le début du mot)</span>
+        <span class="c1">#           et une &quot;pseudo-lettre&quot; est ajoutée à la fin (&quot;_&quot; ajouté après la fin du mot)</span>
+        <span class="c1">#       - getWordMask est un appel récursif qui ajoute les mots dans les masques au fut et à mesure</span>
+        <span class="c1">#   - Utiliser addWordToMask sur le mot étendu par les &quot;pseudo-lettre&quot; au début ou à la fin</span>
+        <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">w_file</span><span class="p">:</span>
+            <span class="n">word</span> <span class="o">=</span> <span class="n">line</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># Ajouter le mot de départ dans un ensemble de masques (getWordMask pourrait être utile)</span>
+            <span class="c1"># Remplacer le print par l&#39;appel approprié</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">word_distance</span><span class="p">)</span>
+            <span class="c1"># Ajouter des entrées si des mots de taille différente sont permis :</span>
+            <span class="c1">#   getWordMask et addWordToMask devraient être utiles</span>
+            <span class="c1"># Remplacer le print par les appels appropriés</span>
+            <span class="k">if</span> <span class="n">different_word_size</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;_&#39;</span> <span class="o">+</span> <span class="n">word</span><span class="p">,</span> <span class="n">word_distance</span><span class="p">)</span>
+
+        <span class="c1"># Ajouter les arcs entre les mots qui apparaissent dans le même masque</span>
+        <span class="c1"># Remplacer le print par le code approprié</span>
+        <span class="c1">#   addEdgesBetweenAdjacentWords pourrait s&#39;avérer utile</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ajout des arcs entre les mots adjacents&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb4Common.buildGraph">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.buildGraph">[docs]</a>
+    <span class="k">def</span> <span class="nf">buildGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">wd</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">D</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">buildGraph1</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">v</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graphe créé&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Création du graphe de proximité avec des capacités étendues</span>
+            <span class="c1">#       (mots de taille différente, plus d&#39;un caractère de différent)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">buildGraph2</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">f</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">wd</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">D</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">v</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graphe étendu créé&quot;</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb4Common.findWord">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.findWord">[docs]</a>
+    <span class="k">def</span> <span class="nf">findWord</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_word</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Vertex</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retourne le noeud (vertex) qui correspond au mot passé en paramètre</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            start_word (str) : Mot de départ</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (Vertex) : Retourne le noeud recherché</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">get_vertex</span><span class="p">(</span><span class="n">start_word</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="LaboProb4Common.SetMaxDistance">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.SetMaxDistance">[docs]</a>
+    <span class="k">def</span> <span class="nf">SetMaxDistance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Annotation de tous les noeuds avec la distance maximale. Utile avant d&#39;établir la distance avec le mot de départ</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : Le graphe contenant tous les mots est contenu dans self.g</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Tous les noeuds du graphe sont annotés avec la distance maximale, mais rien n&#39;est retourné</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">vertex_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">get_vertices</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vertex_list</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">get_vertex</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">set_distance</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb4Common.markPath">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.markPath">[docs]</a>
+    <span class="k">def</span> <span class="nf">markPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_vertex</span><span class="p">:</span> <span class="n">Vertex</span><span class="p">,</span> <span class="n">current_depth</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">current_distance</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Annotation de tous les noeuds du graphe avec la distance la plus courte à partir du mot donné en paramètre :</span>
+<span class="sd">                - Marquer le chemin (distance) à partir du noeud courant et de la distance courante</span>
+<span class="sd">                - Si un noeud voisin obtient une distance plus petite, le mettre à jour et le traiter</span>
+<span class="sd">                - Sinon (noeud voisin a déjà une distance assez petite), ne pas traiter ce noeud</span>
+<span class="sd">                - Considérer la distance maximale permise (currentDepth), pour limiter l&#39;exploration du graphe</span>
+<span class="sd">                - Si la distance maximale permise est négative, cette méthode s&#39;arrêtera lorsque tous les noeuds auront été traités</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            current_vertex (Vertex) : Noeud à traiter</span>
+<span class="sd">            current_depth (int) : Distance maximale à étudier (cesser l&#39;analyse lorsque ce nombre est à 0)</span>
+<span class="sd">            current_distance (int) : Distance courante du noeud (mot) de départ</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Les noeuds du graphe sont annotés, mais rien n&#39;est retourné</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">current_vertex</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># Si ce noeud est nul (le mot utilisé n&#39;a pas de voisin)</span>
+            <span class="k">return</span>
+        <span class="n">current_vertex</span><span class="o">.</span><span class="n">set_distance</span><span class="p">(</span><span class="n">current_distance</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">current_depth</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">neighbor_list</span> <span class="o">=</span> <span class="n">current_vertex</span><span class="o">.</span><span class="n">get_neighbors</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">neighbor_list</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">get_distance</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">current_distance</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">markPath</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">current_depth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">current_distance</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb4Common.storeWordDistances">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.storeWordDistances">[docs]</a>
+    <span class="k">def</span> <span class="nf">storeWordDistances</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="n">get_vertices</span><span class="p">():</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findWord</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">get_distance</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">distance</span> <span class="o">&lt;</span> <span class="n">sys</span><span class="o">.</span><span class="n">maxsize</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">distance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">wordDistanceDict</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">wordDistanceDict</span><span class="p">[</span><span class="n">distance</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">wordDistanceDict</span><span class="p">[</span><span class="n">distance</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">key</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">v</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Nombre de mots à une distance X du mot: &#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wordDistanceDict</span><span class="p">)</span>
+            <span class="n">keys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wordDistanceDict</span><span class="p">[</span><span class="n">key</span><span class="p">])))</span>
+
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb4Common.printRecurWithPrev">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.printRecurWithPrev">[docs]</a>
+    <span class="k">def</span> <span class="nf">printRecurWithPrev</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">:</span> <span class="n">Vertex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">get_distance</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">for</span> <span class="n">prev</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">get_neighbors</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">prev</span><span class="o">.</span><span class="n">get_distance</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span><span class="n">d</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">printRecurWithPrev</span><span class="p">(</span><span class="n">prev</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                <span class="k">break</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb4Common.printFromWordDistance">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.printFromWordDistance">[docs]</a>
+    <span class="k">def</span> <span class="nf">printFromWordDistance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">wordDistanceDict</span><span class="p">)</span>
+        <span class="n">keys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Chaîne de longueur : &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">wordDistanceDict</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">printRecurWithPrev</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">findWord</span><span class="p">(</span><span class="n">word</span><span class="p">))</span>
+                <span class="k">break</span>
+        <span class="k">return</span></div>
+
+
+    <span class="c1"># Imprimer tous les chemins de longueur currentDistance depuis le noeud current_vertex</span>
+    <span class="c1"># Si max_distance est atteint, arrêter</span>
+
+<div class="viewcode-block" id="LaboProb4Common.printPath">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.printPath">[docs]</a>
+    <span class="k">def</span> <span class="nf">printPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_vertex</span><span class="p">:</span> <span class="n">Vertex</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">vertex_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Impression à l&#39;écran de l&#39;ensemble des chemins ayant la distance requise (à partir du mot de départ)</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            current_vertex (Vertex) : Noeud à traiter</span>
+<span class="sd">            max_distance (int) : Distance maximale à imprimer (cesser lorsque ce nombre est à 0)</span>
+<span class="sd">            vertex_list (Liste[Vertex]) : liste des noeuds dans le chemin parcouru jusqu&#39;ici</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Tout le travail est fait par la fonction récursive _prinPath()</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Séquence de mots à partir du mot de départ: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_printPath</span><span class="p">(</span><span class="n">current_vertex</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vertex_list</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_printPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">current_vertex</span><span class="p">:</span> <span class="n">Vertex</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">current_distance</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                   <span class="n">vertex_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">how_many_produced</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot; Fonction interne recursive pour l&#39;impression à l&#39;écran de l&#39;ensemble des chemins</span>
+<span class="sd">            ayant la distance requise (à partir du mot de départ)</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            current_vertex (Vertex) : Noeud à traiter</span>
+<span class="sd">            max_distance (int) : Distance maximale à imprimer (cesser lorsque ce nombre est à 0)</span>
+<span class="sd">            current_distance (int) : Distance courante du noeud (mot) de départ</span>
+<span class="sd">            vertex_list (Liste[Vertex]) : liste des noeuds dans le chemin parcouru jusqu&#39;ici</span>
+<span class="sd">            how_many_produced (int) : Nombre de listes imprimées jusqu&#39;à présent</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Les noeuds du graphe sont annotés, mais rien n&#39;est retourné</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">current_distance</span> <span class="o">==</span> <span class="n">max_distance</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">vertex_list</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">HowManyProduced</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">current_vertex</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># Si ce noeud est nul (le mot utilisé n&#39;a pas de voisin)</span>
+                <span class="k">return</span>
+            <span class="n">neighbor_list</span> <span class="o">=</span> <span class="n">current_vertex</span><span class="o">.</span><span class="n">get_neighbors</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">neighbor_list</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">get_distance</span><span class="p">()</span> <span class="o">==</span> <span class="n">current_distance</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">vertex_recur_list</span> <span class="o">=</span> <span class="n">vertex_list</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">v</span><span class="o">.</span><span class="n">key</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_printPath</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">max_distance</span><span class="p">,</span> <span class="n">current_distance</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">vertex_recur_list</span><span class="p">,</span> <span class="n">how_many_produced</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">HowManyProduced</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbre_max</span><span class="p">:</span>
+                        <span class="k">return</span>
+        <span class="k">return</span>
+
+<div class="viewcode-block" id="LaboProb4Common.testProb4">
+<a class="viewcode-back" href="../labo_prob4_common.html#labo_prob4_common.LaboProb4Common.testProb4">[docs]</a>
+    <span class="k">def</span> <span class="nf">testProb4</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Recherche du noeud (vertex v, qui est une chaîne de caractères) qui correspond au mot de départ</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findWord</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+
+        <span class="c1"># Annotation de tous les noeuds avec la distance maximale</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SetMaxDistance</span><span class="p">()</span>
+
+        <span class="c1"># Annotation des noeuds adjacents au noeud de départ avec la distance minimale</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">markPath</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">d</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># Ajout dans un dictionnaire de tous les mots se situant à une certaine distance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">storeWordDistances</span><span class="p">()</span>
+
+        <span class="c1"># Impression des chemins (sequence de mots) à partir du mot de depart,</span>
+        <span class="c1">#   jusqu&#39;à la distance maximale (en paramètre)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vertex_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">m</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printPath</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">d</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertex_list</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">printFromWordDistance</span><span class="p">()</span>
+
+        <span class="k">return</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialisation d&#39;une nouvelle instance de LaboProb4 :</span>
+<span class="sd">            - Utilise l&#39;initialisation de la classe héritée par LaboProb4Common (ParsingClass4)</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;objet est initialisé</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nbre_max</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">max</span>
+
+        <span class="c1">#  self.masks (dict) : Dictionnaire comprenant éventuellement tous les masques (&quot;_abc&quot;, &quot;xy_z&quot;, etc.)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">masks</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">vertex_list</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1">#  self.g (Graph) : Graphe avec les mots comme noeuds et les liens entre les mots adjacents comme arcs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">g</span><span class="p">:</span> <span class="n">Graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">wordDistanceDict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">HowManyProduced</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span></div>
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2018-2025, Frédéric Mailhot.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

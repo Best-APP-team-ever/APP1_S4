@@ -1,0 +1,349 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>labo_prob1 &mdash; Documentation Labo_GIF270 2.1</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4c2f8551"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Labo_GIF270
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenus:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../debug_handler_common.html">Module debug_handler_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../handle_unicode_common.html">Module handle_unicode_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob1.html">Module labo_prob1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob1_common.html">Module labo_prob1_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob2.html">Module labo_prob2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob2_common.html">Module labo_prob2_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob3.html">Module labo_prob3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob3_common.html">Module labo_prob3_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob4.html">Module labo_prob4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labo_prob4_common.html">Module labo_prob4_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../smart_formatter_common.html">Module smart_formatter_common</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Labo_GIF270</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Code du module</a></li>
+      <li class="breadcrumb-item active">labo_prob1</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de labo_prob1</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Code pour explorer le premier exercice du laboratoire - APP du cours GIF270</span>
+
+<span class="sd">    L&#39;exercice 1 touche le débogage et les éléments suivants :</span>
+<span class="sd">        - Utilisation de points d&#39;arrêt (breakpoints) pour l&#39;identification de problèmes d&#39;exécution et de logique</span>
+<span class="sd">        - Interruption d&#39;exécution sans fin</span>
+<span class="sd">        - Détection et traitement des exceptions</span>
+
+<span class="sd">    Copyright 2023-2025 Frédéric Mailhot et Université de Sherbrooke</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">labo_prob1_common</span> <span class="kn">import</span> <span class="n">ParsingClass1</span><span class="p">,</span> <span class="n">ConfigData</span>
+<span class="kn">from</span> <span class="nn">watchpoints</span> <span class="kn">import</span> <span class="n">watch</span>
+
+
+<div class="viewcode-block" id="LaboProb1">
+<a class="viewcode-back" href="../labo_prob1.html#labo_prob1.LaboProb1">[docs]</a>
+<span class="k">class</span> <span class="nc">LaboProb1</span><span class="p">(</span><span class="n">ParsingClass1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Création d&#39;un ensemble de méthodes qui ont des comportements problématiques</span>
+<span class="sd">        - Classe hérite de ParsingClass1, qui lit les paramètres de la ligne de commande</span>
+<span class="sd">        - Les paramètres sont accessibles dans mp.args</span>
+<span class="sd">        - Méthodes incluses : factorielle, times2, long_calcul, compare_strings, exceptions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="LaboProb1.factorielle">
+<a class="viewcode-back" href="../labo_prob1.html#labo_prob1.LaboProb1.factorielle">[docs]</a>
+    <span class="k">def</span> <span class="nf">factorielle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calcul de factorielle :</span>
+<span class="sd">            - Appel récursif (sur n, n-1, n-2, ...)</span>
+<span class="sd">            - La fin de la récursion est déterminée par le champ fact_end</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            n (int) : Le nombre pour lequel on cherche la factorielle</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (long) : La valeur de (n!)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">fact_end</span><span class="p">:</span>
+            <span class="n">fact</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">factorielle</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">fact</span>
+        <span class="k">return</span> <span class="mi">1</span></div>
+
+
+<div class="viewcode-block" id="LaboProb1.times2">
+<a class="viewcode-back" href="../labo_prob1.html#labo_prob1.LaboProb1.times2">[docs]</a>
+    <span class="k">def</span> <span class="nf">times2</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Calcul du double de la valeur self.args.val :</span>
+<span class="sd">            - Compare à la valeur contenue dans la structure de configuration, mise à jour au besoin</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : Pas de paramètre en entrée</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (long) : La valeur de (2 * self.args.val)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">number</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">val</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">number</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">val</span>
+        <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">val</span></div>
+
+
+<div class="viewcode-block" id="LaboProb1.prepare">
+<a class="viewcode-back" href="../labo_prob1.html#labo_prob1.LaboProb1.prepare">[docs]</a>
+    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Préparation de l&#39;objet de type LaboProb1 :</span>
+<span class="sd">            - Retrait du champ config</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : Aucun paramètre en entrée, on utilise l&#39;objet lui-même</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Aucune valeur de retour</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">:</span> <span class="n">ConfigData</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb1.long_calcul">
+<a class="viewcode-back" href="../labo_prob1.html#labo_prob1.LaboProb1.long_calcul">[docs]</a>
+    <span class="k">def</span> <span class="nf">long_calcul</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Long calcul :</span>
+<span class="sd">            - Calcule val + (val-1) + (val-2) + ... + 1</span>
+<span class="sd">            - val est tirée de l&#39;objet lui-même (self.args.val)</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : La valeur utilisée provient de l&#39;objet lui-même</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (long) : Le résultat du calcul</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">a</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">val</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">val_end</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">+=</span> <span class="n">a</span>
+            <span class="n">a</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">val_end</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="LaboProb1.compare_strings">
+<a class="viewcode-back" href="../labo_prob1.html#labo_prob1.LaboProb1.compare_strings">[docs]</a>
+    <span class="k">def</span> <span class="nf">compare_strings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Comparaison de chaînes de caractères utf-8 :</span>
+<span class="sd">            - Deux chaînes de caractères sont d&#39;apparence identique (lorsqu&#39;on les utilise dans un print()),</span>
+<span class="sd">              mais leur comparaison indique qu&#39;elles ne le sont pas</span>
+
+<span class="sd">       Args :</span>
+<span class="sd">           (void) : Les chaînes de caractères proviennent de l&#39;objet lui-même</span>
+
+<span class="sd">       Returns :</span>
+<span class="sd">           (void) : Aucun résultat à retourner</span>
+<span class="sd">       &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">word1</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">word2</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Les chaînes de caractères </span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">word1</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> et </span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">word2</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> sont égales.&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Les chaînes de caractères </span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">word1</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> et </span><span class="se">\&quot;</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">word2</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\&quot;</span><span class="s2"> ne sont PAS égales!&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+
+<div class="viewcode-block" id="LaboProb1.exceptions">
+<a class="viewcode-back" href="../labo_prob1.html#labo_prob1.LaboProb1.exceptions">[docs]</a>
+    <span class="k">def</span> <span class="nf">exceptions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Exploration de diverses exceptions :</span>
+<span class="sd">            - Par défaut, aucun traitement des exceptions</span>
+<span class="sd">            - Si le paramètre -e est donné en ligne de commande, utiliser les (try/except) pour traiter les exceptions</span>
+<span class="sd">            - Les (try/except) utilisés ne sont pas associés aux bonnes exceptions. Vous devez les corriger</span>
+
+<span class="sd">        Args :</span>
+<span class="sd">            (void) : Tous les calculs sont faits à partir de valeurs locales</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Aucune valeur de retour</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">a</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span>
+        <span class="n">b</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">c</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">ma_liste</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">e</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x = &quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Liste[5]&quot;</span><span class="p">,</span> <span class="n">ma_liste</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+            <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;mon_fichier.txt&quot;</span>
+            <span class="n">mon_fichier</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">mon_fichier</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+            <span class="k">return</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Problème dans la division de a/b: a =&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="s2">&quot;, b =&quot;</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_debug_info</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y = &quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variable y non définie&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_debug_info</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y = &quot;</span><span class="p">,</span> <span class="n">a</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Erreur de type: impossible d&#39;additionner un entier et une chaîne de caractères&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_debug_info</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Liste[5]&quot;</span><span class="p">,</span> <span class="n">ma_liste</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+        <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Index trop grand&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_debug_info</span><span class="p">()</span>
+
+        <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;mon_fichier.txt&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">mon_fichier</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">mon_fichier</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fichier&quot;</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;inexistant&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">print_debug_info</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialisation d&#39;une nouvelle instance de LaboProb1 :</span>
+<span class="sd">            - Utilise l&#39;initialisation de la classe héritée par LaboProb1 (ParsingClass1)</span>
+
+<span class="sd">        Returns :</span>
+<span class="sd">            (void) : Au retour, l&#39;objet est initialisé</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">config</span><span class="p">:</span> <span class="n">ConfigData</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">return</span></div>
+
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../labo_prob1.html#labo_prob1.main">[docs]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Démarrage de l&#39;exercice 1 du labo :</span>
+<span class="sd">        - Crée une instance de la classe LaboProb1, utilisée pour présenter différents problèmes à déboguer</span>
+<span class="sd">        - Utiliser le paramètre -p (1, 2, 3, 4 ou 5) pour déterminer quel problème observer</span>
+<span class="sd">        - Utiliser le paramètre -e de concert avec -p 5</span>
+<span class="sd">                pour démarrer le traitement des exceptions inclus (mais à corriger)</span>
+
+<span class="sd">    Returns :</span>
+<span class="sd">        (void) : Au retour, l&#39;exécution est terminée</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">LaboProb1</span><span class="p">()</span>
+
+    <span class="k">match</span> <span class="n">p1</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">p</span><span class="p">:</span>
+        <span class="k">case</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 1, 1er test: est-ce que le résultat du calcul de la factorielle est valide?&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">fact</span><span class="p">,</span> <span class="s2">&quot;! = &quot;</span><span class="p">,</span> <span class="n">p1</span><span class="o">.</span><span class="n">factorielle</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">fact</span><span class="p">),</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="k">case</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">p1</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 1, 2e test: Est-ce que l&#39;exécution de la méthode est un succès?&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="s2">&quot;fois 2 = &quot;</span><span class="p">,</span> <span class="n">p1</span><span class="o">.</span><span class="n">times2</span><span class="p">())</span>
+        <span class="k">case</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 1, 3e test: Est-ce que le long calcul se terminera un jour?&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Résultat du long calcul = &quot;</span><span class="p">,</span> <span class="n">p1</span><span class="o">.</span><span class="n">long_calcul</span><span class="p">())</span>
+        <span class="k">case</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 1, 4e test: Est-ce que les chaînes de caractères sont égales ou différentes?&quot;</span><span class="p">)</span>
+            <span class="n">p1</span><span class="o">.</span><span class="n">compare_strings</span><span class="p">()</span>
+        <span class="k">case</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 1, 5e test: Pouvez-vous identifier &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;les exceptions pour qu&#39;elles soient traitées adéquatement?&quot;</span><span class="p">,</span> <span class="n">flush</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">p1</span><span class="o">.</span><span class="n">exceptions</span><span class="p">()</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 1, type de problème à déboguer inconnu (doit être 1,2,3,4 ou 5)&quot;</span><span class="p">)</span>
+    <span class="k">return</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2018-2025, Frédéric Mailhot.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

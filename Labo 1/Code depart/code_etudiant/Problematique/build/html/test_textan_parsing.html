@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module test_textan_parsing &mdash; Documentation Problématique_GIF270 1.1</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=de505bba"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=e6b791cb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Module test_beautifier" href="text_beautifier.html" />
+    <link rel="prev" title="Module test_textan_command" href="test_textan_command.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Problématique_GIF270
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="textan_cip1_cip2.html">Module textan_cip1_cip2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="debug_handler_common.html">Module debug_handler_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handle_unicode_common.html">Module handle_unicode_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart_formatter_common.html">Module smart_formatter_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="textan_common.html">Module textan_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_textan.html">Module test_textan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="test_textan_command.html">Module test_textan_command</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Module test_textan_parsing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#diagramme-de-classe">Diagramme de classe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-test_textan_parsing">Code du module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#test_textan_parsing.ParsingClassTextAn"><code class="docutils literal notranslate"><span class="pre">ParsingClassTextAn</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#test_textan_parsing.ParsingClassTextAn.parse_cli"><code class="docutils literal notranslate"><span class="pre">ParsingClassTextAn.parse_cli()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test_textan_parsing.ParsingClassTextAn.setup_after_parse"><code class="docutils literal notranslate"><span class="pre">ParsingClassTextAn.setup_after_parse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#test_textan_parsing.ParsingClassTextAn.setup_and_parse_cli"><code class="docutils literal notranslate"><span class="pre">ParsingClassTextAn.setup_and_parse_cli()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="text_beautifier.html">Module test_beautifier</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Problématique_GIF270</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module test_textan_parsing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/test_textan_parsing.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <a class="reference internal image-reference" href="_images/UdeS_logo_h_pms347-crop.jpg"><img alt="_images/UdeS_logo_h_pms347-crop.jpg" src="_images/UdeS_logo_h_pms347-crop.jpg" style="width: 200px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="module-test-textan-parsing">
+<h1>Module test_textan_parsing<a class="headerlink" href="#module-test-textan-parsing" title="Lien vers cette rubrique"></a></h1>
+<section id="diagramme-de-classe">
+<h2>Diagramme de classe<a class="headerlink" href="#diagramme-de-classe" title="Lien vers cette rubrique"></a></h2>
+<a class="reference internal image-reference" href="_images/classes_test_textan_parsing.png"><img alt="_images/classes_test_textan_parsing.png" src="_images/classes_test_textan_parsing.png" style="width: 416.0px; height: 1245.0px;" />
+</a>
+</section>
+<section id="module-test_textan_parsing">
+<span id="code-du-module"></span><h2>Code du module<a class="headerlink" href="#module-test_textan_parsing" title="Lien vers cette rubrique"></a></h2>
+<p>Code utilitaire pour lire et interpréter la ligne de commande pour test_textan.py</p>
+<p>Copyright 2018-2025 F. Mailhot et Université de Sherbrooke</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="test_textan_parsing.ParsingClassTextAn">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">test_textan_parsing.</span></span><span class="sig-name descname"><span class="pre">ParsingClassTextAn</span></span><a class="reference internal" href="_modules/test_textan_parsing.html#ParsingClassTextAn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_textan_parsing.ParsingClassTextAn" title="Lien vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Constructeur pour la classe TestTextAn.  Initialisation de l’ensemble des éléments requis</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : Le constructeur lit la ligne de commande et ajuste l’état de l’objet TestTextAn en conséquence</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, la nouvelle instance de test est prête à être utilisée</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="test_textan_parsing.ParsingClassTextAn.parse_cli">
+<span class="sig-name descname"><span class="pre">parse_cli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/test_textan_parsing.html#ParsingClassTextAn.parse_cli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_textan_parsing.ParsingClassTextAn.parse_cli" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Utilise le module argparse pour :</dt><dd><ul class="simple">
+<li><p>Enregistrer les commandes à reconnaître</p></li>
+<li><p>Lire la ligne de commande et créer le champ self.args qui récupère la structure produite</p></li>
+</ul>
+</dd>
+<dt>Returns :</dt><dd><p>void : Au retour, toutes les commandes reconnues sont comprises dans self.args</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test_textan_parsing.ParsingClassTextAn.setup_after_parse">
+<span class="sig-name descname"><span class="pre">setup_after_parse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/test_textan_parsing.html#ParsingClassTextAn.setup_after_parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_textan_parsing.ParsingClassTextAn.setup_after_parse" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Utilise le champ args pour :</dt><dd><ul class="simple">
+<li><p>Définir tous les champs modifiables par la ligne de commande</p></li>
+<li><p>Ouvrir un fichier de résultats (si demandé) et y rediriger stdout</p></li>
+</ul>
+</dd>
+<dt>Returns :</dt><dd><p>void : Au retour, toutes les commandes reconnues sont comprises dans self.args</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="test_textan_parsing.ParsingClassTextAn.setup_and_parse_cli">
+<span class="sig-name descname"><span class="pre">setup_and_parse_cli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/test_textan_parsing.html#ParsingClassTextAn.setup_and_parse_cli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#test_textan_parsing.ParsingClassTextAn.setup_and_parse_cli" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Initialise l’objet en interprétant la ligne de commande :</dt><dd><ul class="simple">
+<li><p>Lit la ligne de commande</p></li>
+<li><p>Modifie tous les champs qui y sont définis</p></li>
+</ul>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, toutes les commandes reconnues sont comprises dans self.args</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Documentation créée le 04 janv. 2025.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="test_textan_command.html" class="btn btn-neutral float-left" title="Module test_textan_command" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="text_beautifier.html" class="btn btn-neutral float-right" title="Module test_beautifier" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2018-2025, Frédéric Mailhot et Université de Sherbrooke.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

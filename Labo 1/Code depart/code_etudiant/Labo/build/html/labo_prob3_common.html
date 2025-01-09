@@ -1,0 +1,587 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Module labo_prob3_common &mdash; Documentation Labo_GIF270 2.1</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4c2f8551"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=e6b791cb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Module labo_prob4" href="labo_prob4.html" />
+    <link rel="prev" title="Module labo_prob3" href="labo_prob3.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Labo_GIF270
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contenus:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="debug_handler_common.html">Module debug_handler_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="handle_unicode_common.html">Module handle_unicode_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob1.html">Module labo_prob1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob1_common.html">Module labo_prob1_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob2.html">Module labo_prob2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob2_common.html">Module labo_prob2_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob3.html">Module labo_prob3</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Module labo_prob3_common</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#diagramme-de-classe">Diagramme de classe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-labo_prob3_common">Code du module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#labo_prob3_common.AVLTreeCommon"><code class="docutils literal notranslate"><span class="pre">AVLTreeCommon</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.AVLTreeCommon.rebalance"><code class="docutils literal notranslate"><span class="pre">AVLTreeCommon.rebalance()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.AVLTreeCommon.rotate_left"><code class="docutils literal notranslate"><span class="pre">AVLTreeCommon.rotate_left()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.AVLTreeCommon.rotate_right"><code class="docutils literal notranslate"><span class="pre">AVLTreeCommon.rotate_right()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.AVLTreeCommon.update_balance"><code class="docutils literal notranslate"><span class="pre">AVLTreeCommon.update_balance()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#labo_prob3_common.BinarySearchTree"><code class="docutils literal notranslate"><span class="pre">BinarySearchTree</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.BinarySearchTree.get"><code class="docutils literal notranslate"><span class="pre">BinarySearchTree.get()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.BinarySearchTree.length"><code class="docutils literal notranslate"><span class="pre">BinarySearchTree.length()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.BinarySearchTree.put"><code class="docutils literal notranslate"><span class="pre">BinarySearchTree.put()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#labo_prob3_common.LaboProb3Common"><code class="docutils literal notranslate"><span class="pre">LaboProb3Common</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.LaboProb3Common.build_AVL"><code class="docutils literal notranslate"><span class="pre">LaboProb3Common.build_AVL()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.LaboProb3Common.do_something"><code class="docutils literal notranslate"><span class="pre">LaboProb3Common.do_something()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.LaboProb3Common.print_AVL"><code class="docutils literal notranslate"><span class="pre">LaboProb3Common.print_AVL()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.LaboProb3Common.print_one_node"><code class="docutils literal notranslate"><span class="pre">LaboProb3Common.print_one_node()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#labo_prob3_common.ParsingClass3"><code class="docutils literal notranslate"><span class="pre">ParsingClass3</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.ParsingClass3.read_file_lines"><code class="docutils literal notranslate"><span class="pre">ParsingClass3.read_file_lines()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.ParsingClass3.read_numbers"><code class="docutils literal notranslate"><span class="pre">ParsingClass3.read_numbers()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.ParsingClass3.read_one_file"><code class="docutils literal notranslate"><span class="pre">ParsingClass3.read_one_file()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.ParsingClass3.setup_and_parse_cli"><code class="docutils literal notranslate"><span class="pre">ParsingClass3.setup_and_parse_cli()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#labo_prob3_common.TreeNode"><code class="docutils literal notranslate"><span class="pre">TreeNode</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.TreeNode.has_any_children"><code class="docutils literal notranslate"><span class="pre">TreeNode.has_any_children()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.TreeNode.has_both_children"><code class="docutils literal notranslate"><span class="pre">TreeNode.has_both_children()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.TreeNode.has_left_child"><code class="docutils literal notranslate"><span class="pre">TreeNode.has_left_child()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.TreeNode.has_right_child"><code class="docutils literal notranslate"><span class="pre">TreeNode.has_right_child()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.TreeNode.is_leaf"><code class="docutils literal notranslate"><span class="pre">TreeNode.is_leaf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.TreeNode.is_left_child"><code class="docutils literal notranslate"><span class="pre">TreeNode.is_left_child()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.TreeNode.is_right_child"><code class="docutils literal notranslate"><span class="pre">TreeNode.is_right_child()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.TreeNode.is_root"><code class="docutils literal notranslate"><span class="pre">TreeNode.is_root()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#labo_prob3_common.TreeNode.replaceNodeData"><code class="docutils literal notranslate"><span class="pre">TreeNode.replaceNodeData()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob4.html">Module labo_prob4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labo_prob4_common.html">Module labo_prob4_common</a></li>
+<li class="toctree-l1"><a class="reference internal" href="smart_formatter_common.html">Module smart_formatter_common</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Labo_GIF270</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Module labo_prob3_common</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/labo_prob3_common.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <a class="reference internal image-reference" href="_images/UdeS_logo_h_pms347-crop.jpg"><img alt="_images/UdeS_logo_h_pms347-crop.jpg" src="_images/UdeS_logo_h_pms347-crop.jpg" style="width: 200px;" />
+</a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="module-labo-prob3-common">
+<h1>Module labo_prob3_common<a class="headerlink" href="#module-labo-prob3-common" title="Lien vers cette rubrique"></a></h1>
+<section id="diagramme-de-classe">
+<h2>Diagramme de classe<a class="headerlink" href="#diagramme-de-classe" title="Lien vers cette rubrique"></a></h2>
+<a class="reference internal image-reference" href="_images/classes_labo_prob3_common.png"><img alt="_images/classes_labo_prob3_common.png" src="_images/classes_labo_prob3_common.png" style="width: 1000.0000000000001px; height: 573.694646397885px;" />
+</a>
+</section>
+<section id="module-labo_prob3_common">
+<span id="code-du-module"></span><h2>Code du module<a class="headerlink" href="#module-labo_prob3_common" title="Lien vers cette rubrique"></a></h2>
+<p>Code pour explorer le troisième exercice du laboratoire - APP du cours GIF270</p>
+<dl class="simple">
+<dt>L’exercice 3 touche les arbres AVL et l’élément suivant :</dt><dd><ul class="simple">
+<li><p>Redéfinition de la méthode rotate_right</p></li>
+</ul>
+</dd>
+<dt>Note :</dt><dd><ul class="simple">
+<li><p>Le traitement des arguments a été inclus dans la classe ParsingClass3, qui est utilisée dans le code principal</p></li>
+<li><p>Tous les arguments requis sont présents et accessibles dans ParsingClass3.args</p></li>
+<li><p>Le traitement du mode verbose vous donne un exemple de l’utilisation des arguments</p></li>
+</ul>
+</dd>
+</dl>
+<p>Copyright 2018-2025, Frédéric Mailhot et Université de Sherbrooke</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="labo_prob3_common.AVLTreeCommon">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">labo_prob3_common.</span></span><span class="sig-name descname"><span class="pre">AVLTreeCommon</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">do_rebal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/labo_prob3_common.html#AVLTreeCommon"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.AVLTreeCommon" title="Lien vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#labo_prob3_common.BinarySearchTree" title="labo_prob3_common.BinarySearchTree"><code class="xref py py-class docutils literal notranslate"><span class="pre">BinarySearchTree</span></code></a></p>
+<dl class="simple">
+<dt>Initialisation d’un nouvel arbre AVL :</dt><dd><ul class="simple">
+<li><p>Le paramètre do_rebal permet de créer (et observer) un abre balancé (AVL) ou non</p></li>
+</ul>
+</dd>
+<dt>Args :</dt><dd><p>do_rebal (bool) : L’arbre doit être rebalancé dynamiquement (AVL) ou non (arbre binaire standard)</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, l’objet est initialisé</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.AVLTreeCommon.rebalance">
+<span class="sig-name descname"><span class="pre">rebalance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#labo_prob3_common.TreeNode" title="labo_prob3_common.TreeNode"><span class="pre">TreeNode</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#AVLTreeCommon.rebalance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.AVLTreeCommon.rebalance" title="Lien vers cette définition"></a></dt>
+<dd><p>Rebalancer un noeud en utilisant des rotations sur ses enfants :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>node (TreeNoce) : Le noeud courant</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, le noeud a été rebalancé</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.AVLTreeCommon.rotate_left">
+<span class="sig-name descname"><span class="pre">rotate_left</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rotation_root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#labo_prob3_common.TreeNode" title="labo_prob3_common.TreeNode"><span class="pre">TreeNode</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#AVLTreeCommon.rotate_left"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.AVLTreeCommon.rotate_left" title="Lien vers cette définition"></a></dt>
+<dd><p>Rotation d’un sous-arbre vers la droite :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>rotation_root (TreeNode) : Noeud sur lequel effectuer la rotation gauche</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, la rotation gauche a été effectuée et tous les noeuds ont été ajustés</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.AVLTreeCommon.rotate_right">
+<span class="sig-name descname"><span class="pre">rotate_right</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rotation_root</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#labo_prob3_common.TreeNode" title="labo_prob3_common.TreeNode"><span class="pre">TreeNode</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#AVLTreeCommon.rotate_right"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.AVLTreeCommon.rotate_right" title="Lien vers cette définition"></a></dt>
+<dd><p>Rotation d’un sous-arbre vers la droite :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>rotation_root (TreeNode) : Noeud sur lequel effectuer la rotation droite</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, la rotation droite a été effectuée et tous les noeuds ont été ajustés</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.AVLTreeCommon.update_balance">
+<span class="sig-name descname"><span class="pre">update_balance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#labo_prob3_common.TreeNode" title="labo_prob3_common.TreeNode"><span class="pre">TreeNode</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#AVLTreeCommon.update_balance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.AVLTreeCommon.update_balance" title="Lien vers cette définition"></a></dt>
+<dd><p>À partir d’un certain noeud, rebalancer ses enfants immédiats et son parent, si nécessaire :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>node (TreeNoce) : Le noeud courant</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, le noeud a été rebalancé, ainsi que ses parents (si nécessaire)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="labo_prob3_common.BinarySearchTree">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">labo_prob3_common.</span></span><span class="sig-name descname"><span class="pre">BinarySearchTree</span></span><a class="reference internal" href="_modules/labo_prob3_common.html#BinarySearchTree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.BinarySearchTree" title="Lien vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Création d’un arbre binaire</p>
+<p>Code tiré de la section 6.13 du livre de référence
+Voir : &lt;<a class="reference external" href="https://runestone.academy/ns/books/published/GIF270/Trees/SearchTreeImplementation.html">https://runestone.academy/ns/books/published/GIF270/Trees/SearchTreeImplementation.html</a>&gt;</p>
+<p>Initialisation d’une nouvelle instance d’arbre  :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : Ne fait que créer l’amorce d’un arbre vide</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, l’objet est initialisé</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.BinarySearchTree.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#labo_prob3_common.TreeNode" title="labo_prob3_common.TreeNode"><span class="pre">TreeNode</span></a></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#BinarySearchTree.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.BinarySearchTree.get" title="Lien vers cette définition"></a></dt>
+<dd><p>Retour du noeud associé à la clée dans l’arbre binaire :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>key (int) : La clé associée à la valeur à trouver</p>
+</dd>
+<dt>Returns :</dt><dd><p>(TreeNode) : Le noeud associé à la clé (si elle existe dans l’arbre)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.BinarySearchTree.length">
+<span class="sig-name descname"><span class="pre">length</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#BinarySearchTree.length"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.BinarySearchTree.length" title="Lien vers cette définition"></a></dt>
+<dd><p>Retourne la taille (le nombre de noeuds) de l’arbre :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : La taille de l’arbre est contenue dans l’objet de type BinarySearchTree</p>
+</dd>
+<dt>Returns :</dt><dd><p>(int) : Retourne le nombre de noeuds dans l’arbre</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.BinarySearchTree.put">
+<span class="sig-name descname"><span class="pre">put</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#BinarySearchTree.put"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.BinarySearchTree.put" title="Lien vers cette définition"></a></dt>
+<dd><p>Ajout d’une nouvelle valeur dans l’arbre binaire :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>key (int) : La clé associée à la valeur à ajouter
+val (int) : La valeur à ajouter dans l’arbre</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, un nouveau noeud a été ajouté à l’arbre avec la valeur passée en paramètre</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="labo_prob3_common.LaboProb3Common">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">labo_prob3_common.</span></span><span class="sig-name descname"><span class="pre">LaboProb3Common</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">avltree_class=&lt;class</span> <span class="pre">'labo_prob3_common.AVLTreeCommon'&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/labo_prob3_common.html#LaboProb3Common"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.LaboProb3Common" title="Lien vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="#labo_prob3_common.ParsingClass3" title="labo_prob3_common.ParsingClass3"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParsingClass3</span></code></a></p>
+<p>Création de méthodes permettant de créer des arbres AVL
+- Classe hérite de ParsingClass3, qui lit les paramètres de la ligne de commande</p>
+<dl class="simple">
+<dt>Initialisation d’une nouvelle instance de LaboProb3 :</dt><dd><ul class="simple">
+<li><p>Utilise l’initialisation de la classe héritée par LaboProb3 (ParsingClass3)</p></li>
+<li><p>Par défaut, utilise la classe AVLTreeCommon pour la création future des arbres AVL</p></li>
+<li><p>Cependant, cette classe peut être redéfinie à la création de l’objet</p></li>
+</ul>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, l’objet est initialisé</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.LaboProb3Common.build_AVL">
+<span class="sig-name descname"><span class="pre">build_AVL</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#LaboProb3Common.build_AVL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.LaboProb3Common.build_AVL" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Méthode qui crée l’arbre AVL à partir des nombres inclus dans le tableau self.input_numbers</dt><dd><ul class="simple">
+<li><p>Utilise la classe AVLTree définie dans l’objet</p></li>
+<li><p>Cette classe peut être redéfinie lors de la création de l’objet (paramètre facultatif)</p></li>
+<li><p>Si elle est redéfinie, cela permet d’utiliser une version différente de AVLTree</p></li>
+<li><p>Par exemple, la version par défaut (AVLTreeCommon) ne contient pas le code pour la rotation droite</p></li>
+</ul>
+</dd>
+<dt>Args :</dt><dd><p>(void) : Tout se trouve dans l’objet</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, l’arbre AVL est créé</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.LaboProb3Common.do_something">
+<span class="sig-name descname"><span class="pre">do_something</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#LaboProb3Common.do_something"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.LaboProb3Common.do_something" title="Lien vers cette définition"></a></dt>
+<dd><p>Méthode appelée pour créer l’arbre AVL, imprimer la liste initiale de nombres, puis l’arbre AVL (ordonné)</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : Tout se trouve dans l’objet</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, l’arbre AVL est créé et a été imprimé</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.LaboProb3Common.print_AVL">
+<span class="sig-name descname"><span class="pre">print_AVL</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#LaboProb3Common.print_AVL"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.LaboProb3Common.print_AVL" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Imprime à l’écran les valeurs ordonnées dans l’arbre AVL.</dt><dd><p>À la fin, indique la profondeur maximale de l’arbre</p>
+</dd>
+<dt>Args :</dt><dd><p>(void) : Tout se trouve dans l’objet</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, l’arbre AVL a été imprimé, ainsi que la profondeur maximale</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.LaboProb3Common.print_one_node">
+<span class="sig-name descname"><span class="pre">print_one_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#labo_prob3_common.TreeNode" title="labo_prob3_common.TreeNode"><span class="pre">TreeNode</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#LaboProb3Common.print_one_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.LaboProb3Common.print_one_node" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Imprime à l’écran les valeurs de chacun des noeuds de l’arbre AVL, dans l’ordre :</dt><dd><ul class="simple">
+<li><p>D’abord les enfants gauches</p></li>
+<li><p>Ensuite la valeur dans le noeud lui-même</p></li>
+<li><p>Enfin les enfants droits</p></li>
+</ul>
+</dd>
+<dt>Args :</dt><dd><p>node (TreeNode) : le noeud à traiter dans l’arbre AVL
+depth (int) :    la profondeur du noeud courant
+max_depth (int) : la plus grande profondeur observée jusqu’à maintenant</p>
+</dd>
+<dt>Returns :</dt><dd><p>max_depth (int) : la profondeur maximale observée (enfant gauche, noeud lui-même, enfant droit)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="labo_prob3_common.ParsingClass3">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">labo_prob3_common.</span></span><span class="sig-name descname"><span class="pre">ParsingClass3</span></span><a class="reference internal" href="_modules/labo_prob3_common.html#ParsingClass3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.ParsingClass3" title="Lien vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Création d’un parser prédéfini pour lire les paramètres de la ligne de commande pour le troisième exercice</p>
+<dl class="simple">
+<dt>Initialisation d’une nouvelle instance de ParsingClass3 :</dt><dd><ul class="simple">
+<li><p>Ajoute toutes les valeurs par défaut des paramètres utilisés</p></li>
+<li><p>Modifie les valeurs redéfinies sur la ligne de commande</p></li>
+</ul>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, l’objet est initialisé, avec la liste de nombres dans le tableau input_numbers</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.ParsingClass3.read_file_lines">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">read_file_lines</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#ParsingClass3.read_file_lines"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.ParsingClass3.read_file_lines" title="Lien vers cette définition"></a></dt>
+<dd><p>Lecture d’un fichier” :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>filename (str) : Le nom du fichier à lire</p>
+</dd>
+<dt>Returns :</dt><dd><p>file_lines (array) : Tableau avec les lignes du fichier lu</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.ParsingClass3.read_numbers">
+<span class="sig-name descname"><span class="pre">read_numbers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#ParsingClass3.read_numbers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.ParsingClass3.read_numbers" title="Lien vers cette définition"></a></dt>
+<dd><p>Lecture du fichier nécessaire à l’exercice :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : Tout se trouve déjà dans l’objet</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, la liste de nombre est complète</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.ParsingClass3.read_one_file">
+<span class="sig-name descname"><span class="pre">read_one_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numbers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#ParsingClass3.read_one_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.ParsingClass3.read_one_file" title="Lien vers cette définition"></a></dt>
+<dd><p>Lecture d’un fichier de nombres et ajout dans le tableau fourni :</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>filename (str) : Nom du fichier à traiter
+numbers (array) : Tableau de nombres (vide au départ)</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, le tableau de nombre est rempli</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.ParsingClass3.setup_and_parse_cli">
+<span class="sig-name descname"><span class="pre">setup_and_parse_cli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#ParsingClass3.setup_and_parse_cli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.ParsingClass3.setup_and_parse_cli" title="Lien vers cette définition"></a></dt>
+<dd><dl class="simple">
+<dt>Utilise le module argparse pour :</dt><dd><ul class="simple">
+<li><p>Enregistrer les commandes à reconnaître</p></li>
+<li><p>Lire la ligne de commande et créer le champ self.args qui récupère la structure produite</p></li>
+</ul>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, toutes les commandes reconnues sont comprises dans self.args</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="labo_prob3_common.TreeNode">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">labo_prob3_common.</span></span><span class="sig-name descname"><span class="pre">TreeNode</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">left</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#labo_prob3_common.TreeNode" title="labo_prob3_common.TreeNode"><span class="pre">TreeNode</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">right</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#labo_prob3_common.TreeNode" title="labo_prob3_common.TreeNode"><span class="pre">TreeNode</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#labo_prob3_common.TreeNode" title="labo_prob3_common.TreeNode"><span class="pre">TreeNode</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/labo_prob3_common.html#TreeNode"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.TreeNode" title="Lien vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Création d’un noeud pour un arbre</p>
+<p>Code tiré des sections 6.13 à 6.17 du livre de référence
+Voir : &lt;<a class="reference external" href="https://runestone.academy/ns/books/published/GIF270/Trees/SearchTreeImplementation.html">https://runestone.academy/ns/books/published/GIF270/Trees/SearchTreeImplementation.html</a>&gt;</p>
+<p>Initialisation d’un nouveau noeud d’un arbre</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>key (int) :</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Au retour, l’objet est initialisé</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.TreeNode.has_any_children">
+<span class="sig-name descname"><span class="pre">has_any_children</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#TreeNode.has_any_children"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.TreeNode.has_any_children" title="Lien vers cette définition"></a></dt>
+<dd><p>Indique si un noeud possède au moins un enfant</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : On observe l’instance elle-même</p>
+</dd>
+<dt>Returns :</dt><dd><p>(bool) : Vrai si le noeud a un enfant à gauche, un enfant à droite, ou les deux, Faux sinon</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.TreeNode.has_both_children">
+<span class="sig-name descname"><span class="pre">has_both_children</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#TreeNode.has_both_children"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.TreeNode.has_both_children" title="Lien vers cette définition"></a></dt>
+<dd><p>Indique si un noeud a deux enfants</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : On observe l’instance elle-même</p>
+</dd>
+<dt>Returns :</dt><dd><p>(bool) : Vrai si le noeud deux enfants, Faux sinon</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.TreeNode.has_left_child">
+<span class="sig-name descname"><span class="pre">has_left_child</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#TreeNode.has_left_child"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.TreeNode.has_left_child" title="Lien vers cette définition"></a></dt>
+<dd><p>Indique si un noeud a un enfant à gauche</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : On observe l’instance elle-même</p>
+</dd>
+<dt>Returns :</dt><dd><p>(TreeNode) : Valeur de l’enfant à gauche, ou valeur nulle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.TreeNode.has_right_child">
+<span class="sig-name descname"><span class="pre">has_right_child</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#TreeNode.has_right_child"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.TreeNode.has_right_child" title="Lien vers cette définition"></a></dt>
+<dd><p>Indique si un noeud a un enfant à droite</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : On observe l’instance elle-même</p>
+</dd>
+<dt>Returns :</dt><dd><p>(TreeNode) : Valeur de l’enfant à droite, ou valeur nulle</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.TreeNode.is_leaf">
+<span class="sig-name descname"><span class="pre">is_leaf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#TreeNode.is_leaf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.TreeNode.is_leaf" title="Lien vers cette définition"></a></dt>
+<dd><p>Indique si un noeud est une feuille d’un arbre</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : On observe l’instance elle-même</p>
+</dd>
+<dt>Returns :</dt><dd><p>(bool) : Vrai si le noeud n’a pas d’enfant à gauche ni d’enfant à droite, Faux sinon</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.TreeNode.is_left_child">
+<span class="sig-name descname"><span class="pre">is_left_child</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#TreeNode.is_left_child"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.TreeNode.is_left_child" title="Lien vers cette définition"></a></dt>
+<dd><p>Indique si un noeud est l’enfant à gauche de son parent</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : On observe l’instance elle-même</p>
+</dd>
+<dt>Returns :</dt><dd><p>(bool) : Vrai si le noeud a un parent dont il est l’enfant à gauche, Faux sinon</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.TreeNode.is_right_child">
+<span class="sig-name descname"><span class="pre">is_right_child</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#TreeNode.is_right_child"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.TreeNode.is_right_child" title="Lien vers cette définition"></a></dt>
+<dd><p>Indique si un noeud est l’enfant à droite de son parent</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : On observe l’instance elle-même</p>
+</dd>
+<dt>Returns :</dt><dd><p>(bool) : Vrai si le noeud a un parent dont il est l’enfant à droite, Faux sinon</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.TreeNode.is_root">
+<span class="sig-name descname"><span class="pre">is_root</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#TreeNode.is_root"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.TreeNode.is_root" title="Lien vers cette définition"></a></dt>
+<dd><p>Indique si un noeud est la racine d’un arbre (dans ce cas, il n’a pas de parent)</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>(void) : On observe l’instance elle-même</p>
+</dd>
+<dt>Returns :</dt><dd><p>(bool) : Faux si le noeud a un parent, Vrai sinon</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="labo_prob3_common.TreeNode.replaceNodeData">
+<span class="sig-name descname"><span class="pre">replaceNodeData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#labo_prob3_common.TreeNode" title="labo_prob3_common.TreeNode"><span class="pre">TreeNode</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#labo_prob3_common.TreeNode" title="labo_prob3_common.TreeNode"><span class="pre">TreeNode</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/labo_prob3_common.html#TreeNode.replaceNodeData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#labo_prob3_common.TreeNode.replaceNodeData" title="Lien vers cette définition"></a></dt>
+<dd><p>Remplace toute l’information contenue dans un noeud</p>
+<dl class="simple">
+<dt>Args :</dt><dd><p>key (int) : Clé associée au noeud
+value (int) : Contenu associé à un noeud (peut être n’importe quel objet)
+lc (TreeNode) : Nouvel enfant à gauche
+rc (TreeNode) : Nouvel enfant à droite</p>
+</dd>
+<dt>Returns :</dt><dd><p>(void) : Les champs du noeud sont mis à jour, et il devient le parent de ses nouveaux noeuds enfants</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Documentation créée le 04 janv. 2025.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="labo_prob3.html" class="btn btn-neutral float-left" title="Module labo_prob3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="labo_prob4.html" class="btn btn-neutral float-right" title="Module labo_prob4" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2018-2025, Frédéric Mailhot.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
