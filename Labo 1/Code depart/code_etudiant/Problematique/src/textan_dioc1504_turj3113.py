@@ -128,7 +128,7 @@ class TextAn(TextAnCommon):
             #print(hash_key) #debug
             if hash_key in dict2:
                 dot_prod += dict1[hash_key]['fréquences'] * dict2[hash_key]['fréquences']
-        print("dot_product_dict, valeur trouver: ", dot_prod)
+        #print("dot_product_dict, valeur trouver: ", dot_prod)
         return dot_prod
 
     def dot_product_aut(self, auteur1: str, auteur2: str) -> float:
@@ -155,7 +155,7 @@ class TextAn(TextAnCommon):
 
         # Fait le produit scalaire des deux dict
         dot_product = self.dot_product_dict(dict_auteur1, dict_auteur2)
-        print("dot_product_aut, valeur trouver: ", dot_product)
+        #print("dot_product_aut, valeur trouver: ", dot_product)
         return dot_product
 
     def dot_product_dict_aut(self, dict_oeuvre: dict, auteur: str) -> float:
@@ -175,7 +175,7 @@ class TextAn(TextAnCommon):
         print("Methode du dot_product_dict_aut")
 
         dot_product = self.dot_product_dict(dict_oeuvre, self.ngram_dict[auteur])
-        print("dot_product_dict_aut, valeur trouver: ", dot_product)
+        #print("dot_product_dict_aut, valeur trouver: ", dot_product)
 
         return dot_product
 
@@ -197,7 +197,7 @@ class TextAn(TextAnCommon):
         print("Methode vector_size")
         size = self.dot_product_dict(vector, vector)
         size = math.sqrt(size)
-        print("calcul vector_size:", size)
+        #print("calcul vector_size:", size)
         return size
 
     def cosine(self, vector1: dict, vector2: dict) -> float:
@@ -222,12 +222,12 @@ class TextAn(TextAnCommon):
         # Cosinus de l'angle c'est le produit scalaire de A & B diviser par la norme de A * norme de B
         #
         print('Methode de cosine')
-        print("vector size:", self.vector_size(vector1))
+        #print("vector size:", self.vector_size(vector1))
 
-        print("vector size:", self.vector_size(vector2))
+        #print("vector size:", self.vector_size(vector2))
         #print(vector1, vector2, , )
         angle_cos = self.dot_product_dict(vector1, vector2) / (self.vector_size(vector1) * self.vector_size(vector2))
-        print('Angle de cosine trouver:', angle_cos)
+        #print('Angle de cosine trouver:', angle_cos)
         return angle_cos
 
     def find_author(self, oeuvre: str) -> []:
@@ -245,13 +245,12 @@ class TextAn(TextAnCommon):
         print("Methode find_author")
 
         # Ouverture de l'oeuvre a tester
+        print("ouverture de : ", oeuvre)
         try:
             fichier_oeuvre = open(oeuvre, "r", encoding="utf8")
         except Exception as e:  # si l'ouverture marche pas prend premier fichier du premier auteur juste pour tester
             print(f"Erreur lors de l'ouverture de {oeuvre}: {e}")
             oeuvre = self.get_aut_files(self.auteurs[0])[0]
-            #print(self.get_aut_files(self.auteurs[0])[0])
-            print("ouverture de : ", oeuvre)
             fichier_oeuvre = open(oeuvre, "r", encoding="utf8")
 
         lignes = fichier_oeuvre.readlines()
@@ -271,10 +270,10 @@ class TextAn(TextAnCommon):
         for auteur in self.auteurs:
             print("Comparaison avec auteur :", auteur)
             # calcul le cosinus
-            if auteur in self.ngram_dict:
-                print("auteur is in dictionnary")
-            else:
-                print("auteur is not in dictionnary")
+            # if auteur in self.ngram_dict:
+            #     print("auteur is in dictionnary") #debug cad
+            # else:
+            #     print("auteur is not in dictionnary") #debug cad
 
             #print(self.ngram_dict[auteur])
             #print(dict_inconnu["Mystère"])
@@ -285,19 +284,12 @@ class TextAn(TextAnCommon):
             #print("test tuple: ", (auteur, cosine_auteur))
             Auteur_Cosine.append((auteur, cosine_auteur))
 
-        print("liste des auteurs avec leurs cosine: \n", Auteur_Cosine)
-
         resultats = Auteur_Cosine
 
-
-        # Ajouter votre code pour déterminer la proximité du fichier passé en paramètre avec chacun des auteurs
-        # Retourner la liste des auteurs, chacun avec sa proximité au fichier inconnu
-        # Plus la proximité est grande, plus proche l'oeuvre inconnue est des autres écrits d'un auteur
-        #   Le produit scalaire entre le vecteur représentant les oeuvres d'un auteur
-        #       et celui associé au texte inconnu pourrait s'avérer intéressant...
-        #   Le produit scalaire devrait être normalisé avec la taille du vecteur associé au texte inconnu :
-        #   proximité = (A dot product B) / (|A| |B|)   où A est le vecteur du texte inconnu et B est celui d'un auteur,
-        #           "dot product" est le produit scalaire, et |X| est la norme (longueur) du vecteur X
+        # Affichage des resultats
+        print("liste des auteurs avec leurs cosine:")
+        for auteur, cosine_value in resultats:
+            print(f"\t\t\t\t\t\t\t\t\t\t{auteur}: {cosine_value}")
 
         return resultats
 
@@ -564,7 +556,7 @@ class TextAn(TextAnCommon):
 
         # section pour test cad
         print("Start test cad")
-        self.find_author("random")
+        self.find_author("random") #ici il faudrait mettre le path d<un fichier d<auteur en param pour bien tester
 
         return
 
