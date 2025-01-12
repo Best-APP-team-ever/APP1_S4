@@ -22,7 +22,7 @@
 """
 import io
 import math  # Au besoin, retirer le commentaire de cette ligne
-# import random # Au besoin, retirer le commentaire de cette ligne
+import random # Au besoin, retirer le commentaire de cette ligne
 from textan_common import TextAnCommon
 import re
 
@@ -360,7 +360,30 @@ class TextAn(TextAnCommon):
         """
         # Utilisez to_file pour y imprimer les mots générés, il s'agit d'un fichier vide, ouvert en écriture
         # Le print ne sert ici qu'à éliminer un avertissement. Il doit être adapté ou retiré
-        print("\t", self.auteurs, auteur, taille, file=to_file)
+        # print("\t", self.auteurs, auteur, taille, file=to_file)
+
+        # liste de mots trier du plus au moins fréquent
+        combined_ngram_dict = self.combine_ngram_ocurence(auteur)
+        sorted_list = self.quicksort_dict(combined_ngram_dict)
+
+        # choisir un mot de départ aléatoire
+        starting_word = random.choice(sorted_list)[1] #il va falloir refaire la liste pour que ca soit du plus frequant au moins frequant car ca affecte les probabilie de random
+        generated_text = starting_word
+
+        # generation du texte en utilisant une chaine de markov (générée des mots jusqu'a atteindre le target de mot)
+
+        # Chercher les n-grammes qui peuvent suivre le dernier mot (si possible)
+
+        # Choisir un mot suivant de manière aléatoire
+        next_word = " " #random.choice(next_ngram_candidates)
+        generated_text.append(next_word)
+
+        # Beautifier
+
+
+        # Écrire le texte généré dans le fichier
+        print(" ".join(generated_text), file=to_file)
+
 
         return
 
