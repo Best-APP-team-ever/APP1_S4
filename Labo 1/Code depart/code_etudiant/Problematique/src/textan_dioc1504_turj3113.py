@@ -173,10 +173,12 @@ class TextAn(TextAnCommon):
         Copyright 2024-2025, F. Mailhot et Université de Sherbrooke
         """
 
-        # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
-        # Il faut les retirer et les remplacer par du code fonctionnel
-        print("\t", self.mots_auteurs, dict_oeuvre, auteur)
-        dot_product = 1.0
+        print("Methode du dot_product_dict_aut")
+        dot_product = 0.0
+
+        dot_product = self.dot_product_dict(dict_oeuvre, self.ngram_dict[auteur])
+        print("dot_product_dict_aut, valeur trouver: ", dot_product)
+
         return dot_product
 
     def find_author(self, oeuvre: str) -> []:
