@@ -304,7 +304,7 @@ class TextAn(TextAnCommon):
 
         Copyright 2024-2025, F. Mailhot et Université de Sherbrooke
         """
-        #print(ngram)
+        print(ngram)
         ocurence = 0
         #list_ngram = ngram.split()
         for entry in self.ngram_dict[auteur]:
@@ -326,7 +326,10 @@ class TextAn(TextAnCommon):
 
         Copyright 2024-2025, F. Mailhot et Université de Sherbrooke
         """
-        return len(self.ngram_dict[auteur])
+        # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
+        # Il faut les retirer et les remplacer par du code fonctionnel
+        print("\t", self.ngram_size, auteur)
+        return 1
 
     def gen_text_all(self, taille: int, to_file: io.TextIOWrapper) -> None:
         """Après analyse des textes d'auteurs connus, produire un texte selon des statistiques de l'ensemble des auteurs
@@ -375,7 +378,7 @@ class TextAn(TextAnCommon):
 
         # Function to find the partition position
     def partition(self, array, low, high):
-        pivot = array[high][0]
+        pivot = array[high]
 
         # pointer for greater element
         i = low - 1
@@ -383,7 +386,7 @@ class TextAn(TextAnCommon):
         # traverse through all elements
         # compare each element with pivot
         for j in range(low, high):
-            if array[j][0] <= pivot:
+            if array[j] <= pivot:
                 # If element smaller than pivot is found
                 # swap it with the greater element pointed by i
                 i = i + 1
@@ -410,14 +413,11 @@ class TextAn(TextAnCommon):
             # Recursive call on the right of pivot
             self.quickSort(array, pi + 1, high)
 
-    def quicksort_dict(self, combined_dict: dict)-> list:
+    def quicksort_dict(self, combined_dict: dict)-> dict:
         list_of_dict = list(combined_dict.items())
         #list[index][0] = fréquence
         #list[index][1] = ngrams de fréquence
-        #print(list_of_dict)
-        length = len(list_of_dict)
-        self.quickSort(list_of_dict, 0, length-1)
-        return list_of_dict
+        #self.quickSort()
 
 
     def get_kth_element(self, auteur: str, k: int) -> [[str]]:
@@ -435,9 +435,8 @@ class TextAn(TextAnCommon):
         # Il faut les retirer lorsque le code est complété
         combined_ngram_dict = self.combine_ngram_ocurence(auteur)
         sorted_list = self.quicksort_dict(combined_ngram_dict)
-        #print(sorted_list)
-        #print("\t", self.auteurs, auteur, k)
-        ngram = sorted_list[len(sorted_list)-k][1]  # Exemple du format de sortie pour trois bigrammes
+        print("\t", self.auteurs, auteur, k)
+        ngram = [["JULES", "VERNE"], ["de", "l"], ["ému", "par"]]  # Exemple du format de sortie pour trois bigrammes
         return ngram
 
     def generate_ngrams_from_lines(self, lines, punctuation=("!", "'", ";", ",", ".", "-", "?", "(", ")", "[", "]")):
@@ -540,13 +539,13 @@ class TextAn(TextAnCommon):
             oeuvres = self.get_aut_files(auteur)
             self.ngram_dict[auteur]= {} #crée un dictionnaire vide pour chaque auteur
             for oeuvre in oeuvres:
-                #print("\t", oeuvre)
+                print("\t", oeuvre)
                 #ici on doit mettre les textes dans une variable afin des analyser.
                 with open(oeuvre, 'r', encoding='utf-8') as file:  # Specify UTF-8 encoding
                     file_lines = file.readlines()  # List of lines
                     ngram_list = self.generate_ngrams_from_lines(file_lines)
                     for ngram in ngram_list:
                         self.add_ngram(ngram, auteur)
-            #print(self.ngram_dict[auteur])
+            print(self.ngram_dict[auteur])
         return
 
