@@ -120,11 +120,14 @@ class TextAn(TextAnCommon):
         Copyright 2024-2025, F. Mailhot et Université de Sherbrooke
         """
 
-        # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
-        # Il faut les retirer et les remplacer par du code fonctionnel
-        print("\t", dict1, dict2, dict1_size, dict2_size)
-        dot_product = 1.0
-        return dot_product
+        print("Methode du dot product")
+        dot_prod = 0.0
+        for hash_key in dict1.keys():  # Passe au travers de toutes les clés du dictionnaire
+            #print(hash_key) #debug
+            if hash_key in dict2:
+                dot_prod += dict1[hash_key] * dict2[hash_key]
+        print("dot product trouver: ", dot_prod)
+        return dot_prod
 
     def dot_product_aut(self, auteur1: str, auteur2: str) -> float:
         """Calcule le produit scalaire normalisé entre les oeuvres de deux auteurs, en utilisant dot_product_dict()
@@ -138,9 +141,8 @@ class TextAn(TextAnCommon):
 
         Copyright 2024-2025, F. Mailhot et Université de Sherbrooke
         """
+        
 
-        # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
-        # Il faut les retirer et les remplacer par du code fonctionnel
         print("\t", self.mots_auteurs, auteur1, auteur2)
         dot_product = 1.0
         return dot_product
