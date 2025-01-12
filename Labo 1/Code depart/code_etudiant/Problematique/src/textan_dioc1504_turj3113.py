@@ -120,13 +120,15 @@ class TextAn(TextAnCommon):
         Copyright 2024-2025, F. Mailhot et Université de Sherbrooke
         """
 
-        print("Methode du dot product")
+        # on a le size donner en param mais on en a pas besoin??
+
+        print("Methode du dot_product_dict")
         dot_prod = 0.0
         for hash_key in dict1.keys():  # Passe au travers de toutes les clés du dictionnaire
             #print(hash_key) #debug
             if hash_key in dict2:
                 dot_prod += dict1[hash_key] * dict2[hash_key]
-        print("dot product trouver: ", dot_prod)
+        print("dot_product_dict, valeur trouver: ", dot_prod)
         return dot_prod
 
     def dot_product_aut(self, auteur1: str, auteur2: str) -> float:
@@ -141,10 +143,20 @@ class TextAn(TextAnCommon):
 
         Copyright 2024-2025, F. Mailhot et Université de Sherbrooke
         """
-        
 
-        print("\t", self.mots_auteurs, auteur1, auteur2)
-        dot_product = 1.0
+        # Gerer par analyse:
+        # Get les textes des auteurs
+        # Extrait les ngram des textes
+        # Ajoute les ngram au dicts
+        # ainsi on assume que les deux dict sont deja bon
+        print("Methode du dot_product_aut")
+        dict_auteur1 = self.ngram_dict[auteur1]
+        dict_auteur2 = self.ngram_dict[auteur2]
+
+        # Fait le produit scalaire des deux dict
+        dot_product = 0.0
+        dot_product = self.dot_product_dict(dict_auteur1, dict_auteur2)
+        print("dot_product_aut, valeur trouver: ", dot_product)
         return dot_product
 
     def dot_product_dict_aut(self, dict_oeuvre: dict, auteur: str) -> float:
@@ -323,9 +335,8 @@ class TextAn(TextAnCommon):
         # Generate n-grams from the collected tokens
         ngrams=[]
         for i in range(0, len(tokens) - self.ngram_size + 1, self.ngram_size):
-            ngram = tokens[i:i + self.ngram_size]
+            ngram = tokens[i : (i + self.ngram_size)]
             ngrams.append(ngram)
-
         return ngrams
 
     def add_ngram(self, n_gram, auteur) -> None:
