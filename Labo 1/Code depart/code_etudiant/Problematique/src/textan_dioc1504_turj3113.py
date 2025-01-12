@@ -292,7 +292,7 @@ class TextAn(TextAnCommon):
 
         return resultats
 
-    def get_ngram_occurrence(self, auteur: str, ngram: str) -> int:
+    def get_ngram_occurrence(self, auteur: str, ngram) -> int:
         """Retourne le nombre d'occurrences du n-gramme pour cet auteur
 
         Args :
@@ -304,10 +304,15 @@ class TextAn(TextAnCommon):
 
         Copyright 2024-2025, F. Mailhot et Université de Sherbrooke
         """
-        # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
-        # Il faut les retirer et les remplacer par du code fonctionnel
-        print("\t", self.ngram_size, auteur, ngram)
-        return 0
+        print(ngram)
+        ocurence = 0
+        #list_ngram = ngram.split()
+        for entry in self.ngram_dict[auteur]:
+            if ngram == self.ngram_dict[auteur][entry]["n-gram"]:
+                ocurence = self.ngram_dict[auteur][entry]["fréquences"]
+                break
+        #print("\t", self.ngram_size, auteur, ngram)
+        return ocurence
 
     def get_total_occurrences(self, auteur: str) -> int:
         """Retourne le nombre total d'occurrences de n-grammes pour cet auteur
@@ -339,7 +344,6 @@ class TextAn(TextAnCommon):
         # Utilisez to_file pour y imprimer les mots générés, il s'agit d'un fichier vide, ouvert en écriture
         # Le print ne sert ici qu'à éliminer un avertissement. Il doit être adapté ou retiré
         print("\t", self.auteurs, taille, file=to_file)
-
         return
 
     def gen_text_auteur(self, auteur: str, taille: int, to_file: io.TextIOWrapper) -> None:
@@ -359,6 +363,63 @@ class TextAn(TextAnCommon):
 
         return
 
+    def combine_ngram_ocurence(self, auteur: str)-> dict:
+        combined_ngram_dict={}
+        for hash_key in self.ngram_dict[auteur]:
+            if self.ngram_dict[auteur][hash_key]["fréquences"] in combined_ngram_dict:
+                combined_ngram_dict[self.ngram_dict[auteur][hash_key]["fréquences"]].append(self.ngram_dict[auteur][hash_key]["n-gram"])
+                # ajoute élément à la fin de la liste
+            else:
+                combined_ngram_dict[self.ngram_dict[auteur][hash_key]["fréquences"]] = [] #crée une liste vide
+                combined_ngram_dict[self.ngram_dict[auteur][hash_key]["fréquences"]].append(self.ngram_dict[auteur][hash_key]["n-gram"])
+                #ajoute élément à la fin de la liste
+        #print(combined_ngram_dict)
+        return combined_ngram_dict
+
+        # Function to find the partition position
+    def partition(self, array, low, high):
+        pivot = array[high]
+
+        # pointer for greater element
+        i = low - 1
+
+        # traverse through all elements
+        # compare each element with pivot
+        for j in range(low, high):
+            if array[j] <= pivot:
+                # If element smaller than pivot is found
+                # swap it with the greater element pointed by i
+                i = i + 1
+
+                # Swapping element at i with element at j
+                (array[i], array[j]) = (array[j], array[i])
+
+        # Swap the pivot element with the greater element specified by i
+        (array[i + 1], array[high]) = (array[high], array[i + 1])
+
+        # Return the position from where partition is done
+        return i + 1
+
+    def quickSort(self, array, low, high):
+        if low < high:
+            # Find pivot element such that
+            # element smaller than pivot are on the left
+            # element greater than pivot are on the right
+            pi = self.partition(array, low, high)
+
+            # Recursive call on the left of pivot
+            self.quickSort(array, low, pi - 1)
+
+            # Recursive call on the right of pivot
+            self.quickSort(array, pi + 1, high)
+
+    def quicksort_dict(self, combined_dict: dict)-> dict:
+        list_of_dict = list(combined_dict.items())
+        #list[index][0] = fréquence
+        #list[index][1] = ngrams de fréquence
+        #self.quickSort()
+
+
     def get_kth_element(self, auteur: str, k: int) -> [[str]]:
         """Après analyse des textes d'auteurs connus, retourner le k-ième plus fréquent n-gramme de l'auteur indiqué
 
@@ -372,8 +433,10 @@ class TextAn(TextAnCommon):
         """
         # Les lignes suivantes ne servent qu'à éliminer un avertissement.
         # Il faut les retirer lorsque le code est complété
+        combined_ngram_dict = self.combine_ngram_ocurence(auteur)
+        sorted_list = self.quicksort_dict(combined_ngram_dict)
         print("\t", self.auteurs, auteur, k)
-        ngram = [["un", "roman"], ["le", "lac"], ["code", "est"]]  # Exemple du format de sortie pour trois bigrammes
+        ngram = [["JULES", "VERNE"], ["de", "l"], ["ému", "par"]]  # Exemple du format de sortie pour trois bigrammes
         return ngram
 
     def generate_ngrams_from_lines(self, lines, punctuation=("!", "'", ";", ",", ".", "-", "?", "(", ")", "[", "]")):
