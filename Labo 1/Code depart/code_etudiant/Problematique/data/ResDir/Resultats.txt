@@ -1,0 +1,54 @@
+Aucune action à effectuer. Utiliser un paramètre pour:
+	 - Générer un texte aléatoire (-a Auteur -g) ou (-G)
+	 - Trouver l'auteur d'un texte inconnu (-f texte_inconnu.txt)
+	 - Trouver le k-ième n-gramme le plus fréquent d'un auteur (-F k)
+
+usage: textan_CIP1_CIP2.py [-h] [-d D] [-a A] [-f F]
+                           [-m {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19}]
+                           [-F F] [-G] [-g] [-g_size G_SIZE] [-g_base G_BASE]
+                           [-g_ext G_EXT] [-g_nocip] [-g_noaut] [-g_sep G_SEP]
+                           [-v] [-noPonc] [-rep_code REP_CODE]
+                           [-recursion RECURSION] [-golden GOLDEN]
+                           [-fichier_res FICHIER_RES] [-dir_res DIR_RES]
+                           [-timeout TIMEOUT] [-compare_auteurs] [-not_pretty]
+
+options:
+  -h, --help            show this help message and exit
+  -d D                  Répertoire contenant les sous-repertoires des auteurs
+                        (TextesPourEtudiants par défaut)
+  -a A                  Résultats à produire pour cet auteur spécifique
+  -f F                  Fichier inconnu pour lequel on recherche un auteur
+  -m {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19}
+                        Mode (1 ou 2 ou 3 ou ... 20) - unigrammes ou digrammes
+                        ou trigrammes ou ... 20-grammes
+  -F F                  Indication du rang (en fréquence) du n-gramme a
+                        imprimer
+  -G                    Génération de texte avec les statistiques de tous les
+                        auteurs
+  -g                    Génération de texte avec les statistiques de l'auteur
+                        (identifié par -a)
+  -g_size G_SIZE        Taille du texte à générer
+  -g_base G_BASE        Nom de base du fichier de texte à générer
+  -g_ext G_EXT          Extension utilisée pour le fichier généré, .txt par
+                        défaut
+  -g_nocip              Ne pas utiliser les CIPs dans le nom du fichier généré
+  -g_noaut              Ne pas utiliser le nom de l'auteur dans le nom du
+                        fichier généré
+  -g_sep G_SEP          Utiliser cette chaine de caractères comme séparateur
+                        dans le nom de fichier généré
+  -v                    Mode verbose
+  -noPonc               Retirer la ponctuation
+  -rep_code REP_CODE    Répertoire contenant la liste des CIPs et leur code
+                        textan_CIP1_CIP2.py
+  -recursion RECURSION  Récursion maximale permise (par défaut, 1000)
+  -golden GOLDEN        Compare les résultats avec la version 'golden'
+                        indiquée par ce paramètre
+  -fichier_res FICHIER_RES
+                        Tous les prints seront faits dans ce fichier
+  -dir_res DIR_RES      Tous les résultats seront ajoutés dans ce répertoire
+                        (sous le répertoire courant)
+  -timeout TIMEOUT      Temps maximum (secondes) pour l'exécution du système
+  -compare_auteurs      Indique les proximités des textes des différents
+                        auteurs
+  -not_pretty           Ne pas utiliser l'appel au système de reformattage des
+                        textes générés pour les rendre plus beaux

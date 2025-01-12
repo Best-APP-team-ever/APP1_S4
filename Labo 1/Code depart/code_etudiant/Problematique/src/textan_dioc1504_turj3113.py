@@ -126,8 +126,10 @@ class TextAn(TextAnCommon):
         dot_prod = 0.0
         for hash_key in dict1.keys():  # Passe au travers de toutes les clés du dictionnaire
             #print(hash_key) #debug
+            #print(dict1[hash_key]['fréquences'])
+            #print(dict2[hash_key]['fréquences'])
             if hash_key in dict2:
-                dot_prod += dict1[hash_key] * dict2[hash_key]
+                dot_prod += dict1[hash_key]['fréquences'] * dict2[hash_key]['fréquences']
         print("dot_product_dict, valeur trouver: ", dot_prod)
         return dot_prod
 
@@ -195,7 +197,7 @@ class TextAn(TextAnCommon):
         # Ici, chaque bigramme distinct est une dimension
         # Remplacez les lignes suivantes par le code approprié.
 
-
+        print("fonction vector_size")
         size = self.dot_product_dict(vector, vector)
         size = math.sqrt(size)
         print("calcul vector_size:", size)
@@ -223,7 +225,8 @@ class TextAn(TextAnCommon):
         # Cosinus de l'angle c'est le produit scalaire de A & B diviser par la norme de A * norme de B
         #
         print('Fonction de cosine')
-        print(vector1, vector2, self.vector_size(vector1), self.vector_size(vector2))
+        print("size des vecteur 1: ", self.vector_size(vector1), "size vecteur 2", self.vector_size(vector2), "dot_product: ", self.dot_product_dict(vector1, vector2))
+
         angle_cos = self.dot_product_dict(vector1, vector2) / (self.vector_size(vector1) * self.vector_size(vector2))
         print('Angle de cosine trouver:', angle_cos)
         return angle_cos
@@ -240,33 +243,38 @@ class TextAn(TextAnCommon):
             resultats (Liste[(string, float)]) : Liste de tuples (auteurs, niveau de proximité),
             où la proximité est un nombre entre 0 et 1)
         """
+
+        print("Methode find_author")
+
+        # Ouverture de l'oeuvre a tester
+        try :
+            fichier_oeuvre = open(oeuvre, "r", encoding="utf8")
+        except Exception as e: # si l'ouverture marche pas prend premier fichier du premier auteur juste pour tester
+            print(f"Erreur lors de l'ouverture de {oeuvre}: {e}")
+            oeuvre = self.get_aut_files(self.auteurs[0])[0]
+            print(self.get_aut_files(self.auteurs[0])[0])
+            print(oeuvre)
+            fichier_oeuvre = open(oeuvre, "r", encoding="utf8")
+
+        lignes = fichier_oeuvre.readlines()
+        ngram = self.generate_ngrams_from_lines(lignes)
+        fichier_oeuvre.close()
+        dict_inconnu = {}
+        self.add_ngram(dict_inconnu, ngram, "mystère")
+
+        # Calcul du cosine
         Auteur_Cosine = []
         for auteur in self.auteurs:
             #calcul le cosinus
-            cosine_auteur = self.cosine(self.ngram_dict[auteur], self.ngram_dict[auteur])
+            cosine_auteur = self.cosine(self.ngram_dict[auteur], dict_inconnu["mystère"])
 
             # met les infos dans un tuple et append le tuple a la liste
             Auteur_Cosine.append((auteur, cosine_auteur))
 
         print("liste des auteurs avec leurs cosine: \n", Auteur_Cosine)
 
+        resultats = Auteur_Cosine
 
-        # Exemple du format des sorties
-        resultats = [
-            ("Premier_auteur", 0.1234),
-            ("Deuxième_auteur", 0.1123),
-        ]
-
-
-
-        # Exemple de lecture du fichier oeuvre une ligne à la fois.  Modifier ou remplacer ce code par le vôtre.
-        fichier_oeuvre = open(oeuvre, "r", encoding="utf8")
-        lignes = fichier_oeuvre.readlines()
-        plus_grande_ligne = ""
-        for ligne in lignes:
-            if len(ligne) > len(plus_grande_ligne):
-                plus_grande_ligne = ligne
-        print("\tPlus grande ligne: ", plus_grande_ligne.strip())
 
         # oeuvres = self.get_aut_files(auteur)
         # self.ngram_dict[auteur] = {}  # crée un dictionnaire vide pour chaque auteur
@@ -473,7 +481,7 @@ class TextAn(TextAnCommon):
             ngrams.append(ngram)
         return ngrams
 
-    def add_ngram(self, n_gram, auteur) -> None:
+    def add_ngram(self, ngram_dict: dict , n_gram, auteur) -> None:
         """Méthode appelée pour ajouter un bigramme au dictionnaire fourni :
 
                 Args :
@@ -487,22 +495,22 @@ class TextAn(TextAnCommon):
         # On suppose qu'au départ, le tableau de hachage est vide
 
         hash_n_gram_rentrant = self.__hash__(n_gram)  # techniquement déjà handle par python
-        if hash_n_gram_rentrant in self.ngram_dict[auteur]:
-            if self.__eq__(n_gram, self.ngram_dict[auteur][hash_n_gram_rentrant]["n-gram"]):
-                self.ngram_dict[auteur][hash_n_gram_rentrant]["fréquences"] += 1
+        if hash_n_gram_rentrant in ngram_dict[auteur]:
+            if self.__eq__(n_gram, ngram_dict[auteur][hash_n_gram_rentrant]["n-gram"]):
+                ngram_dict[auteur][hash_n_gram_rentrant]["fréquences"] += 1
             else:  # existe seulement pour vérifier s'il a eu plus que 2 fois le même Bigram
                 test = True
                 while test:
                     hash_n_gram_rentrant += 1
-                    if hash_n_gram_rentrant in self.ngram_dict[auteur]:
-                        if self.__eq__(n_gram, self.ngram_dict[auteur][hash_n_gram_rentrant]["n-gram"]):
-                            self.ngram_dict[auteur][hash_n_gram_rentrant]["fréquences"] += 1
+                    if hash_n_gram_rentrant in ngram_dict[auteur]:
+                        if self.__eq__(n_gram, ngram_dict[auteur][hash_n_gram_rentrant]["n-gram"]):
+                            ngram_dict[auteur][hash_n_gram_rentrant]["fréquences"] += 1
                             test = False
                     else:
-                        self.ngram_dict[auteur][hash_n_gram_rentrant] = {"n-gram": n_gram, "fréquences": 1}
+                        ngram_dict[auteur][hash_n_gram_rentrant] = {"n-gram": n_gram, "fréquences": 1}
                         test = False
         else:
-            self.ngram_dict[auteur][hash_n_gram_rentrant] = {"n-gram": n_gram, "fréquences": 1}
+            ngram_dict[auteur][hash_n_gram_rentrant] = {"n-gram": n_gram, "fréquences": 1}
         #print(n_gram)
         #print(self.ngram_dict)
         return
@@ -536,6 +544,8 @@ class TextAn(TextAnCommon):
         #     for oeuvre in self.auteurs[auteur]:
         #         print(oeuvre)
 
+
+
         for auteur in self.auteurs:
             oeuvres = self.get_aut_files(auteur)
             self.ngram_dict[auteur]= {} #crée un dictionnaire vide pour chaque auteur
@@ -546,7 +556,21 @@ class TextAn(TextAnCommon):
                     file_lines = file.readlines()  # List of lines
                     ngram_list = self.generate_ngrams_from_lines(file_lines)
                     for ngram in ngram_list:
+<<<<<<< HEAD
+                        self.add_ngram(self.ngram_dict, ngram, auteur)
+            #print(self.ngram_dict[auteur])
+        file.close()
+
+        # section pour test cad
+        print("Start test cad")
+        self.find_author("random")
+
+=======
                         self.add_ngram(ngram, auteur)
             #print(self.ngram_dict[auteur])
+<<<<<<< Updated upstream
+=======
+>>>>>>> 179d8519b5e6aaa778c4547da364d327a67b1dcd
+>>>>>>> Stashed changes
         return
 
