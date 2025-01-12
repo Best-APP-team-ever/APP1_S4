@@ -21,7 +21,7 @@
     Copyright 2018-2025, F. Mailhot et Université de Sherbrooke
 """
 import io
-# import math  # Au besoin, retirer le commentaire de cette ligne
+import math  # Au besoin, retirer le commentaire de cette ligne
 # import random # Au besoin, retirer le commentaire de cette ligne
 from textan_common import TextAnCommon
 import re
@@ -107,7 +107,7 @@ class TextAn(TextAnCommon):
         return hash(combo_string)
 
     @staticmethod
-    def dot_product_dict(dict1: dict, dict2: dict, dict1_size: int, dict2_size: int) -> float:
+    def dot_product_dict(dict1: dict, dict2: dict) -> float:   # , dict1_size: int, dict2_size: int
         """Calcule le produit scalaire NORMALISÉ de deux vecteurs représentés par des dictionnaires
 
         Args :
@@ -154,7 +154,6 @@ class TextAn(TextAnCommon):
         dict_auteur2 = self.ngram_dict[auteur2]
 
         # Fait le produit scalaire des deux dict
-        dot_product = 0.0
         dot_product = self.dot_product_dict(dict_auteur1, dict_auteur2)
         print("dot_product_aut, valeur trouver: ", dot_product)
         return dot_product
@@ -174,35 +173,91 @@ class TextAn(TextAnCommon):
         """
 
         print("Methode du dot_product_dict_aut")
-        dot_product = 0.0
 
         dot_product = self.dot_product_dict(dict_oeuvre, self.ngram_dict[auteur])
         print("dot_product_dict_aut, valeur trouver: ", dot_product)
 
         return dot_product
 
+    def vector_size(self, vector: dict) -> float:
+        """Méthode appelée pour calculer la taille d'un vecteur (tableau de hachage, dict) :
+
+        Args :
+            vector (dict) : tableau de hachage contenant tous les bigrammes
+
+        Returns :
+            size (int) : La taille du vecteur
+        """
+        # Ici, vous devez calculer la taille totale du vecteur (le tableau de hachage vector, de type dict).
+        # Comme pour tout vecteur, la taille est obtenue en calculant la racine carrée de
+        # la somme des carrés des projections dans chacune des dimensions.
+        # Cette somme de carrés représente le produit scalaire du vecteur avec lui-même
+        # Ici, chaque bigramme distinct est une dimension
+        # Remplacez les lignes suivantes par le code approprié.
+
+
+        size = self.dot_product_dict(vector, vector)
+        size = math.sqrt(size)
+        print("calcul vector_size:", size)
+        return size
+
+    def cosine(self, vector1: dict, vector2: dict) -> float:
+        """Méthode calculant le cosinus de l'angle entre 2 vecteurs (produit scalaire normalisé) :
+
+        Args :
+            vector1 (dict) : tableau de hachage contenant tous les bigrammes du premier fichier
+            vector2 (dict) : tableau de hachage contenant tous les bigrammes du deuxième fichier
+
+        Returns :
+            angle_cos (float) : Cosinus de l'angle entre les deux vecteurs (produit scalaire normalisé)
+        """
+        # Ici, vous devez calculer le cosinus de l'angle entre les deux vecteurs, soit le produit scalaire normalisé.
+        # Pour normaliser un vecteur, il faut diviser chacune des projections par la longueur totale du vecteur.
+        # Vous devez donc :
+        #   - Effectuer le produit scalaire entre les deux vecteurs,
+        #     puis diviser le résultat par leurs longueurs respectives.
+        # Remplacer le print et les lignes qui suivent par le code approprié.
+        # Note: Assurez-vous que le résultat ne dépasse pas 1.0, sinon math.acos() causera une exception.
+        # Remplacer les lignes qui suivent par le code approprié.
+
+        # Cosinus de l'angle c'est le produit scalaire de A & B diviser par la norme de A * norme de B
+        #
+        print('Fonction de cosine')
+        print(vector1, vector2, self.vector_size(vector1), self.vector_size(vector2))
+        angle_cos = self.dot_product_dict(vector1, vector2) / (self.vector_size(vector1) * self.vector_size(vector2))
+        print('Angle de cosine trouver:', angle_cos)
+        return angle_cos
+
     def find_author(self, oeuvre: str) -> []:
         """Après analyse des textes d'auteurs connus, retourner la liste d'auteurs
-            et le niveau de proximité (un nombre entre 0 et 1) de l'oeuvre inconnue
+            et le niveau de proximité (un nombre entre 0 et 1) de l'œuvre inconnue
             avec les écrits de chacun d'entre eux
 
         Args :
-            oeuvre (str) : Nom du fichier contenant l'oeuvre d'un auteur inconnu
+            œuvre (str) : Nom du fichier contenant l'œuvre d'un auteur inconnu
 
         Returns :
             resultats (Liste[(string, float)]) : Liste de tuples (auteurs, niveau de proximité),
             où la proximité est un nombre entre 0 et 1)
         """
+        Auteur_Cosine = []
+        for auteur in self.auteurs:
+            #calcul le cosinus
+            cosine_auteur = self.cosine(self.ngram_dict[auteur], self.ngram_dict[auteur])
 
-        # La ligne suivante ne sert qu'à éliminer un avertissement.
-        # Il faut la retirer lorsque le code est complété
-        print("\tAuteurs: ", self.auteurs, "\n\tOeuvre: ", oeuvre)
+            # met les infos dans un tuple et append le tuple a la liste
+            Auteur_Cosine.append((auteur, cosine_auteur))
+
+        print("liste des auteurs avec leurs cosine: \n", Auteur_Cosine)
+
 
         # Exemple du format des sorties
         resultats = [
             ("Premier_auteur", 0.1234),
             ("Deuxième_auteur", 0.1123),
         ]
+
+
 
         # Exemple de lecture du fichier oeuvre une ligne à la fois.  Modifier ou remplacer ce code par le vôtre.
         fichier_oeuvre = open(oeuvre, "r", encoding="utf8")
@@ -212,6 +267,19 @@ class TextAn(TextAnCommon):
             if len(ligne) > len(plus_grande_ligne):
                 plus_grande_ligne = ligne
         print("\tPlus grande ligne: ", plus_grande_ligne.strip())
+
+        # oeuvres = self.get_aut_files(auteur)
+        # self.ngram_dict[auteur] = {}  # crée un dictionnaire vide pour chaque auteur
+        # for oeuvre in oeuvres:
+        #     print("\t", oeuvre)
+        #     # ici on doit mettre les textes dans une variable afin des analyser.
+        #     with open(oeuvre, 'r', encoding='utf-8') as file:  # Specify UTF-8 encoding
+        #         file_lines = file.readlines()  # List of lines
+        #         ngram_list = self.generate_ngrams_from_lines(file_lines)
+        #         for ngram in ngram_list:
+        #             self.add_ngram(ngram, auteur)
+        # print(self.ngram_dict[auteur])
+
 
         # Ajouter votre code pour déterminer la proximité du fichier passé en paramètre avec chacun des auteurs
         # Retourner la liste des auteurs, chacun avec sa proximité au fichier inconnu
@@ -308,7 +376,7 @@ class TextAn(TextAnCommon):
         ngram = [["un", "roman"], ["le", "lac"], ["code", "est"]]  # Exemple du format de sortie pour trois bigrammes
         return ngram
 
-    def generate_ngrams_from_lines(self, lines, punctuation=["!", "'", ";", ",", ".", "-", "?", "(", ")", "[", "]"]):
+    def generate_ngrams_from_lines(self, lines, punctuation=("!", "'", ";", ",", ".", "-", "?", "(", ")", "[", "]")):
         """
         Generate n-grams from a list of lines, treating punctuation as individual words and preserving their order.
 
@@ -397,8 +465,6 @@ class TextAn(TextAnCommon):
         #   De cette façon, les mots d'un court poème auraient une importance beaucoup plus grande que
         #   les mots d'une très longue oeuvre du même auteur. Ce n'est PAS ce qui vous est demandé ici.
 
-        # Ces trois lignes ne servent qu'à éliminer un avertissement. Il faut les retirer lorsque le code est complété
-        print("\t", self.auteurs)
 
         # Le code qui suit indique comment accéder aux noms des fichiers qui contiennent les oeuvres des auteurs.
         # Vous pouvez l'adapter pour effectuer l'analyse
