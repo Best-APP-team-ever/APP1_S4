@@ -342,14 +342,14 @@ class TextAn(TextAnCommon):
         # On suppose qu'au départ, le tableau de hachage est vide
 
         hash_n_gram_rentrant = self.__hash__(n_gram)  # techniquement déjà handle par python
-        if hash_n_gram_rentrant in self.ngram_dict:
+        if hash_n_gram_rentrant in self.ngram_dict[auteur]:
             if self.__eq__(n_gram, self.ngram_dict[auteur][hash_n_gram_rentrant]["n-gram"]):
                 self.ngram_dict[auteur][hash_n_gram_rentrant]["fréquences"] += 1
             else:  # existe seulement pour vérifier s'il a eu plus que 2 fois le même Bigram
                 test = True
                 while test:
                     hash_n_gram_rentrant += 1
-                    if hash_n_gram_rentrant in self.ngram_dict:
+                    if hash_n_gram_rentrant in self.ngram_dict[auteur]:
                         if self.__eq__(n_gram, self.ngram_dict[auteur][hash_n_gram_rentrant]["n-gram"]):
                             self.ngram_dict[auteur][hash_n_gram_rentrant]["fréquences"] += 1
                             test = False
@@ -395,7 +395,7 @@ class TextAn(TextAnCommon):
 
         for auteur in self.auteurs:
             oeuvres = self.get_aut_files(auteur)
-            self.ngram_dict[auteur]= {} #crée un dicitionnaire vide pour chaque auteur
+            self.ngram_dict[auteur]= {} #crée un dictionnaire vide pour chaque auteur
             for oeuvre in oeuvres:
                 print("\t", oeuvre)
                 #ici on doit mettre les textes dans une variable afin des analyser.
@@ -404,6 +404,6 @@ class TextAn(TextAnCommon):
                     ngram_list = self.generate_ngrams_from_lines(file_lines)
                     for ngram in ngram_list:
                         self.add_ngram(ngram, auteur)
-            #print(self.ngram_dict[auteur])
+            print(self.ngram_dict[auteur])
         return
 
