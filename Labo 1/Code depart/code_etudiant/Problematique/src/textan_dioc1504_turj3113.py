@@ -569,6 +569,10 @@ class TextAn(TextAnCommon):
                         self.add_ngram(ngram, auteur)
             #print(self.ngram_dict[auteur])
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+>>>>>>> 179d8519b5e6aaa778c4547da364d327a67b1dcd
+>>>>>>> Stashed changes
 =======
 >>>>>>> 179d8519b5e6aaa778c4547da364d327a67b1dcd
 >>>>>>> Stashed changes
