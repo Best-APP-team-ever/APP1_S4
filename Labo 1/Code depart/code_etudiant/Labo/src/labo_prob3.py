@@ -34,6 +34,26 @@ class AVLTree(AVLTreeCommon):
         Returns :
             (void) : Au retour, la rotation droite a été effectuée et tous les noeuds ont été ajustés
         """
+        new_root = rotation_root.left_child
+        rotation_root.left_child = new_root.right_child#
+        if new_root.right_child:#
+            new_root.right_child.parent = rotation_root#
+        new_root.parent = rotation_root.parent
+        if rotation_root.is_root():
+            self.root = new_root
+        else:
+            if rotation_root.is_right_child():#
+                rotation_root.parent.right_child = new_root#
+            else:
+                rotation_root.parent.left_child = new_root
+        new_root.right_child = rotation_root#
+        rotation_root.parent = new_root
+        rotation_root.balance_factor = (
+                rotation_root.balance_factor + 1 - min(new_root.balance_factor, 0)
+        )
+        new_root.balance_factor = (
+                new_root.balance_factor + 1 + max(rotation_root.balance_factor, 0)
+        )
         return
 
 

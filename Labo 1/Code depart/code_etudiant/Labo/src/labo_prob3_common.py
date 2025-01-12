@@ -403,7 +403,7 @@ class AVLTreeCommon(BinarySearchTree) :
         return
 
     def rotate_left(self, rotation_root: TreeNode) -> None:
-        """Rotation d'un sous-arbre vers la droite :
+        """Rotation d'un sous-arbre vers la gauche :
 
         Args :
             rotation_root (TreeNode) : Noeud sur lequel effectuer la rotation gauche

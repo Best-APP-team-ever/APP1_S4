@@ -272,7 +272,7 @@ class LaboProb2(LaboProb2Common):
         # Remplacer le print et les lignes qui suivent par le code approprié.
         # Note: Assurez-vous que le résultat ne dépasse pas 1.0, sinon math.acos() causera une exception.
         # Remplacer les lignes qui suivent par le code approprié.
-        angle_cos = (LaboProb2.scalar_product(vector1, vector2)/(LaboProb2.vector_size(vector1)*(LaboProb2.vector_size(vector1))))
+        angle_cos = (LaboProb2.scalar_product(vector1, vector2)/(LaboProb2.vector_size(vector1)*(LaboProb2.vector_size(vector2))))
         return angle_cos
 
 

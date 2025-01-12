@@ -24,6 +24,7 @@ import io
 # import math  # Au besoin, retirer le commentaire de cette ligne
 # import random # Au besoin, retirer le commentaire de cette ligne
 from textan_common import TextAnCommon
+import re
 
 
 class TextAn(TextAnCommon):
@@ -50,7 +51,7 @@ class TextAn(TextAnCommon):
     """
 
     # Signes de ponctuation à traiter comme des mots (compléter cette liste incomplète)
-    PONC = ["!", ";"]
+    PONC = ["!", ";", ",", ".", "-", "?"] # pas vraiment utilisé à date, voir fonction generate_ngrams
 
     def __init__(self) -> None:
         """Initialize l'objet de type TextAn lorsqu'il est créé
@@ -64,22 +65,49 @@ class TextAn(TextAnCommon):
 
         # Initialisation des champs nécessaires aux fonctions fournies
         super().__init__()
+        self.ngram_dict = {}
+        self.ngram_list = []
 
         # Au besoin, ajouter votre code d'initialisation de l'objet de type TextAn lors de sa création
-
+        # Ajouter les structures de données et les fonctions nécessaires à l'analyse des textes,
+        # la production de textes aléatoires, la détection d'oeuvres inconnues,
+        # l'identification des k-ièmes mots les plus fréquents.
+        #
+        # Les méthodes qui suivent doivent toutes être complétées pour que le système soit opérationnel
+        # et que le harnais de test (test_textan.py) puisse exécuter tous les tests requis
+        #
         return
 
-    # Ajouter les structures de données et les fonctions nécessaires à l'analyse des textes,
-    # la production de textes aléatoires, la détection d'oeuvres inconnues,
-    # l'identification des k-ièmes mots les plus fréquents.
-    #
-    # Les méthodes qui suivent doivent toutes être complétées pour que le système soit opérationnel
-    # et que le harnais de test (test_textan.py) puisse exécuter tous les tests requis
-    #
+    def __eq__(self, other: list, dict_ngram: list) -> bool:
+        """Redéfinition de l'égalité entre deux bigrammes :
+            - L'un des bigrammes est self (celui avec lequel __eq__ est appelé)
+            - Le deuxième bigramme est other, fourni en paramètre
+
+        Args :
+            other (Bigram) : Le bigramme avec lequel il faut se comparer
+
+        Returns :
+            (bool) : Retourne True ou False, selon l'égalité entre les bigrammes
+        """
+        if isinstance(other, self.ngram_list.__class__):
+                return dict_ngram == other #si les listes sont identiques return True
+        return False
+
+    def __hash__(self, ngram) -> int:
+        """Redéfinition de la méthode de hachage d'un bigramme :
+            - Doit utiliser les deux mots du bigramme
+
+        Args :
+            (void) : Toute l'information nécessaire (a et b) se trouve dans le bigramme
+
+        Returns :
+            (int) : Retourne la valeur de hachage
+        """
+        combo_string = "_".join(ngram)
+        return hash(combo_string)
+
     @staticmethod
-    def dot_product_dict(
-        dict1: dict, dict2: dict, dict1_size: int, dict2_size: int
-    ) -> float:
+    def dot_product_dict(dict1: dict, dict2: dict, dict1_size: int, dict2_size: int) -> float:
         """Calcule le produit scalaire NORMALISÉ de deux vecteurs représentés par des dictionnaires
 
         Args :
@@ -264,6 +292,73 @@ class TextAn(TextAnCommon):
         ngram = [["un", "roman"], ["le", "lac"], ["code", "est"]]  # Exemple du format de sortie pour trois bigrammes
         return ngram
 
+    def generate_ngrams_from_lines(self, lines, punctuation=["!", "'", ";", ",", ".", "-", "?", "(", ")", "[", "]"]):
+        """
+        Generate n-grams from a list of lines, treating punctuation as individual words and preserving their order.
+
+        Parameters:
+            lines (list): A list of strings, where each string is a line of text.
+            punctuation (list): List of punctuation characters to treat as words.
+
+        Returns:
+            list: A list of n-grams, where each n-gram is a list of `n` words.
+        """
+        # Define a regex pattern to split on spaces and treat punctuation as separate tokens
+        pattern = r"(\s+|[" + re.escape("".join(punctuation)) + r"])"
+
+        tokens = []  # Accumulate tokens from all lines
+
+        for line in lines:
+            # Normalize and split the line
+            clean_line = line.strip()
+            if not clean_line:  # Skip empty lines
+                continue
+
+            # Tokenize the line
+            line_tokens = [token for token in re.split(pattern, clean_line) if token.strip()]
+            tokens.extend(line_tokens)
+
+        # Generate n-grams from the collected tokens
+        ngrams=[]
+        for i in range(0, len(tokens) - self.ngram_size + 1, self.ngram_size):
+            ngram = tokens[i:i + self.ngram_size]
+            ngrams.append(ngram)
+
+        return ngrams
+
+    def add_ngram(self, n_gram, auteur) -> None:
+        """Méthode appelée pour ajouter un bigramme au dictionnaire fourni :
+
+                Args :
+                    n_gram (Any) : object (arbitraire) qui représente un n-gram et qui est utilisé comme clé
+
+                Returns :
+                    (void) : Le nouveau n-gram est ajouté au dictionnaire de n-gram fourni
+                """
+        # Ici, remplacez les prints par votre code.
+        # Le tableau de hachage self.n_gram_dict devrait accumuler et compter les n-gram à mesure qu'on les ajoute.
+        # On suppose qu'au départ, le tableau de hachage est vide
+
+        hash_n_gram_rentrant = self.__hash__(n_gram)  # techniquement déjà handle par python
+        if hash_n_gram_rentrant in self.ngram_dict:
+            if self.__eq__(n_gram, self.ngram_dict[auteur][hash_n_gram_rentrant]["n-gram"]):
+                self.ngram_dict[auteur][hash_n_gram_rentrant]["fréquences"] += 1
+            else:  # existe seulement pour vérifier s'il a eu plus que 2 fois le même Bigram
+                test = True
+                while test:
+                    hash_n_gram_rentrant += 1
+                    if hash_n_gram_rentrant in self.ngram_dict:
+                        if self.__eq__(n_gram, self.ngram_dict[auteur][hash_n_gram_rentrant]["n-gram"]):
+                            self.ngram_dict[auteur][hash_n_gram_rentrant]["fréquences"] += 1
+                            test = False
+                    else:
+                        self.ngram_dict[auteur][hash_n_gram_rentrant] = {"n-gram": n_gram, "fréquences": 1}
+                        test = False
+        else:
+            self.ngram_dict[auteur][hash_n_gram_rentrant] = {"n-gram": n_gram, "fréquences": 1}
+        #print(n_gram)
+        #print(self.ngram_dict)
+        return
     def analyze(self) -> None:
         """Fait l'analyse des textes fournis, en traitant chaque oeuvre de chaque auteur
 
@@ -300,6 +395,17 @@ class TextAn(TextAnCommon):
 
         for auteur in self.auteurs:
             oeuvres = self.get_aut_files(auteur)
+            self.ngram_dict[auteur]= {} #crée un dicitionnaire vide pour chaque auteur
             for oeuvre in oeuvres:
                 print("\t", oeuvre)
+                #ici on doit mettre les textes dans une variable afin des analyser.
+                with open(oeuvre, 'r', encoding='utf-8') as file:  # Specify UTF-8 encoding
+                    file_lines = file.readlines()  # List of lines
+                    ngram_list = self.generate_ngrams_from_lines(file_lines)
+                    for ngram in ngram_list:
+                        self.add_ngram(ngram, auteur)
+            #print(self.ngram_dict[auteur])
+
+
         return
+

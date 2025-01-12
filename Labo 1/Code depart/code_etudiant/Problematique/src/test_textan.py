@@ -247,7 +247,7 @@ class TestTextAn(ParsingClassTextAn):
         )  # Chargement du code des étudiants identifiés par cip
         self.textan = self.textan_module.TextAn()
         self.setup_instance_param()
-        self.debug_handler.start_execution_timing()  # Permet de mesurer le temps d'exécution du code étudiant
+        #self.debug_handler.start_execution_timing()  # Permet de mesurer le temps d'exécution du code étudiant
         self.debug_handler.set_student_cip(
             student_cip
         )  # Indique le cip courant au gestionnaire de débogage
