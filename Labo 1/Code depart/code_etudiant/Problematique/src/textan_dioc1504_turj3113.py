@@ -370,7 +370,7 @@ class TextAn(TextAnCommon):
         """
 
         # Ajouter votre code ici pour traiter l'ensemble des oeuvres de l'ensemble des auteurs
-        # Pour l'analyse :  faire le calcul des fréquences de n-grammes pour l'ensemble des oeuvres
+        # Pour l'analyse : faire le calcul des fréquences de n-grammes pour l'ensemble des oeuvres
         #   d'un certain auteur, sans distinction des oeuvres individuelles,
         #       et recommencer ce calcul pour chacun des auteurs
         #   En procédant ainsi, les oeuvres comprenant plus de mots auront un impact plus grand sur
@@ -383,8 +383,6 @@ class TextAn(TextAnCommon):
         #   les mots d'une très longue oeuvre du même auteur. Ce n'est PAS ce qui vous est demandé ici.
 
         # Ces trois lignes ne servent qu'à éliminer un avertissement. Il faut les retirer lorsque le code est complété
-        ngram = self.get_empty_ngram(2)
-        print("\t", ngram)
         print("\t", self.auteurs)
 
         # Le code qui suit indique comment accéder aux noms des fichiers qui contiennent les oeuvres des auteurs.
@@ -405,7 +403,5 @@ class TextAn(TextAnCommon):
                     for ngram in ngram_list:
                         self.add_ngram(ngram, auteur)
             #print(self.ngram_dict[auteur])
-
-
         return
 
