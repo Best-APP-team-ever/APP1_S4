@@ -362,6 +362,9 @@ class TextAn(TextAnCommon):
         # Le print ne sert ici qu'à éliminer un avertissement. Il doit être adapté ou retiré
         # print("\t", self.auteurs, auteur, taille, file=to_file)
 
+
+        # chapitre 3 generation de texte et chaines de markov pour generation texte dans the practice of programming
+
         # liste de mots trier du plus au moins fréquent
         combined_ngram_dict = self.combine_ngram_ocurence(auteur)
         sorted_list = self.quicksort_dict(combined_ngram_dict)
