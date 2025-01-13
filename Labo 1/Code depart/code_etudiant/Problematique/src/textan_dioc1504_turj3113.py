@@ -417,7 +417,7 @@ class TextAn(TextAnCommon):
            """
         transition_table = {}
 
-        for hash in self.ngram_dict[auteur].items(): #La méthode .items() d'un dictionnaire retourne une vue de type liste de tuples, où chaque tuple contient : La clé du dictionnaire et la valeur associée.
+        for hash in self.ngram_dict[auteur]: #La méthode .items() d'un dictionnaire retourne une vue de type liste de tuples, où chaque tuple contient : La clé du dictionnaire et la valeur associée.
             ngram = self.ngram_dict[auteur][hash]["n-gram"] # decompose le n-gram en mots distinct
             count = self.ngram_dict[auteur][hash]["fréquences"]
 
