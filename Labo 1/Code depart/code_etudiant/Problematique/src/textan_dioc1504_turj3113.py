@@ -400,7 +400,7 @@ class TextAn(TextAnCommon):
         #generated_text = self.beautifier????????????????
 
         # Écrire le texte généré dans le fichier
-        print(" ".join(generated_text), file=to_file)
+        # print(" ".join(generated_text), file=to_file)
 
 
         return
@@ -421,9 +421,8 @@ class TextAn(TextAnCommon):
             ngram = self.ngram_dict[auteur][hash]["n-gram"] # decompose le n-gram en mots distinct
             count = self.ngram_dict[auteur][hash]["fréquences"]
 
-            n = self.ngram_size
 
-            for i in range(1, n): # si commence a 1 on ignore les n-gramme avec juste 1 mot (ce qui est invalid)
+            for i in range(1, self.ngram_size): # si commence a 1 on ignore les n-gramme avec juste 1 mot (ce qui est invalid)
                 prefix  = " ".join(ngram[:i])   # : extrait tous les elements juste avant i
                 next_word = ngram[i] #next word after prefix extrait element i
 
