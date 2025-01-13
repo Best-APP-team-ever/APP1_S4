@@ -21,11 +21,21 @@
     Copyright 2018-2025, F. Mailhot et Université de Sherbrooke
 """
 import io
+import os
 import math  # Au besoin, retirer le commentaire de cette ligne
 import random # Au besoin, retirer le commentaire de cette ligne
 from textan_common import TextAnCommon
 import re
 
+# ANSI color codes for console output
+RESET = "\033[0m"  # Resets color
+RED = "\033[31m"
+GREEN = "\033[32m"
+YELLOW = "\033[33m"
+BLUE = "\033[34m"
+MAGENTA = "\033[35m"
+CYAN = "\033[36m"
+WHITE = "\033[37m"
 
 class TextAn(TextAnCommon):
     """Classe à utiliser pour coder la solution à la problématique :
@@ -67,6 +77,9 @@ class TextAn(TextAnCommon):
         super().__init__()
         self.ngram_dict = {}
         self.ngram_list = []
+        self.rep_inconnues = ""
+        self.oeuvres_inconnues = []
+        self.oeuvre_inconnues = ""
 
         # Au besoin, ajouter votre code d'initialisation de l'objet de type TextAn lors de sa création
         # Ajouter les structures de données et les fonctions nécessaires à l'analyse des textes,
@@ -106,6 +119,17 @@ class TextAn(TextAnCommon):
         combo_string = "_".join(ngram)
         return hash(combo_string)
 
+    def get_inconnues_directory(self, inconnues_dir):
+        cwd = os.getcwd()
+        if os.path.isabs(inconnues_dir):
+            self.rep_inconnues = inconnues_dir
+        else:
+            self.rep_inconnues = os.path.join(cwd, inconnues_dir)
+        self.rep_inconnues = os.path.normpath(self.rep_inconnues)
+        #self.oeuvres_inconnues = [f.path for f in os.scandir(self.rep_inconnues)
+        #           if f.is_file() and f.name.endswith('.txt')]
+        return
+
     @staticmethod
     def dot_product_dict(dict1: dict, dict2: dict) -> float:   # , dict1_size: int, dict2_size: int
         """Calcule le produit scalaire NORMALISÉ de deux vecteurs représentés par des dictionnaires
@@ -122,7 +146,7 @@ class TextAn(TextAnCommon):
 
         # on a le size donner en param mais on en a pas besoin??
 
-        print("Methode du dot_product_dict")
+        #print("Methode du dot_product_dict")
         dot_prod = 0.0
         for hash_key in dict1.keys():  # Passe au travers de toutes les clés du dictionnaire
             #print(hash_key) #debug
@@ -149,7 +173,7 @@ class TextAn(TextAnCommon):
         # Extrait les ngram des textes
         # Ajoute les ngram au dicts
         # ainsi on assume que les deux dict sont deja bon
-        print("Methode du dot_product_aut")
+        #print("Methode du dot_product_aut")
         dict_auteur1 = self.ngram_dict[auteur1]
         dict_auteur2 = self.ngram_dict[auteur2]
 
@@ -172,7 +196,7 @@ class TextAn(TextAnCommon):
         Copyright 2024-2025, F. Mailhot et Université de Sherbrooke
         """
 
-        print("Methode du dot_product_dict_aut")
+        #print("Methode du dot_product_dict_aut")
 
         dot_product = self.dot_product_dict(dict_oeuvre, self.ngram_dict[auteur])
         #print("dot_product_dict_aut, valeur trouver: ", dot_product)
@@ -194,7 +218,7 @@ class TextAn(TextAnCommon):
         # Cette somme de carrés représente le produit scalaire du vecteur avec lui-même
         # Ici, chaque bigramme distinct est une dimension
         # Remplacez les lignes suivantes par le code approprié.
-        print("Methode vector_size")
+        #print("Methode vector_size")
         size = self.dot_product_dict(vector, vector)
         size = math.sqrt(size)
         #print("calcul vector_size:", size)
@@ -221,7 +245,7 @@ class TextAn(TextAnCommon):
 
         # Cosinus de l'angle c'est le produit scalaire de A & B diviser par la norme de A * norme de B
         #
-        print('Methode de cosine')
+        #print('Methode de cosine')
         #print("vector size:", self.vector_size(vector1))
 
         #print("vector size:", self.vector_size(vector2))
@@ -242,12 +266,16 @@ class TextAn(TextAnCommon):
             resultats (Liste[(string, float)]) : Liste de tuples (auteurs, niveau de proximité),
             où la proximité est un nombre entre 0 et 1)
         """
-        print("Methode find_author")
+        self.get_inconnues_directory("")
+        #print("Methode find_author")
 
         # Ouverture de l'oeuvre a tester
         print("ouverture de : ", oeuvre)
+
+        self.oeuvre_inconnues = os.path.join(self.rep_inconnues, oeuvre)
+        self.oeuvre_inconnues = os.path.normpath(self.oeuvre_inconnues)
         try:
-            fichier_oeuvre = open(oeuvre, "r", encoding="utf8")
+            fichier_oeuvre = open(self.oeuvre_inconnues, "r", encoding="utf8")
         except Exception as e:  # si l'ouverture marche pas prend premier fichier du premier auteur juste pour tester
             print(f"Erreur lors de l'ouverture de {oeuvre}: {e}")
             oeuvre = self.get_aut_files(self.auteurs[0])[0]
@@ -266,30 +294,26 @@ class TextAn(TextAnCommon):
         # Calcul du cosine
         Auteur_Cosine = []
 
-        print("Liste d'auteurs : ",self.auteurs)
+        #print("Liste d'auteurs : ",self.auteurs)
         for auteur in self.auteurs:
-            print("Comparaison avec auteur :", auteur)
+            #print("Comparaison avec auteur :", auteur)
             # calcul le cosinus
             # if auteur in self.ngram_dict:
             #     print("auteur is in dictionnary") #debug cad
             # else:
             #     print("auteur is not in dictionnary") #debug cad
 
-            #print(self.ngram_dict[auteur])
-            #print(dict_inconnu["Mystère"])
             cosine_auteur = self.cosine(self.ngram_dict[auteur], dict_inconnu["Mystère"])
 
             # met les infos dans un tuple et append le tuple a la liste
-            #print("valeurs a mettre dans auteur_cosine : ", auteur, cosine_auteur)
-            #print("test tuple: ", (auteur, cosine_auteur))
             Auteur_Cosine.append((auteur, cosine_auteur))
 
         resultats = Auteur_Cosine
 
         # Affichage des resultats
-        print("liste des auteurs avec leurs cosine:")
-        for auteur, cosine_value in resultats:
-            print(f"\t\t\t\t\t\t\t\t\t\t{auteur}: {cosine_value}")
+        #print("liste des auteurs avec leurs cosine:")
+        #for auteur, cosine_value in resultats:
+        #    print(f"\t\t\t\t\t\t\t\t\t\t{auteur}: {cosine_value}")
 
         return resultats
 
@@ -305,7 +329,7 @@ class TextAn(TextAnCommon):
 
         Copyright 2024-2025, F. Mailhot et Université de Sherbrooke
         """
-        print(ngram)
+        #print(ngram)
         ocurence = 0
         #list_ngram = ngram.split()
         for entry in self.ngram_dict[auteur]:
@@ -403,7 +427,7 @@ class TextAn(TextAnCommon):
         #print(combined_ngram_dict)
         return combined_ngram_dict
 
-        # Function to find the partition position
+    # Function to find the partition position
     def partition(self, array, low, high):
         pivot = array[high]
 
@@ -559,30 +583,25 @@ class TextAn(TextAnCommon):
         #   De cette façon, les mots d'un court poème auraient une importance beaucoup plus grande que
         #   les mots d'une très longue oeuvre du même auteur. Ce n'est PAS ce qui vous est demandé ici.
 
-        # if "Hugo" in self.auteurs:
-        #     print("Hugo is in auteurs") #debug cad
-
         for auteur in self.auteurs:
-            print("adding", auteur, "to dictionary")
+            print(GREEN,"\t Ajout de ",CYAN, auteur,GREEN, "au dictionnaire 'ngram_dict'.",RESET)
             oeuvres = self.get_aut_files(auteur)
             self.ngram_dict[auteur]= {} #crée un dictionnaire vide pour chaque auteur
             for oeuvre in oeuvres:
-                #print("\t", oeuvre)
                 #ici on doit mettre les textes dans une variable afin des analyser.
                 with open(oeuvre, 'r', encoding='utf-8') as file:  # Specify UTF-8 encoding
+
                     file_lines = file.readlines()  # List of lines
                     ngram_list = self.generate_ngrams_from_lines(file_lines)
                     for ngram in ngram_list:
                         self.add_ngram(self.ngram_dict, ngram, auteur)
-            #print(self.ngram_dict[auteur])
-
             file.close()
 
             #print("dict complet: ", self.ngram_dict)
 
         # section pour test cad
-        print("Start test cad")
-        self.find_author("random") #ici il faudrait mettre le path d<un fichier d<auteur en param pour bien tester
+        #print("Start test cad")
+        #self.find_author("Gen_text_sol_1.txt") #ici il faudrait mettre le path d<un fichier d<auteur en param pour bien tester
 
         return
 
