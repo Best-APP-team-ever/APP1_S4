@@ -398,9 +398,18 @@ class TextAn(TextAnCommon):
 
         # Beautifier
         #generated_text = self.beautifier????????????????
-
+        cwd = os.getcwd()
         # Écrire le texte généré dans le fichier
-        print(" ".join(generated_text))
+        nouvel_oeuvre = os.path.join(cwd, to_file)
+        nouvel_oeuvre = os.path.normpath(self.oeuvre_inconnues)
+        try:
+            fichier_nouvel_oeuvre = open(nouvel_oeuvre, "w", encoding="utf8")
+        except Exception as e:  # si l'ouverture marche pas prend premier fichier du premier auteur juste pour tester
+            print(f"Erreur lors de l'ouverture de {to_file}: {e}")
+
+        fichier_nouvel_oeuvre.write(" ".join(generated_text))
+
+        #print(" ".join(generated_text))
 
 
         return
