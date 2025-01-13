@@ -526,7 +526,7 @@ class TextAn(TextAnCommon):
         sorted_list = self.quicksort_dict(combined_ngram_dict)
         # print(sorted_list)
         # print("\t", self.auteurs, auteur, k)
-        ngram = sorted_list[len(sorted_list) - k][1]  # Exemple du format de sortie pour trois bigrammes
+        ngram = sorted_list[k-1][1]  # Exemple du format de sortie pour trois bigrammes
         return ngram
 
     def generate_ngrams_from_lines(self, lines, punctuation=("!", "'", ";", ",", ".", "-", "?", "(", ")", "[", "]", "«", "»")):
