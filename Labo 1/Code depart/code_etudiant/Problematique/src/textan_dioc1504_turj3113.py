@@ -395,7 +395,7 @@ class TextAn(TextAnCommon):
 
         # Chercher les n-grammes qui peuvent suivre le dernier mot (si possible)
         # Aka creer une table de transition
-
+        transition_table = self.build_transition_table(auteur)
 
         # choisir un mot de départ aléatoire
         starting_word = random.choice(sorted_list)[1]  # il va falloir refaire la liste pour que ca soit du plus frequant au moins frequant car ca affecte les probabilie de random
@@ -414,18 +414,18 @@ class TextAn(TextAnCommon):
 
         return
 
-    def build_transition_table(self, ngram_dict: dict[str, int]):
+    def build_transition_table(self, auteur: str) -> dict:
         """
            Construit une table de transitions pour une chaîne de Markov à partir des n-grammes et leurs fréquences
 
            Args:
-               ngram_dict (Dict[str, int]): Dictionnaire des n-grammes avec leur fréquence
+               auteur : mots de quelle auteur a analyser
 
            Returns:
                Dict[str, Dict[str, int]]: Table de transitions
            """
         transition_table = {}
-        for ngram, count in ngram_dict.items(): #La méthode .items() d'un dictionnaire retourne une vue de type liste de tuples, où chaque tuple contient : La clé du dictionnaire et la valeur associée.
+        for ngram, count in self.ngram_dict[auteur].items(): #La méthode .items() d'un dictionnaire retourne une vue de type liste de tuples, où chaque tuple contient : La clé du dictionnaire et la valeur associée.
             words = ngram.split() # decompose le n-gram en mots distinct
            
             n = len(words) # longeur du n-gram
