@@ -332,8 +332,8 @@ class TextAn(TextAnCommon):
         # Les lignes qui suivent ne servent qu'à éliminer un avertissement.
         # Il faut les retirer et les remplacer par du code fonctionnel
         #print("\t", self.ngram_size, auteur)
-        self.ngram_size = len(self.ngram_dict[auteur])
-        return self.ngram_size
+        value = len(self.ngram_dict[auteur])
+        return value
 
     def gen_text_all(self, taille: int, to_file: io.TextIOWrapper) -> None:
         """Après analyse des textes d'auteurs connus, produire un texte selon des statistiques de l'ensemble des auteurs
