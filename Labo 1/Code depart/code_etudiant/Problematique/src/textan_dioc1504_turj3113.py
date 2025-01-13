@@ -399,15 +399,27 @@ class TextAn(TextAnCommon):
         transition_table = self.build_transition_table(auteur)
 
         # choisir un mot de départ aléatoire
-        starting_word = random.choice(sorted_list)[1]  # il va falloir refaire la liste pour que ca soit du plus frequant au moins frequant car ca affecte les probabilie de random
-        generated_text = starting_word
+        starting_word = random.choice(sorted_list)[1]
+        generated_text = [starting_word]
 
         # Choisir un mot suivant de manière aléatoire (generation de texte)
-        next_word = " " #random.choice(next_ngram_candidates)
-        generated_text.append(next_word)
+
+        current_prefix = starting_word
+        for _ in range(taille - len(generated_text)):
+            if current_prefix not in transition_table:
+                break # Aucun mot disponible, n-gram completer
+
+            next_words = transition_table[current_prefix]
+            total_count = sum(next_word.values())
+            probabilities = [count / total_count for count in next_words.values()]
+            next_word = random.choices(list(next_words.keys()), probabilities)[0] # random prenant en compte les probabilités
+
+            # add word to text
+            generated_text.append(next_word)
+            current_prefix = " ".join(generated_text[-(len(current_prefix.split())):]) #met les derniers mots du ngram ensemble dans le prefixe
 
         # Beautifier
-
+        #generated_text = self.beautifier????????????????
 
         # Écrire le texte généré dans le fichier
         print(" ".join(generated_text), file=to_file)
@@ -426,14 +438,15 @@ class TextAn(TextAnCommon):
                Dict[str, Dict[str, int]]: Table de transitions
            """
         transition_table = {}
+
         for ngram, count in self.ngram_dict[auteur].items(): #La méthode .items() d'un dictionnaire retourne une vue de type liste de tuples, où chaque tuple contient : La clé du dictionnaire et la valeur associée.
             words = ngram.split() # decompose le n-gram en mots distinct
            
-            n = len(words) # longeur du n-gram
+            n = len(words) # longueur du n-gram
 
             for i in range(1, n): # si commence a 1 on ignore les n-gramme avec juste 1 mot (ce qui est invalid)
-                prefix  = " ".join(words[:-1])   # :-1 extrait tous les elements sauf le dernier et word[-1] accede au dernier element
-                next_word = words[-1]
+                prefix  = " ".join(words[:i])   # : extrait tous les elements juste avant i
+                next_word = words[i] #next word after prefix extrait element i
 
                 # construction de la table
                 if prefix not in transition_table:
