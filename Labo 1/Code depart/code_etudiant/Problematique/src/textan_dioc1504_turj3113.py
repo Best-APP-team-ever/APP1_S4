@@ -390,33 +390,33 @@ class TextAn(TextAnCommon):
         # generation du texte en utilisant une chaine de markov (générée des mots jusqu'a atteindre le target de mot)
         # chapitre 3 generation de texte et chaines de markov pour generation texte dans the practice of programming
 
-        # liste de mots trier du plus au moins fréquent
-        combined_ngram_dict = self.combine_ngram_ocurence(auteur)
-        sorted_list = self.quicksort_dict(combined_ngram_dict)
+        # liste de mots trier du plus au moins fréquent, sert a rien?
+        # combined_ngram_dict = self.combine_ngram_ocurence(auteur)
+        # sorted_list = self.quicksort_dict(combined_ngram_dict)
 
         # Chercher les n-grammes qui peuvent suivre le dernier mot (si possible)
         # Aka creer une table de transition
         transition_table = self.build_transition_table(auteur)
 
         # choisir un mot de départ aléatoire
-        starting_word = random.choice(sorted_list)[1]
-        generated_text = [starting_word]
+        starting_prefix = random.choice(list(transition_table.keys()))
+        generated_text = starting_prefix.split()
 
-        # Choisir un mot suivant de manière aléatoire (generation de texte)
-
-        current_prefix = starting_word
-        for _ in range(taille - len(generated_text)):
+        # generation de texte
+        current_prefix = starting_prefix
+        for _ in range(taille - len(generated_text)): #prend en compte les starting word dans la generation de texte
             if current_prefix not in transition_table:
-                break # Aucun mot disponible, n-gram completer
+                current_prefix = random.choice(list(transition_table.keys())) # Aucun mot disponible, choisir un nouveau
 
             next_words = transition_table[current_prefix]
-            total_count = sum(next_word.values())
+            total_count = sum(next_words.values())
             probabilities = [count / total_count for count in next_words.values()]
             next_word = random.choices(list(next_words.keys()), probabilities)[0] # random prenant en compte les probabilités
 
             # add word to text
             generated_text.append(next_word)
-            current_prefix = " ".join(generated_text[-(len(current_prefix.split())):]) #met les derniers mots du ngram ensemble dans le prefixe
+            n = len(current_prefix.split())
+            current_prefix = " ".join(generated_text[-n:]) #met les derniers mots du ngram ensemble dans le prefixe
 
         # Beautifier
         #generated_text = self.beautifier????????????????
