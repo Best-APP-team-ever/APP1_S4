@@ -362,22 +362,22 @@ class TextAn(TextAnCommon):
         # Le print ne sert ici qu'à éliminer un avertissement. Il doit être adapté ou retiré
         # print("\t", self.auteurs, auteur, taille, file=to_file)
 
-
+        # generation du texte en utilisant une chaine de markov (générée des mots jusqu'a atteindre le target de mot)
         # chapitre 3 generation de texte et chaines de markov pour generation texte dans the practice of programming
 
         # liste de mots trier du plus au moins fréquent
         combined_ngram_dict = self.combine_ngram_ocurence(auteur)
         sorted_list = self.quicksort_dict(combined_ngram_dict)
 
+        # Chercher les n-grammes qui peuvent suivre le dernier mot (si possible)
+        # Aka creer une table de transition
+
+
         # choisir un mot de départ aléatoire
-        starting_word = random.choice(sorted_list)[1] #il va falloir refaire la liste pour que ca soit du plus frequant au moins frequant car ca affecte les probabilie de random
+        starting_word = random.choice(sorted_list)[1]  # il va falloir refaire la liste pour que ca soit du plus frequant au moins frequant car ca affecte les probabilie de random
         generated_text = starting_word
 
-        # generation du texte en utilisant une chaine de markov (générée des mots jusqu'a atteindre le target de mot)
-
-        # Chercher les n-grammes qui peuvent suivre le dernier mot (si possible)
-
-        # Choisir un mot suivant de manière aléatoire
+        # Choisir un mot suivant de manière aléatoire (generation de texte)
         next_word = " " #random.choice(next_ngram_candidates)
         generated_text.append(next_word)
 
@@ -389,6 +389,35 @@ class TextAn(TextAnCommon):
 
 
         return
+
+    def build_transition_table(self, ngram_dict: dict[str, int]):
+        """
+           Construit une table de transitions pour une chaîne de Markov à partir des n-grammes et leurs fréquences
+
+           Args:
+               ngram_dict (Dict[str, int]): Dictionnaire des n-grammes avec leur fréquence
+
+           Returns:
+               Dict[str, Dict[str, int]]: Table de transitions
+           """
+        transition_table = {}
+        for ngram, count in ngram_dict.items(): #La méthode .items() d'un dictionnaire retourne une vue de type liste de tuples, où chaque tuple contient : La clé du dictionnaire et la valeur associée.
+            words = ngram.split() # decompose le n-gram en mots distinct
+           
+            n = len(words) # longeur du n-gram
+
+            for i in range(1, n): # si commence a 1 on ignore les n-gramme avec juste 1 mot (ce qui est invalid)
+                prefix  = " ".join(words[:-1])   # :-1 extrait tous les elements sauf le dernier et word[-1] accede au dernier element
+                next_word = words[-1]
+
+                # construction de la table
+                if prefix not in transition_table:
+                    transition_table[prefix] = {}
+                if next_word not in transition_table[prefix]:
+                    transition_table[prefix][next_word] = 0
+                transition_table[prefix][next_word] += count
+
+        return transition_table
 
     def combine_ngram_ocurence(self, auteur: str)-> dict:
         combined_ngram_dict={}
