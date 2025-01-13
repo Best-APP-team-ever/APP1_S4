@@ -417,14 +417,15 @@ class TextAn(TextAnCommon):
            """
         transition_table = {}
 
-        for ngram, count in self.ngram_dict[auteur].items(): #La méthode .items() d'un dictionnaire retourne une vue de type liste de tuples, où chaque tuple contient : La clé du dictionnaire et la valeur associée.
-            words = ngram.split() # decompose le n-gram en mots distinct
-           
-            n = len(words) # longueur du n-gram
+        for hash in self.ngram_dict[auteur].items(): #La méthode .items() d'un dictionnaire retourne une vue de type liste de tuples, où chaque tuple contient : La clé du dictionnaire et la valeur associée.
+            ngram = self.ngram_dict[auteur][hash]["n-gram"] # decompose le n-gram en mots distinct
+            count = self.ngram_dict[auteur][hash]["fréquences"]
+
+            n = self.ngram_size
 
             for i in range(1, n): # si commence a 1 on ignore les n-gramme avec juste 1 mot (ce qui est invalid)
-                prefix  = " ".join(words[:i])   # : extrait tous les elements juste avant i
-                next_word = words[i] #next word after prefix extrait element i
+                prefix  = " ".join(ngram[:i])   # : extrait tous les elements juste avant i
+                next_word = ngram[i] #next word after prefix extrait element i
 
                 # construction de la table
                 if prefix not in transition_table:
