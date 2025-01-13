@@ -417,7 +417,7 @@ class TextAn(TextAnCommon):
 
         return
 
-    def build_transition_table(self, auteur: str) -> dict:
+    def build_transition_table(self, auteurs: str) -> dict:
         """
            Construit une table de transitions pour une chaîne de Markov à partir des n-grammes et leurs fréquences
 
@@ -427,23 +427,30 @@ class TextAn(TextAnCommon):
            Returns:
                Dict[str, Dict[str, int]]: Table de transitions
            """
+        # print("Creation de transition table")
         transition_table = {}
 
-        for hash in self.ngram_dict[auteur]: #La méthode .items() d'un dictionnaire retourne une vue de type liste de tuples, où chaque tuple contient : La clé du dictionnaire et la valeur associée.
-            ngram = self.ngram_dict[auteur][hash]["n-gram"] # decompose le n-gram en mots distinct
-            count = self.ngram_dict[auteur][hash]["fréquences"]
+        # si il y a plusqu'un auteur, le traiter
+        for auteur in auteurs:
+            if auteur not in self.ngram_dict:
+                continue # si l'auteur existe pas on passe au suivant
 
 
-            for i in range(1, self.ngram_size): # si commence a 1 on ignore les n-gramme avec juste 1 mot (ce qui est invalid)
-                prefix  = " ".join(ngram[:i])   # : extrait tous les elements juste avant i
-                next_word = ngram[i] #next word after prefix extrait element i
+            for hash in self.ngram_dict[auteur]: #La méthode .items() d'un dictionnaire retourne une vue de type liste de tuples, où chaque tuple contient : La clé du dictionnaire et la valeur associée.
+                ngram = self.ngram_dict[auteur][hash]["n-gram"] # decompose le n-gram en mots distinct
+                count = self.ngram_dict[auteur][hash]["fréquences"]
 
-                # construction de la table
-                if prefix not in transition_table:
-                    transition_table[prefix] = {}
-                if next_word not in transition_table[prefix]:
-                    transition_table[prefix][next_word] = 0
-                transition_table[prefix][next_word] += count
+
+                for i in range(1, self.ngram_size): # si commence a 1 on ignore les n-gramme avec juste 1 mot (ce qui est invalid)
+                    prefix  = " ".join(ngram[:i])   # : extrait tous les elements juste avant i
+                    next_word = ngram[i] #next word after prefix extrait element i
+
+                    # construction de la table
+                    if prefix not in transition_table:
+                        transition_table[prefix] = {}
+                    if next_word not in transition_table[prefix]:
+                        transition_table[prefix][next_word] = 0
+                    transition_table[prefix][next_word] += count
 
         return transition_table
 
