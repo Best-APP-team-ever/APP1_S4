@@ -88,7 +88,7 @@ class TextAn(TextAnCommon):
         #
         # Les méthodes qui suivent doivent toutes être complétées pour que le système soit opérationnel
         # et que le harnais de test (test_textan.py) puisse exécuter tous les tests requis
-        #
+
         return
 
     def __eq__(self, other: list, dict_ngram: list) -> bool:
@@ -216,6 +216,7 @@ class TextAn(TextAnCommon):
         # Comme pour tout vecteur, la taille est obtenue en calculant la racine carrée de
         # la somme des carrés des projections dans chacune des dimensions.
         # Cette somme de carrés représente le produit scalaire du vecteur avec lui-même
+
         # Ici, chaque bigramme distinct est une dimension
         # Remplacez les lignes suivantes par le code approprié.
         #print("Methode vector_size")
@@ -244,12 +245,6 @@ class TextAn(TextAnCommon):
         # Remplacer les lignes qui suivent par le code approprié.
 
         # Cosinus de l'angle c'est le produit scalaire de A & B diviser par la norme de A * norme de B
-        #
-        #print('Methode de cosine')
-        #print("vector size:", self.vector_size(vector1))
-
-        #print("vector size:", self.vector_size(vector2))
-        #print(vector1, vector2, , )
         angle_cos = self.dot_product_dict(vector1, vector2) / (self.vector_size(vector1) * self.vector_size(vector2))
         #print('Angle de cosine trouver:', angle_cos)
         return angle_cos
@@ -290,32 +285,15 @@ class TextAn(TextAnCommon):
             self.add_ngram(dict_inconnu, ngram, "Mystère")
         fichier_oeuvre.close()
 
-
         # Calcul du cosine
         Auteur_Cosine = []
 
-        #print("Liste d'auteurs : ",self.auteurs)
         for auteur in self.auteurs:
-            #print("Comparaison avec auteur :", auteur)
-            # calcul le cosinus
-            # if auteur in self.ngram_dict:
-            #     print("auteur is in dictionnary") #debug cad
-            # else:
-            #     print("auteur is not in dictionnary") #debug cad
-
             cosine_auteur = self.cosine(self.ngram_dict[auteur], dict_inconnu["Mystère"])
-
             # met les infos dans un tuple et append le tuple a la liste
             Auteur_Cosine.append((auteur, cosine_auteur))
 
-        resultats = Auteur_Cosine
-
-        # Affichage des resultats
-        #print("liste des auteurs avec leurs cosine:")
-        #for auteur, cosine_value in resultats:
-        #    print(f"\t\t\t\t\t\t\t\t\t\t{auteur}: {cosine_value}")
-
-        return resultats
+        return Auteur_Cosine
 
     def get_ngram_occurrence(self, auteur: str, ngram) -> int:
         """Retourne le nombre d'occurrences du n-gramme pour cet auteur
@@ -640,12 +618,6 @@ class TextAn(TextAnCommon):
                     for ngram in ngram_list:
                         self.add_ngram(self.ngram_dict, ngram, auteur)
             file.close()
-
-            #print("dict complet: ", self.ngram_dict)
-
-        # section pour test cad
-        #print("Start test cad")
-        #self.find_author("Gen_text_sol_1.txt") #ici il faudrait mettre le path d<un fichier d<auteur en param pour bien tester
 
         return
 
