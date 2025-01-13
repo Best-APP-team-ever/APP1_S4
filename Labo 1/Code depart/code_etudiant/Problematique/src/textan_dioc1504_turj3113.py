@@ -377,7 +377,9 @@ class TextAn(TextAnCommon):
 
         # Chercher les n-grammes qui peuvent suivre le dernier mot (si possible)
         # Aka creer une table de transition
-        transition_table = self.build_transition_table(auteur)
+        list_auteur=[]
+        list_auteur.append(auteur)
+        transition_table = self.build_transition_table(list_auteur)
 
         # choisir un mot de départ aléatoire
         starting_prefix = random.choice(list(transition_table.keys()))
@@ -409,7 +411,7 @@ class TextAn(TextAnCommon):
 
         return
 
-    def build_transition_table(self, auteurs: str) -> dict:
+    def build_transition_table(self, auteurs: list) -> dict:
         """
            Construit une table de transitions pour une chaîne de Markov à partir des n-grammes et leurs fréquences
 
