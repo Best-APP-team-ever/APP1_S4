@@ -347,7 +347,10 @@ class TextAn(TextAnCommon):
         """
         # Utilisez to_file pour y imprimer les mots générés, il s'agit d'un fichier vide, ouvert en écriture
         # Le print ne sert ici qu'à éliminer un avertissement. Il doit être adapté ou retiré
-        print("\t", self.auteurs, taille, file=to_file)
+        # print("\t", self.auteurs, taille, file=to_file)
+        auteurs = self.auteurs
+        self.gen_text_auteur(auteurs, taille, to_file)
+
         return
 
     def gen_text_auteur(self, auteur: str, taille: int, to_file: io.TextIOWrapper) -> None:
