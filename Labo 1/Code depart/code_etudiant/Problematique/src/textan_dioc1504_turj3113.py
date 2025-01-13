@@ -310,9 +310,9 @@ class TextAn(TextAnCommon):
         #print(ngram)
         ocurence = 0
         #list_ngram = ngram.split()
-        for entry in self.ngram_dict[auteur]:
-            if ngram == self.ngram_dict[auteur][entry]["n-gram"]:
-                ocurence = self.ngram_dict[auteur][entry]["fréquences"]
+        for hash_key in self.ngram_dict[auteur]:
+            if ngram == self.ngram_dict[auteur][hash_key]["n-gram"]:
+                ocurence = self.ngram_dict[auteur][hash_key]["fréquences"]
                 break
         #print("\t", self.ngram_size, auteur, ngram)
         return ocurence
