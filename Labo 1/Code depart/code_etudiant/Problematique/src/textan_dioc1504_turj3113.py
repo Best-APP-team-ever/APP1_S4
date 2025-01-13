@@ -529,7 +529,7 @@ class TextAn(TextAnCommon):
         ngram = sorted_list[k-1][1]  # Exemple du format de sortie pour trois bigrammes
         return ngram
 
-    def generate_ngrams_from_lines(self, lines, punctuation=("!", "'", ";", ",", ".", "-", "?", "(", ")", "[", "]", "«", "»")):
+    def generate_ngrams_from_lines(self, lines, punctuation=("!", "'", ";", ",", ".", "-", "?", "(", ")", "[", "]", "«", "»", '"')):
         """
         Generate n-grams from a list of lines, treating punctuation as individual words and preserving their order.
 
